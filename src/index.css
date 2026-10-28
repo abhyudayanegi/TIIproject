@@ -1,0 +1,206 @@
+/* Fira Code (webfont fallback if FiraCode Nerd Font isn't installed locally) */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap');
+
+/* ===== Gruvbox Dark Palette - Authentic Terminal Aesthetic ===== */
+:root {
+  --gb-bg0h: #1d2021; /* Hard background */
+  --gb-bg:   #282828; /* Default background */
+  --gb-bg1:  #32302f; /* Soft panel layer */
+  --gb-bg2:  #3c3836; /* Card / element background */
+  --gb-bg3:  #504945; /* Crisp border */
+  --gb-bg4:  #665c54; /* Active / hover border */
+
+  --gb-fg0:  #fbf1c7; /* Brightest cream text */
+  --gb-fg:   #ebdbb2; /* Standard readable text */
+  --gb-fg2:  #d5c4a1; /* Soft subtitle text */
+  --gb-fg4:  #a89984; /* Muted text */
+  --gb-gray: #928374; /* Comments and hints */
+
+  /* Gruvbox Accents */
+  --gb-red:    #fb4934;
+  --gb-green:  #b8bb26;
+  --gb-yellow: #fabd2f;
+  --gb-blue:   #83a598;
+  --gb-purple: #d3869b;
+  --gb-aqua:   #8ec07c;
+  --gb-orange: #fe8019;
+
+  /* Subtle background tints */
+  --gb-tint-green:  rgba(184, 187, 38, 0.12);
+  --gb-tint-yellow: rgba(250, 189, 47, 0.12);
+  --gb-tint-blue:   rgba(131, 165, 152, 0.12);
+  --gb-tint-purple: rgba(211, 134, 155, 0.12);
+  --gb-tint-red:    rgba(251, 73, 52, 0.12);
+  --gb-tint-aqua:   rgba(142, 192, 124, 0.12);
+  --gb-tint-orange: rgba(254, 128, 25, 0.12);
+
+  --font-mono: 'FiraCode Nerd Font', 'FiraCode Nerd Font Mono', 'Fira Code', 'Courier New', monospace;
+  
+  /* Crisp terminal border radii - NO ROUNDY PILLS */
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-full: 2px;
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-feature-settings: "liga" 1, "calt" 1;
+  background-color: var(--gb-bg0h);
+  color: var(--gb-fg);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--gb-yellow);
+  color: var(--gb-bg0h);
+}
+
+h1, h2, h3, h4 {
+  color: var(--gb-yellow);
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 24px;
+  border-bottom: 1px dashed var(--gb-bg3);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+/* ===== Crisp Rectangular Terminal Buttons ===== */
+button {
+  background-color: var(--gb-bg2);
+  color: var(--gb-fg0);
+  border: 1px solid var(--gb-bg3);
+  padding: 7px 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  user-select: none;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--gb-bg3);
+  border-color: var(--gb-yellow);
+  color: var(--gb-yellow);
+}
+
+button:active:not(:disabled) {
+  background-color: var(--gb-bg1);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Button Variants */
+button.btn-primary {
+  background-color: var(--gb-green);
+  color: var(--gb-bg0h);
+  border-color: var(--gb-green);
+  font-weight: 600;
+}
+button.btn-primary:hover:not(:disabled) {
+  background-color: #c7ca3a;
+  border-color: #c7ca3a;
+  color: var(--gb-bg0h);
+}
+
+button.btn-textbook {
+  background: var(--gb-tint-purple);
+  color: var(--gb-purple);
+  border-color: rgba(211, 134, 155, 0.4);
+}
+button.btn-textbook:hover:not(:disabled) {
+  background: var(--gb-purple);
+  color: var(--gb-bg0h);
+  border-color: var(--gb-purple);
+}
+
+button.btn-hint {
+  background: var(--gb-tint-orange);
+  color: var(--gb-orange);
+  border-color: rgba(254, 128, 25, 0.4);
+}
+button.btn-hint:hover:not(:disabled) {
+  background: var(--gb-orange);
+  color: var(--gb-bg0h);
+  border-color: var(--gb-orange);
+}
+
+input {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  border-radius: var(--radius-sm);
+}
+
+a {
+  color: var(--gb-aqua);
+  text-decoration: none;
+  transition: color 0.12s ease;
+}
+
+a:hover {
+  color: var(--gb-yellow);
+  text-decoration: underline;
+}
+
+code {
+  background-color: var(--gb-bg1);
+  color: var(--gb-green);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--gb-bg3);
+  font-size: 0.9em;
+}
+
+/* Terminal Badge Tags (Rectangular brackets, no rounded pill shapes) */
+.badge-pill, .badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+
+/* Pre & ASCII styling */
+.ascii {
+  font-family: var(--font-mono);
+  white-space: pre;
+  line-height: 1.22;
+  font-size: 12px;
+  margin: 0;
+  overflow-x: auto;
+}
+
+/* Terminal Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--gb-bg0h); }
+::-webkit-scrollbar-thumb { background: var(--gb-bg3); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--gb-bg4); }

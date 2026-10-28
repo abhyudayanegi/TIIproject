@@ -1,0 +1,13 @@
+.domain-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.domain-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
