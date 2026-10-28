@@ -67,7 +67,7 @@ export default function HomePage({ onAgree }) {
           <strong>CTF (Capture The Flag)</strong> is an interactive cybersecurity puzzle format where participants solve real-world challenges to uncover a secret key known as a <em>&quot;flag&quot;</em>.
         </p>
         <p>
-          Flags look like <code>CTF&#123;sample_flag_value&#125;</code>.
+          Flags look like <code>CAT&#123;sample_flag_value&#125;</code>.
           Instead of sitting through dry lectures or memorizing abstract theory, you become a digital detective—examining photo clues, decoding ciphers, and inspecting web headers to capture the proof yourself.
         </p>
         <div className="terminal-callout text-yellow">

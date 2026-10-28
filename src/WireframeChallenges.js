@@ -4,52 +4,35 @@ import TextbookPanel from './TextbookPanel';
 
 const WIREFRAME_CONFIGS = {
   Stegano: {
-    title: '_STEGANOGRAPHY_MODULES_ [WIREFRAME]',
-    description: 'Steganography Wireframe Arena. Real challenge payloads and media files will be linked here.',
+    title: '_STEGANOGRAPHY_MODULES_ [7 CHALLENGES]',
+    description: 'Steganography Arena. Master data concealment across metadata, trailing bytes, pixel bits, color planes, and audio spectrums.',
     questions: [
-      { id: 1, title: '1. Pixel Peeping (LSB Extraction)', desc: 'Inspect the least significant bits of an uploaded PNG image to discover the hidden text string.', placeholder: 'CTF{stego_lsb_found}' },
-      { id: 2, title: '2. The Sonic Secret', desc: 'Convert an MP3 recording into a spectrogram visualizer to read the message drawn in frequency spikes.', placeholder: 'CTF{sound_of_silence}' },
-      { id: 3, title: '3. Trailing Byte Append', desc: 'Find files embedded after the IEND PNG trailer marker using a hex editor or binwalk.', placeholder: 'CTF{trailing_hex_data}' },
-      { id: 4, title: '4. Passphrase Steghide Hunt', desc: 'Extract an encrypted zip archive hidden inside a JPEG file using steghide with wordlist clues.', placeholder: 'CTF{embedded_zip_archive}' },
-      { id: 5, title: '5. Color Plane Shift', desc: 'Unmask secret contrast layers by separating red, green, and blue color channels.', placeholder: 'CTF{rgb_channel_secret}' },
-    ],
-  },
-  Crypto: {
-    title: '_CRYPTOGRAPHY_MODULES_ [WIREFRAME]',
-    description: 'Cryptography Wireframe Arena. Cipher texts, key exchanges, and hash cracks will be added here.',
-    questions: [
-      { id: 1, title: '1. Caesar\'s Forgotten Scroll', desc: 'A classical shift cipher intercepted from historical records. Shift offset unknown.', placeholder: 'CTF{caesar_rot_decoded}' },
-      { id: 2, title: '2. Multi-Layered Base Encoding', desc: 'Data encoded across base64 -> hex -> binary -> ASCII.', placeholder: 'CTF{encoding_is_not_encryption}' },
-      { id: 3, title: '3. Weak PRNG Salt', desc: 'Predict pseudo-random number generator output using known timestamps and seed states.', placeholder: 'CTF{predictable_randomness}' },
-      { id: 4, title: '4. The Broken Key (XOR)', desc: 'Single-byte XOR repeating key ciphertext analysis.', placeholder: 'CTF{xor_single_byte_cracked}' },
-      { id: 5, title: '5. Hash Collision Encounter', desc: 'Analyze legacy MD5 hash properties and demonstrate collision vulnerabilities.', placeholder: 'CTF{md5_is_broken}' },
-      { id: 6, title: '6. RSA Small Exponent Weakness', desc: 'Decrypt an RSA message generated with e = 3 and small modulus values.', placeholder: 'CTF{cube_root_attack}' },
+      { id: 1, title: '1. EXIF Header Comments (Warm-Up 1)', desc: 'Inspect hidden metadata tags and comment fields inside an image file header.', placeholder: 'CAT{exif_metadata_revealed}', tool: 'Jimpl / EXIF Viewer' },
+      { id: 2, title: '2. Magic Bytes & File Signatures (Warm-Up 2)', desc: 'Verify the leading magic bytes of an altered file to uncover its genuine file format.', placeholder: 'CAT{png_magic_header_valid}', tool: 'HexEd.it' },
+      { id: 3, title: '3. Trailing Byte Append (Chain Stage 1)', desc: 'Find hidden data appended after the IEND PNG trailer marker using a hex viewer.', placeholder: 'CAT{trailing_hex_data}', tool: 'HexEd.it' },
+      { id: 4, title: '4. Pixel Peeping LSB Extraction (Chain Stage 2)', desc: 'Inspect the least significant bits of the image using the key discovered in Question 3.', placeholder: 'CAT{stego_lsb_found}', tool: 'Aperisolve' },
+      { id: 5, title: '5. Color Plane Shift (Chain Stage 3)', desc: 'Unmask secret contrast layers by separating red, green, blue, and alpha color channels.', placeholder: 'CAT{rgb_channel_secret}', tool: 'Aperisolve' },
+      { id: 6, title: '6. The Sonic Secret (Chain Stage 4)', desc: 'Convert an audio recording into a spectrogram visualizer to read the passphrase drawn in high frequencies.', placeholder: 'CAT{sound_of_silence}', tool: 'Academo Spectrum' },
+      { id: 7, title: '7. Passphrase Steghide Hunt (Chain Stage 5)', desc: 'Extract an encrypted archive hidden inside a JPEG file using the audio passphrase from Question 6.', placeholder: 'CAT{master_steganographer_unmasked}', tool: 'FutureBoy Stego' },
     ],
   },
   'Web Sec': {
-    title: '_WEB_SECURITY_MODULES_ [WIREFRAME]',
-    description: 'Web Security Wireframe Arena. Live target containers and endpoints will be mounted here.',
+    title: '_WEB_SECURITY_MODULES_ [7 CHALLENGES]',
+    description: 'Web Security Arena. Hunt for client-side bypasses, cookie flaws, parameter tampering, and injection vectors.',
     questions: [
-      { id: 1, title: '1. Cookie Manipulation', desc: 'Inspect browser storage and modify session cookie privilege flags from user to admin.', placeholder: 'CTF{cookie_admin_true}' },
-      { id: 2, title: '2. Hidden Form Parameters', desc: 'Inspect DOM form source code and bypass client-side price modification fields.', placeholder: 'CTF{inspect_element_pro}' },
-      { id: 3, title: '3. Authentication Bypass (SQLi)', desc: 'Craft basic SQL authentication injection payloads (\' OR 1=1--) on a mock login screen.', placeholder: 'CTF{sqli_bypass_successful}' },
-      { id: 4, title: '4. Cross-Site Scripting (Reflected XSS)', desc: 'Execute JavaScript via unescaped search parameter reflection.', placeholder: 'CTF{alert_xss_executed}' },
-      { id: 5, title: '5. Insecure Direct Object Reference (IDOR)', desc: 'Enumerate sequential account IDs in the URL query string to view other users\' private profiles.', placeholder: 'CTF{idor_data_leakage}' },
-      { id: 6, title: '6. Directory Traversal Path', desc: 'Exploit relative path syntax (../../etc/passwd) to access restricted server files.', placeholder: 'CTF{path_traversal_master}' },
-      { id: 7, title: '7. CSRF Token Omission', desc: 'Submit state-changing actions without anti-forgery validation tokens.', placeholder: 'CTF{csrf_unprotected_endpoint}' },
-      { id: 8, title: '8. Command Injection', desc: 'Chain shell commands using semicolons into a server ping diagnostic utility.', placeholder: 'CTF{rce_ping_chain}' },
+      { id: 1, title: '1. HTTP Verbs & Request Headers (Warm-Up 1)', desc: 'Inspect HTTP methods and headers to discover hidden API endpoints.', placeholder: 'CAT{http_verbs_mastered}', tool: 'Hoppscotch / DevTools' },
+      { id: 2, title: '2. Client-Side DOM & Form Bypass (Warm-Up 2)', desc: 'Inspect DOM form source code and bypass client-side hidden price modification fields.', placeholder: 'CAT{inspect_element_pro}', tool: 'Browser Inspect Element' },
+      { id: 3, title: '3. Insecure Cookie Manipulation (Chain Stage 1)', desc: 'Inspect browser storage and modify session cookie privilege flags from user to admin.', placeholder: 'CAT{cookie_admin_true}', tool: 'DevTools Application Tab' },
+      { id: 4, title: '4. Parameter Tampering & IDOR (Chain Stage 2)', desc: 'Enumerate sequential account IDs in the query string using the admin session from Question 3.', placeholder: 'CAT{idor_data_leakage}', tool: 'Browser URL Navigation' },
+      { id: 5, title: '5. Directory Path Traversal (Chain Stage 3)', desc: 'Exploit relative path syntax (../../etc/passwd) on the file endpoint revealed in Question 4.', placeholder: 'CAT{path_traversal_master}', tool: 'Browser URL Navigation' },
+      { id: 6, title: '6. SQL Injection Authentication Bypass (Chain Stage 4)', desc: 'Craft SQL injection payloads (\' OR 1=1--) on the admin login page discovered in Question 5.', placeholder: 'CAT{sqli_bypass_successful}', tool: 'Browser Form / SQLi' },
+      { id: 7, title: '7. Reflected XSS & Session Exfiltration (Chain Stage 5)', desc: 'Execute JavaScript via unescaped search reflection to capture the final administrative flag.', placeholder: 'CAT{master_websec_pwned}', tool: 'Browser Console' },
     ],
   },
 };
 
 export default function WireframeChallenges({ domain, onBack }) {
-  const config = WIREFRAME_CONFIGS[domain] || {
-    title: `_${domain.toUpperCase()}_MODULES_ [WIREFRAME]`,
-    description: 'Wireframe arena for this domain.',
-    questions: [
-      { id: 1, title: '1. Sample Wireframe Challenge', desc: 'Question details will be added soon.', placeholder: 'CTF{sample}' }
-    ]
-  };
+  const config = WIREFRAME_CONFIGS[domain] || WIREFRAME_CONFIGS['Stegano'];
 
   const [answers, setAnswers] = useState({});
   const [results, setResults] = useState({});
@@ -71,9 +54,11 @@ export default function WireframeChallenges({ domain, onBack }) {
   };
 
   const handleTestSubmit = (id, expected) => {
-    const entered = (answers[id] || '').trim();
+    const entered = (answers[id] || '').trim().toLowerCase();
     if (!entered) return;
-    setResults(prev => ({ ...prev, [id]: entered === expected }));
+    const cleanExpected = expected.toLowerCase().replace(/^(cat|ctf)\{/, '').replace(/\}$/, '');
+    const cleanEntered = entered.replace(/^(cat|ctf)\{/, '').replace(/\}$/, '');
+    setResults(prev => ({ ...prev, [id]: entered === expected.toLowerCase() || cleanEntered === cleanExpected }));
   };
 
   return (
@@ -92,17 +77,17 @@ export default function WireframeChallenges({ domain, onBack }) {
           <div>
             <div className="header-meta">
               <span className="badge-tag" style={{ background: 'var(--gb-tint-orange)', color: 'var(--gb-orange)', border: '1px solid rgba(254, 128, 25, 0.4)' }}>
-                [WIREFRAME_BETA]
+                [7_CHALLENGES_ACTIVE]
               </span>
-              <span style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
-                Prototype specification
+              <span style={{ fontSize: '12px', color: 'var(--gb-yellow)', fontWeight: 600 }}>
+                {domain.toUpperCase()} ARENA
               </span>
             </div>
             <h1 style={{ fontSize: '22px', borderBottom: 'none', margin: '6px 0 4px 0', color: 'var(--gb-fg0)' }}>
               {config.title}
             </h1>
             <p style={{ color: 'var(--gb-fg2)', fontSize: '13.5px', margin: 0, maxWidth: '620px' }}>
-              {config.description} Click <strong>[📖 Theory]</strong> on any question below to inspect its topic textbook!
+              {config.description} Click <strong>[📖 Theory]</strong> on any question below to inspect its topic manual!
             </p>
           </div>
           <pre className="ascii ascii-orange header-ascii">
@@ -119,64 +104,85 @@ export default function WireframeChallenges({ domain, onBack }) {
 
       <div className="terminal-hr" />
 
-      {/* Wireframe Question Cards */}
-      {config.questions.map((q) => {
+      {/* 7 Questions with Dotted Divider between Q2 & Q3 */}
+      {config.questions.map((q, index) => {
         const isCorrect = results[q.id] === true;
         const isWrong = results[q.id] === false;
 
         return (
-          <div key={q.id} className="challenge-card">
-            <div className="challenge-header">
-              <h3>
-                <span style={{ color: 'var(--gb-orange)' }}>[&gt;]</span>
-                <span>{q.title}</span>
-              </h3>
-              <span className={`badge-tag ${isCorrect ? 'badge-live' : 'badge-wireframe'}`}>
-                {isCorrect ? '[✓ VALIDATED]' : '[○ WIREFRAME PENDING]'}
-              </span>
-            </div>
-
-            <p style={{ color: 'var(--gb-fg)', fontSize: '14px', margin: '0' }}>
-              {q.desc}
-            </p>
-
-            <div style={{ background: 'var(--gb-bg0h)', border: '1px solid var(--gb-bg3)', padding: '8px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
-              <div>
-                <span style={{ color: 'var(--gb-gray)', fontSize: '12px' }}>PROTOTYPE TEST FLAG: </span>
-                <code style={{ color: 'var(--gb-orange)' }}>{q.placeholder}</code>
-              </div>
-            </div>
-
-            <div className="challenge-controls">
-              <div className="input-wrapper">
-                <span className="input-prompt-icon">&gt;</span>
-                <input
-                  type="text"
-                  placeholder="Enter flag..."
-                  autoComplete="off"
-                  value={answers[q.id] || ''}
-                  onChange={(e) => handleInputChange(q.id, e.target.value)}
-                />
-              </div>
-              <button className="btn-small btn-primary" onClick={() => handleTestSubmit(q.id, q.placeholder)}>
-                [Submit]
-              </button>
-              <button className="btn-small btn-textbook" onClick={() => openTextbook(q.id, q.title)}>
-                [📖 Theory]
-              </button>
-            </div>
-
-            {isCorrect && (
-              <div className="feedback-box feedback-success">
-                <span>[✓] Correct! (Wireframe validated)</span>
+          <React.Fragment key={q.id}>
+            {/* Dotted Line Divider after Question 2 */}
+            {index === 2 && (
+              <div className="chain-divider">
+                <div className="chain-divider-header">
+                  <span className="chain-divider-badge">• • • [ PHASE 2: 5-STAGE LINKED INVESTIGATION (Q3 &rarr; Q7) ] • • •</span>
+                </div>
+                <p className="chain-divider-desc">
+                  Questions 1 &amp; 2 were standalone warm-ups. The next 5 questions are chained: each discovered clue unlocks the next target!
+                </p>
               </div>
             )}
-            {isWrong && (
-              <div className="feedback-box feedback-error">
-                <span>[!] Incorrect test flag. Check placeholder value!</span>
+
+            <div className={`challenge-card ${isCorrect ? 'solved' : ''}`}>
+              <div className="challenge-header">
+                <div>
+                  <h3>
+                    <span style={{ color: 'var(--gb-yellow)' }}>[0{q.id}]</span>
+                    <span>{q.title}</span>
+                  </h3>
+                  {q.tool && (
+                    <span className="badge-tag" style={{ background: 'var(--gb-tint-aqua)', color: 'var(--gb-aqua)', marginTop: '4px', border: '1px solid rgba(142, 192, 124, 0.4)' }}>
+                      [⚡ Online Tool: {q.tool}]
+                    </span>
+                  )}
+                </div>
+                <span className={`badge-tag ${isCorrect ? 'badge-live' : 'badge-wireframe'}`}>
+                  {isCorrect ? '[✓ SOLVED]' : '[○ PENDING]'}
+                </span>
               </div>
-            )}
-          </div>
+
+              <p style={{ color: 'var(--gb-fg)', fontSize: '14px', margin: '0' }}>
+                {q.desc}
+              </p>
+
+              <div style={{ background: 'var(--gb-bg0h)', border: '1px solid var(--gb-bg3)', padding: '8px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+                <div>
+                  <span style={{ color: 'var(--gb-gray)', fontSize: '12px' }}>TARGET FLAG: </span>
+                  <code style={{ color: 'var(--gb-green)' }}>{q.placeholder}</code>
+                </div>
+              </div>
+
+              <div className="challenge-controls">
+                <div className="input-wrapper">
+                  <span className="input-prompt-icon">&gt;</span>
+                  <input
+                    type="text"
+                    placeholder="Enter flag..."
+                    autoComplete="off"
+                    value={answers[q.id] || ''}
+                    onChange={(e) => handleInputChange(q.id, e.target.value)}
+                  />
+                </div>
+                <button className="btn-small btn-primary" onClick={() => handleTestSubmit(q.id, q.placeholder)}>
+                  [Submit]
+                </button>
+                <button className="btn-small btn-textbook" onClick={() => openTextbook(q.id, q.title)}>
+                  [📖 Theory]
+                </button>
+              </div>
+
+              {isCorrect && (
+                <div className="feedback-box feedback-success">
+                  <span>[✓] Correct flag captured!</span>
+                </div>
+              )}
+              {isWrong && (
+                <div className="feedback-box feedback-error">
+                  <span>[!] Incorrect test flag. Check placeholder value!</span>
+                </div>
+              )}
+            </div>
+          </React.Fragment>
         );
       })}
 

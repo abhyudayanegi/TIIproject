@@ -4,6 +4,7 @@ import Onboarding from './Onboarding';
 import MainPage from './MainPage';
 import DomainPage from './DomainPage';
 import Challenges from './Challenges';
+import CryptoChallenges from './CryptoChallenges';
 import WireframeChallenges from './WireframeChallenges';
 import EndPage from './EndPage';
 import NavBar from './NavBar';
@@ -13,25 +14,46 @@ const DOMAIN_ORDER = ['OSINT', 'Stegano', 'Crypto', 'Web Sec'];
 const TUTORIAL_KEY = 'cyberacademy_tutorial_done';
 
 function App() {
-  // ----- Navigation history (synced with the browser's back/forward) -----
-  // Each entry: { view, domain }
-  // Views: 'home' | 'onboarding' | 'main' | 'domain' | 'osint' | 'wireframe' | 'end'
+  // Navigation history (synced with the browser back/forward)
   const [entries, setEntries] = useState([{ view: 'home', domain: null }]);
   const [idx, setIdx] = useState(0);
 
   const safeIdx = Math.min(idx, entries.length - 1);
   const { view, domain } = entries[safeIdx];
 
-  // ----- App state -----
+  // App state
   const [tutorialDone, setTutorialDone] = useState(
     () => localStorage.getItem(TUTORIAL_KEY) === 'true'
   );
+
+  // OSINT state
   const [osintStarted, setOsintStarted] = useState(false);
   const [startTime, setStartTime] = useState(null);
   const [timeTaken, setTimeTaken] = useState(null);
   const [finalScore, setFinalScore] = useState(null);
 
-  // Hook into the browser history so the browser's own back/forward buttons work too
+  // Crypto state
+  const [cryptoStarted, setCryptoStarted] = useState(false);
+  const [cryptoStartTime, setCryptoStartTime] = useState(null);
+  const [cryptoTimeTaken, setCryptoTimeTaken] = useState(null);
+  const [cryptoScore, setCryptoScore] = useState(null);
+
+  // Live results tracking across arenas (updates progress bars in real-time)
+  const [osintResults, setOsintResults] = useState({});
+  const [cryptoResults, setCryptoResults] = useState({});
+
+  const handleOsintResultChange = useCallback((id, isCorrect) => {
+    setOsintResults(prev => ({ ...prev, [id]: isCorrect }));
+  }, []);
+
+  const handleCryptoResultChange = useCallback((id, isCorrect) => {
+    setCryptoResults(prev => ({ ...prev, [id]: isCorrect }));
+  }, []);
+
+  const osintSolvedCount = Object.values(osintResults).filter(v => v === true).length;
+  const cryptoSolvedCount = Object.values(cryptoResults).filter(v => v === true).length;
+
+  // Hook into browser history so browser buttons work
   useEffect(() => {
     window.history.replaceState({ idx: 0 }, '');
     const onPop = (e) => {
@@ -46,13 +68,17 @@ function App() {
     window.scrollTo(0, 0);
   }, [safeIdx]);
 
-  // Start the OSINT timer the first time the user enters the challenges
+  // Timers for arenas
   useEffect(() => {
     if (view === 'osint' && !osintStarted) {
       setOsintStarted(true);
       setStartTime(Date.now());
     }
-  }, [view, osintStarted]);
+    if (view === 'crypto' && !cryptoStarted) {
+      setCryptoStarted(true);
+      setCryptoStartTime(Date.now());
+    }
+  }, [view, osintStarted, cryptoStarted]);
 
   const navigate = useCallback(
     (nextView, nextDomain = null) => {
@@ -71,7 +97,7 @@ function App() {
   const goBack = () => canBack && window.history.back();
   const goForward = () => canForward && window.history.forward();
 
-  // ----- Handlers -----
+  // Handlers
   const handleOnboardingComplete = () => {
     setTutorialDone(true);
     localStorage.setItem(TUTORIAL_KEY, 'true');
@@ -80,6 +106,7 @@ function App() {
 
   const handleDomainContinue = (d) => {
     if (d === 'OSINT') navigate('osint', 'OSINT');
+    else if (d === 'Crypto') navigate('crypto', 'Crypto');
     else navigate('wireframe', d);
   };
 
@@ -89,7 +116,12 @@ function App() {
     navigate('end', 'OSINT');
   };
 
-  // ----- Logical "previous / next step" for the bottom pager -----
+  const handleCryptoSubmit = (score, total) => {
+    if (cryptoStartTime) setCryptoTimeTaken(Date.now() - cryptoStartTime);
+    setCryptoScore({ score, total });
+    navigate('end', 'Crypto');
+  };
+
   const nextDomainAfter = (d) => {
     const i = DOMAIN_ORDER.indexOf(d);
     return i >= 0 && i < DOMAIN_ORDER.length - 1 ? DOMAIN_ORDER[i + 1] : null;
@@ -124,6 +156,12 @@ function App() {
           next: finalScore ? { label: 'results', go: () => navigate('end', 'OSINT') } : null,
           nextHint: finalScore ? null : 'submit your answers to see results',
         };
+      case 'crypto':
+        return {
+          prev: { label: 'crypto brief', go: () => navigate('domain', 'Crypto') },
+          next: cryptoScore ? { label: 'results', go: () => navigate('end', 'Crypto') } : null,
+          nextHint: cryptoScore ? null : 'submit your answers to see results',
+        };
       case 'wireframe': {
         const nd = nextDomainAfter(domain);
         return {
@@ -135,7 +173,10 @@ function App() {
       }
       case 'end':
         return {
-          prev: { label: 'challenges', go: () => navigate('osint', 'OSINT') },
+          prev: {
+            label: `${(domain || 'osint').toLowerCase()} challenges`,
+            go: () => navigate(domain === 'Crypto' ? 'crypto' : 'osint', domain || 'OSINT'),
+          },
           next: { label: 'dashboard', go: () => navigate('main') },
         };
       default:
@@ -143,7 +184,7 @@ function App() {
     }
   })();
 
-  // ----- Page content -----
+  // Page content
   let content = null;
   switch (view) {
     case 'home':
@@ -154,7 +195,13 @@ function App() {
       break;
     case 'main':
       content = (
-        <MainPage onSelectDomain={(d) => navigate('domain', d)} osintScore={finalScore} />
+        <MainPage
+          onSelectDomain={(d) => navigate('domain', d)}
+          osintScore={finalScore}
+          cryptoScore={cryptoScore}
+          osintSolvedCount={osintSolvedCount}
+          cryptoSolvedCount={cryptoSolvedCount}
+        />
       );
       break;
     case 'domain':
@@ -169,16 +216,19 @@ function App() {
     case 'wireframe':
       content = <WireframeChallenges domain={domain} onBack={() => navigate('main')} />;
       break;
-    case 'end':
+    case 'end': {
+      const isCrypto = domain === 'Crypto';
       content = (
         <EndPage
-          timeTaken={timeTaken}
-          finalScore={finalScore}
-          onBackToQuestions={() => navigate('osint', 'OSINT')}
+          domain={domain || 'OSINT'}
+          timeTaken={isCrypto ? cryptoTimeTaken : timeTaken}
+          finalScore={isCrypto ? cryptoScore : finalScore}
+          onBackToQuestions={() => navigate(isCrypto ? 'crypto' : 'osint', domain || 'OSINT')}
           onBackToMain={() => navigate('main')}
         />
       );
       break;
+    }
     default:
       content = null;
   }
@@ -197,15 +247,30 @@ function App() {
       />
 
       <div className="app-container">
-        {/* OSINT challenges stay mounted once started, so typed answers survive back/forward */}
+        {/* OSINT challenges stay mounted so answers survive back/forward */}
         {osintStarted && (
           <div style={{ display: view === 'osint' ? 'block' : 'none' }}>
             <Challenges
               onSubmit={handleOsintSubmit}
               onBack={() => navigate('domain', 'OSINT')}
+              results={osintResults}
+              onResultChange={handleOsintResultChange}
             />
           </div>
         )}
+
+        {/* Crypto challenges stay mounted once started */}
+        {cryptoStarted && (
+          <div style={{ display: view === 'crypto' ? 'block' : 'none' }}>
+            <CryptoChallenges
+              onSubmit={handleCryptoSubmit}
+              onBack={() => navigate('domain', 'Crypto')}
+              results={cryptoResults}
+              onResultChange={handleCryptoResultChange}
+            />
+          </div>
+        )}
+
         {content}
       </div>
 

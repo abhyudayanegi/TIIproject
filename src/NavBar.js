@@ -16,8 +16,9 @@ function pathFor(view, domain) {
     case 'main': return '~/dashboard';
     case 'domain': return `~/dashboard/${slug}`;
     case 'osint': return '~/dashboard/osint/arena';
+    case 'crypto': return '~/dashboard/crypto/arena';
     case 'wireframe': return `~/dashboard/${slug}/arena`;
-    case 'end': return '~/dashboard/osint/results';
+    case 'end': return `~/dashboard/${slug || 'mission'}/results`;
     default: return '~';
   }
 }
@@ -35,7 +36,9 @@ export default function NavBar({
   const lockedTitle = 'Complete the tutorial first to unlock arenas!';
   const inDomain = (d) =>
     ((view === 'domain' || view === 'wireframe') && domain === d) ||
-    (d === 'OSINT' && (view === 'osint' || view === 'end'));
+    (d === 'OSINT' && view === 'osint') ||
+    (d === 'Crypto' && view === 'crypto') ||
+    (view === 'end' && domain === d);
 
   return (
     <nav className="navbar">

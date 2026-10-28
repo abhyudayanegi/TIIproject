@@ -5,23 +5,23 @@ const TUTORIAL_CHALLENGES = [
   {
     id: 1,
     title: 'Question 1: Standard Flag Format',
-    instructions: 'Every CTF challenge hides a secret password called a "flag". Flags almost always follow a standard template like CTF{secret_text}. Try entering the flag below and press Submit:',
-    flagToFind: 'CTF{welcome_to_cybersec}',
-    hint: 'Type or paste exactly: CTF{welcome_to_cybersec}',
+    instructions: 'Every CTF challenge hides a secret password called a "flag". Flags almost always follow a standard template like CAT{secret_text}. Try entering the flag below and press Submit:',
+    flagToFind: 'CAT{welcome_to_cybersec}',
+    hint: 'Type or paste exactly: CAT{welcome_to_cybersec}',
   },
   {
     id: 2,
     title: 'Question 2: Case & Symbol Precision',
     instructions: 'Flags are exact! Punctuation, underscores, and letter case must match precisely. Practice typing this second flag with symbols:',
-    flagToFind: 'CTF{look_beneath_the_surface}',
-    hint: 'Enter: CTF{look_beneath_the_surface}',
+    flagToFind: 'CAT{look_beneath_the_surface}',
+    hint: 'Enter: CAT{look_beneath_the_surface}',
   },
   {
     id: 3,
     title: 'Question 3: Final Calibration Drill',
     instructions: 'You are now ready to test hypotheses and verify flags one by one. Enter this final calibration flag to unlock all arena dashboards:',
-    flagToFind: 'CTF{ready_to_hack}',
-    hint: 'Enter: CTF{ready_to_hack}',
+    flagToFind: 'CAT{ready_to_hack}',
+    hint: 'Enter: CAT{ready_to_hack}',
   },
 ];
 
@@ -141,7 +141,7 @@ export default function Onboarding({ onComplete }) {
                 <span className="input-prompt-icon">&gt;</span>
                 <input
                   type="text"
-                  placeholder="Enter flag here (e.g. CTF{...})"
+                  placeholder="Enter flag here (e.g. CAT{...})"
                   autoComplete="off"
                   value={inputs[q.id] || ''}
                   disabled={isSolved}

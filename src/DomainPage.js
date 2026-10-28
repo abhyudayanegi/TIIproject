@@ -33,7 +33,7 @@ const DOMAIN_DETAILS = {
       'Audio spectrum visualizer (Audacity)'
     ],
     isLive: false,
-    totalQuestions: 5,
+    totalQuestions: 7,
   },
   Crypto: {
     icon: '🔐',
@@ -44,12 +44,12 @@ const DOMAIN_DETAILS = {
     criticalWarning: 'Cryptographic systems rarely break because of the math—they break because of human implementation errors. Reusing an IV (initialization vector), hardcoding secret keys, or using legacy MD5/SHA1 hashing has directly led to billion-dollar corporate data breaches.',
     requirements: [
       'CyberChef (The Swiss Army Knife of Cyber Decoders)',
-      'ASCII, Base64, Hex converters',
+      'CrackStation (Free Online Rainbow Table Lookup)',
       'ROT13 and Vigenère cipher decoders',
-      'Basic command line tools (OpenSSL, Python)'
+      'In-browser Base64 & Hex converters'
     ],
-    isLive: false,
-    totalQuestions: 6,
+    isLive: true,
+    totalQuestions: 7,
   },
   'Web Sec': {
     icon: '🌐',
@@ -60,12 +60,11 @@ const DOMAIN_DETAILS = {
     criticalWarning: 'Web developers frequently trust user input blindly. A single unescaped quote mark can trigger SQL Injection to dump an entire customer database; a missing parameter validation can allow any user to edit another person\'s bank account.',
     requirements: [
       'Browser Developer Tools (Network tab, Console, Storage inspector)',
-      'cURL or Postman for API request crafting',
-      'Proxy tools (OWASP ZAP or Burp Suite Community)',
+      'Hoppscotch / Postman for API request crafting',
       'HTML/JS/HTTP inspection awareness'
     ],
     isLive: false,
-    totalQuestions: 8,
+    totalQuestions: 7,
   },
 };
 
@@ -158,7 +157,7 @@ export default function DomainPage({ domain: rawDomain, onBack, onContinue }) {
           [ &larr; Back to Dashboard ]
         </button>
         <button className="btn-primary" onClick={() => onContinue(domain)}>
-          {info.isLive ? '[ Launch OSINT Challenges Arena &rarr; ]' : `[ Enter ${domain} CTF Arena (Wireframe) &rarr; ]`}
+          {info.isLive ? `[ Launch ${domain} Challenges Arena → ]` : `[ Enter ${domain} CTF Arena (Wireframe) → ]`}
         </button>
       </div>
     </div>

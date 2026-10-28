@@ -23,9 +23,9 @@ const DOMAIN_CARDS = [
     title: '2. Steganography',
     shortName: 'Stegano',
     fullName: 'Steganography',
-    badge: '[WIREFRAME BETA]',
+    badge: '[7 CHALLENGES]',
     badgeType: 'badge-wireframe',
-    questions: 5,
+    questions: 7,
     about: 'The subtle art of hiding secrets in plain sight. Unlike encryption which obscures data, steganography conceals the fact that a message exists at all.',
     requirements: 'Hex editor, image inspection software, online stego decoders.',
     teaches: 'File headers, LSB (Least Significant Bit), metadata payloads.',
@@ -37,13 +37,13 @@ const DOMAIN_CARDS = [
     title: '3. Cryptography',
     shortName: 'Crypto',
     fullName: 'Cryptography',
-    badge: '[WIREFRAME BETA]',
-    badgeType: 'badge-wireframe',
-    questions: 6,
-    about: 'Uncover the mathematical armor protecting modern cyberspace. Decipher classic ciphers, decode encodings, and understand real cryptographic flaws.',
-    requirements: 'CyberChef, Base64/Hex decoders, frequency analysis.',
-    teaches: 'Symmetric vs asymmetric keys, Caesar/Vigenère, hashing vs encryption.',
-    actionLabel: '[ Enter Crypto Mission Brief &rarr; ]',
+    badge: '[LIVE ARENA]',
+    badgeType: 'badge-live',
+    questions: 7,
+    about: 'Deconstruct the mathematical spine of digital security. Decipher ROT13, crack Vigenère, reverse Caesar shifts, lookup MD5 hashes, and peel multi-layer XOR envelopes.',
+    requirements: 'CyberChef, CrackStation, online decoders (zero local downloads).',
+    teaches: 'ROT13, Base64, Hex bytes, Vigenère, Caesar shifts, MD5, chained XOR.',
+    actionLabel: '[ Enter Crypto Live Arena &rarr; ]',
   },
   {
     id: 'Web Sec',
@@ -51,9 +51,9 @@ const DOMAIN_CARDS = [
     title: '4. Web Security',
     shortName: 'Web Sec',
     fullName: 'Web Security',
-    badge: '[WIREFRAME BETA]',
+    badge: '[7 CHALLENGES]',
     badgeType: 'badge-wireframe',
-    questions: 8,
+    questions: 7,
     about: 'Dissect the anatomy of websites and APIs. Learn how hackers manipulate web parameters, cookies, and inputs to gain unauthorized access.',
     requirements: 'Browser Developer Tools (F12 / Inspect element), cURL.',
     teaches: 'Client-side bypasses, cookie manipulation, SQL injection, XSS.',
@@ -61,7 +61,13 @@ const DOMAIN_CARDS = [
   },
 ];
 
-export default function MainPage({ onSelectDomain, osintScore }) {
+export default function MainPage({
+  onSelectDomain,
+  osintScore,
+  cryptoScore,
+  osintSolvedCount = 0,
+  cryptoSolvedCount = 0
+}) {
   return (
     <div className="main-page">
       {/* Clean Terminal Header */}
@@ -73,7 +79,7 @@ export default function MainPage({ onSelectDomain, osintScore }) {
                 [DOMAINS_DASHBOARD]
               </span>
               <span style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
-                4 foundational cybersecurity disciplines
+                4 domains &bull; 7 questions each &bull; 2 live arenas
               </span>
             </div>
             <h1 style={{ fontSize: '24px', borderBottom: 'none', margin: '6px 0 6px 0', color: 'var(--gb-fg0)' }}>
@@ -94,8 +100,14 @@ export default function MainPage({ onSelectDomain, osintScore }) {
       {/* Domain Cards Grid (Only actionable cards!) */}
       <div className="cards-grid">
         {DOMAIN_CARDS.map((card) => {
-          const currentProgress = card.id === 'OSINT' && osintScore ? osintScore.score : 0;
-          const progressPercent = Math.round((currentProgress / card.questions) * 100);
+          let currentProgress = 0;
+          if (card.id === 'OSINT') {
+            currentProgress = osintScore ? osintScore.score : osintSolvedCount;
+          }
+          if (card.id === 'Crypto') {
+            currentProgress = cryptoScore ? cryptoScore.score : cryptoSolvedCount;
+          }
+          const progressPercent = Math.min(100, Math.round((currentProgress / card.questions) * 100));
 
           return (
             <div

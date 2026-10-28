@@ -1,14 +1,9 @@
 // =====================================================================
-//  TEXTBOOK CONTENT WIREFRAME
-//  One entry per question, keyed by domain -> question id.
-//  Each entry includes:
-//  - topic:        Name of the concept/technique covered
-//  - whatIsIt:     Plain-English explanation for total beginners
-//  - whyItMatters: Real-world cybersecurity impact & why you should care
-//  - keyTerms:     Key vocabulary explained simply
-//  - links:        Curated external reading & guides
-//  - onlineTools:  Recommended browser-based tools for solving the CTF
-//  - offlineTools: Advanced installable tools to explore deeper
+//  COMPREHENSIVE TEXTBOOK DATABASE :: ANTI-CORPO EDITION
+//  7 questions per domain (OSINT, Crypto, Stegano, Web Sec).
+//  Standard Flag Prefix: CAT{...}
+//  Features plain-English concepts, real-world corporate surveillance context,
+//  jargon busters, and highlighted free online tools.
 // =====================================================================
 
 export const TEXTBOOK = {
@@ -16,7 +11,7 @@ export const TEXTBOOK = {
     1: {
       topic: 'Geolocation Intelligence (GeoINT)',
       whatIsIt: 'Geolocation Intelligence is the discipline of pinpointing the physical, real-world location where a photo, video, or post originated. Instead of magical satellite tracking, analysts look for subtle environmental clues: street signs, architectural styles, store logos, reflections in windows, license plate patterns, and sun shadows.',
-      whyItMatters: 'Every day people post casual photos online without realizing they are broadcasting their exact location. Stalkers, burglars, and threat actors use GeoINT to track routines, discover homes, and plan physical breaches.',
+      whyItMatters: 'Every day people post casual photos online without realizing they are broadcasting their exact location. Stalkers, corporate data aggregators, and threat actors use GeoINT to track personal routines, discover homes, and map physical locations.',
       keyTerms: [
         { term: 'GeoINT', meaning: 'Geospatial Intelligence — extracting location clues from visual and public assets.' },
         { term: 'Landmark Pivoting', meaning: 'Using a visible business name or distinct structure to narrow coordinates on maps.' },
@@ -24,7 +19,7 @@ export const TEXTBOOK = {
       ],
       links: [
         { label: 'Bellingcat Guide to Image Geolocation', url: 'https://www.bellingcat.com/resources/how-tos/2019/07/09/buy-the-ticket-take-the-ride-a-beginners-guide-to-geolocation/', note: 'Step-by-step primer by investigative journalists' },
-        { label: 'Geoguessr Tips & Visual Recognition Guide', url: 'https://www.geoguessr.com', note: 'Techniques for recognizing countries and regions by visual cues' }
+        { label: 'Geoguessr Visual Recognition Guide', url: 'https://www.geoguessr.com', note: 'Techniques for recognizing regions by subtle visual cues' }
       ],
       onlineTools: [
         { name: 'Google Lens', url: 'https://images.google.com', note: 'Crop store signs, menus, and landmarks to find origins' },
@@ -51,12 +46,11 @@ export const TEXTBOOK = {
       ],
       onlineTools: [
         { name: 'Jeffrey’s Image Metadata Viewer', url: 'http://exif.regex.info/exif.cgi', note: 'Classic online EXIF decoder showing GPS maps' },
-        { name: 'JPEGsnoop', url: 'https://www.impulseadventure.com/photo/jpeg-snoop.html', note: 'In-depth JPEG structure and compression inspector' },
-        { name: 'Jimpl EXIF Viewer', url: 'https://jimpl.com', note: 'Fast in-browser EXIF and geotag reader' }
+        { name: 'Jimpl EXIF Viewer', url: 'https://jimpl.com', note: 'Fast in-browser EXIF and geotag reader' },
+        { name: 'ExifMeta Online', url: 'https://exifmeta.com', note: 'Instant metadata analyzer with no upload retention' }
       ],
       offlineTools: [
-        { name: 'ExifTool by Phil Harvey', url: 'https://exiftool.org', note: 'The gold-standard command-line metadata reader and editor' },
-        { name: 'Strings (Sysinternals / Unix)', url: 'https://learn.microsoft.com/en-us/sysinternals/downloads/strings', note: 'Quickly dump ASCII strings from any file' }
+        { name: 'ExifTool by Phil Harvey', url: 'https://exiftool.org', note: 'The gold-standard command-line metadata reader and editor' }
       ]
     },
     3: {
@@ -77,8 +71,7 @@ export const TEXTBOOK = {
         { name: 'Google Lens', url: 'https://images.google.com', note: 'Broad AI image matching across social platforms' }
       ],
       offlineTools: [
-        { name: 'Sherlock (Python CLI)', url: 'https://github.com/sherlock-project/sherlock', note: 'Hunt social accounts by username across 300+ networks' },
-        { name: 'Maigret', url: 'https://github.com/soxoj/maigret', note: 'Advanced dossier generator using public username footprints' }
+        { name: 'Sherlock (Python CLI)', url: 'https://github.com/sherlock-project/sherlock', note: 'Hunt social accounts by username across 300+ networks' }
       ]
     },
     4: {
@@ -87,317 +80,360 @@ export const TEXTBOOK = {
       whyItMatters: 'Developers accidentally leak passwords, database API keys, and personal contact info into public repositories every hour. Automated bots scrape GitHub within seconds to harvest exposed credentials.',
       keyTerms: [
         { term: 'Commit Metadata', meaning: 'The author name, email, and timestamp stamped into each Git commit object.' },
-        { term: 'Patch Endpoint (.patch)', meaning: 'Appending .patch to a GitHub commit URL shows raw diff headers with emails.' },
-        { term: 'Secret Leaks', meaning: 'Accidental check-ins of keys, tokens, or emails into public history.' }
+        { term: 'Patch Endpoint (.patch)', meaning: 'Appending .patch to a GitHub commit URL shows raw diff headers with emails.' }
       ],
       links: [
-        { label: 'GitHub Docs: About Commit Email Addresses', url: 'https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address', note: 'Official guide on how GitHub emails leak and how to hide them' },
-        { label: 'Git Secrets and Security Best Practices', url: 'https://owasp.org', note: 'OWASP guidelines on avoiding credentials in source repositories' }
+        { label: 'GitHub Docs: Commit Email Addresses', url: 'https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address', note: 'Official guide on how GitHub emails leak and how to hide them' }
       ],
       onlineTools: [
         { name: 'GitHub Search & Commit Dorks', url: 'https://github.com/search', note: 'Search repositories using author:, extension:, and keyword filters' },
-        { name: 'Wayback Machine (Archive.org)', url: 'https://archive.org/web/', note: 'View past versions of deleted repositories and user profile pages' }
+        { name: 'Wayback Machine (Archive.org)', url: 'https://archive.org/web/', note: 'View past versions of deleted repositories and profile pages' }
       ],
       offlineTools: [
-        { name: 'Git Log CLI (`git log -p`)', url: 'https://git-scm.com', note: 'Inspect local commit author headers and line differences' },
-        { name: 'TruffleHog', url: 'https://github.com/trufflesecurity/trufflehog', note: 'Scan Git histories for leaked credentials and emails' }
+        { name: 'TruffleHog', url: 'https://github.com/trufflesecurity/trufflehog', note: 'Scans Git histories for leaked secrets and emails' }
       ]
     },
     5: {
-      topic: 'Service Identification & Platform Footprinting',
-      whatIsIt: 'Once an intelligence researcher discovers an email or handle, the next step is determining which services, hosting providers, or platforms it is registered on. Services often leak registration status through password reset pages, avatar lookups, or API profile queries.',
-      whyItMatters: 'Finding out where someone has accounts allows threat actors to orchestrate credential stuffing, password spray attacks, or spear-phishing campaigns tailored to the services the victim uses daily.',
+      topic: 'Platform Verification & Cross-Referencing',
+      whatIsIt: 'Digital footprints span across multiple platforms: code hosts (GitHub), creative portfolios, social platforms, and discussion forums. Source tracking entails verifying which platform originated a specific piece of leaked intelligence and validating its authenticity.',
+      whyItMatters: 'Threat actors and intelligence agencies fabricate false trails. Verifying platform authenticity ensures investigations rely on solid, verifiable evidence.',
       keyTerms: [
-        { term: 'Credential Stuffing', meaning: 'Testing leaked credentials from one service against dozens of other websites.' },
-        { term: 'Account Enumeration', meaning: 'Probing login forms to see if an email is registered based on error messages.' }
+        { term: 'Cross-Correlation', meaning: 'Matching timestamps, bios, and links across two or more services.' },
+        { term: 'Primary Source', meaning: 'The root service where the credential or data was first authored.' }
       ],
       links: [
-        { label: 'IntelTechniques: Email and Handle Investigation', url: 'https://inteltechniques.com', note: 'Techniques from former FBI cyber investigator Michael Bazzell' },
-        { label: 'HaveIBeenPwned', url: 'https://haveibeenpwned.com', note: 'Check whether an email has been leaked in historic data breaches' }
+        { label: 'IntelTechniques by Michael Bazzell', url: 'https://inteltechniques.com', note: 'Gold-standard open-source investigative methodologies' }
       ],
       onlineTools: [
-        { name: 'Epieos', url: 'https://epieos.com', note: 'Reverse email search verifying Google, GitHub, Skype, and Gravatar profiles' },
-        { name: 'Hunter.io', url: 'https://hunter.io', note: 'Find email patterns and verify company domain contacts' },
-        { name: 'OSINT Industries', url: 'https://osint.industries', note: 'Real-time module checks for email-to-service links' }
+        { name: 'Namechk', url: 'https://namechk.com', note: 'Check username consistency across major networks' },
+        { name: 'CyberChef', url: 'https://gchq.github.io/CyberChef/', note: 'Format and normalize extracted URLs and handles' }
       ],
       offlineTools: [
-        { name: 'Holehe (Python CLI)', url: 'https://github.com/megadose/holehe', note: 'Checks if an email is attached to 120+ sites without notifying target' },
-        { name: 'theHarvester', url: 'https://github.com/laramies/theHarvester', note: 'Gathers emails, names, subdomains, and open ports from public sources' }
+        { name: 'Spiderfoot', url: 'https://github.com/smicallef/spiderfoot', note: 'Automated OSINT reconnaissance engine' }
       ]
     },
     6: {
-      topic: 'Classical Substitution Ciphers (Vigenère & Caesar)',
-      whatIsIt: 'Classical ciphers manipulate text by shifting or substituting characters along the alphabet. A Caesar cipher shifts every letter by a fixed number (e.g. A becomes D with shift 3). A Vigenère cipher uses a repeating keyword to shift each letter by a different amount, providing multi-alphabet protection.',
-      whyItMatters: 'While obsolete for protecting modern banking, classical ciphers are widely used in CTFs and malware obfuscation to hide configuration strings, command endpoints, and anti-virus evasion payloads.',
+      topic: 'Cipher Clues in Intelligence Operations',
+      whatIsIt: 'Often targets scramble text snippets using classic ciphers like Vigenère or substitution ciphers to hide contact handles or private keys in plain view. Recognizing the structure of encrypted strings lets investigators quickly determine the algorithm.',
+      whyItMatters: 'Casual obfuscation gives users a false sense of security. Knowing how to break basic ciphers reveals secrets hiding in bios, commit messages, and usernames.',
       keyTerms: [
-        { term: 'Substitution Cipher', meaning: 'Replacing units of plaintext with ciphertext according to a system.' },
-        { term: 'Vigenère Cipher', meaning: 'Polyalphabetic substitution using a keyword to shift each character.' },
-        { term: 'ROT13', meaning: 'A Caesar cipher with a fixed shift of 13 characters (A <-> N).' }
+        { term: 'Substitution Cipher', meaning: 'Replacing characters with other characters according to a rule or key.' },
+        { term: 'Vigenère Cipher', meaning: 'Polyalphabetic substitution using a keyword.' }
       ],
       links: [
-        { label: 'Khan Academy: Journey into Cryptography', url: 'https://www.khanacademy.org/computing/computer-science/cryptography', note: 'Engaging interactive visual walkthrough of Caesar and Vigenère ciphers' },
-        { label: 'dcode.fr Cipher Identifier', url: 'https://www.dcode.fr/cipher-identifier', note: 'Analyzes ciphertext frequency to guess the cipher algorithm' }
+        { label: 'CryptoCorner Vigenère Solver', url: 'https://cryptii.com', note: 'Interactive cipher manipulation canvas' }
       ],
       onlineTools: [
-        { name: 'CyberChef', url: 'https://gchq.github.io/CyberChef/', note: 'The ultimate tool for ROT13, Vigenère, Base64, and Hex decoding' },
-        { name: 'dcode.fr Vigenère Solver', url: 'https://www.dcode.fr/vigenere-cipher', note: 'Cracks Vigenère with or without a known keyword' },
-        { name: 'Rumkin Cipher Tools', url: 'https://rumkin.com/tools/cipher/', note: 'Clean browser-based classical cipher workbench' }
+        { name: 'CyberChef (Vigenère / ROT13)', url: 'https://gchq.github.io/CyberChef/', note: 'The ultimate web tool for instant cipher decryption' },
+        { name: 'dcode.fr Cipher Identifier', url: 'https://www.dcode.fr/cipher-identifier', note: 'Analyzes ciphertext and suggests likely ciphers' }
       ],
       offlineTools: [
-        { name: 'CrypTool', url: 'https://www.cryptool.org', note: 'Open-source desktop software for learning and testing cryptography' },
-        { name: 'Python PyCryptodome', url: 'https://pycryptodome.readthedocs.io', note: 'Python cryptographic library for writing custom solvers' }
+        { name: 'Python PyCryptodome', url: 'https://pycryptodome.readthedocs.io', note: 'Cryptographic library for custom scripts' }
       ]
     },
     7: {
-      topic: 'Social Media Intelligence (SOCMINT)',
-      whatIsIt: 'SOCMINT is the gathering and analysis of data published on social networks like Instagram, LinkedIn, Facebook, and Twitter. This includes biographical summaries, geotagged stories, comments, followers, friend graphs, and tagged photos posted by friends.',
-      whyItMatters: 'Even if your personal account is private, friends tagging you in group photos, comments on public posts, and bio links often reveal your location, interests, and affiliations to any observer.',
+      topic: 'Social Media Footprinting & The Final Flag',
+      whatIsIt: 'Public social networks like Instagram, Twitter, and LinkedIn are treasure troves of personal disclosures. Users routinely post photos containing badges, computer screens, sticky notes with passwords, and flags hidden in image captions or stories (format: CAT{...}).',
+      whyItMatters: 'Human behavior is the weakest link in cybersecurity. No amount of encryption helps if an employee posts a selfie with their computer screen in the background.',
       keyTerms: [
-        { term: 'SOCMINT', meaning: 'Social Media Intelligence — extracting intel from social platforms.' },
-        { term: 'Digital Footprint', meaning: 'The trail of data you leave behind while navigating the internet.' },
-        { term: 'Google Dorking for Socials', meaning: 'Using `site:instagram.com "keyword"` to find indexed public posts.' }
+        { term: 'Social Media Intelligence (SOCMINT)', meaning: 'Gathering intelligence from social media platforms.' },
+        { term: 'OPSEC (Operations Security)', meaning: 'Practices that prevent adversaries from gathering sensitive info.' }
       ],
       links: [
-        { label: 'SANS Institute: SOCMINT Fundamentals', url: 'https://www.sans.org', note: 'Practical methodologies for auditing social media presence' },
-        { label: 'EFF: Surveillance Self-Defense for Social Media', url: 'https://ssd.eff.org', note: 'How to lock down social media settings against scrapers' }
+        { label: 'SANS Institute: Introduction to SOCMINT', url: 'https://www.sans.org', note: 'Best practices for social media auditing' }
       ],
       onlineTools: [
-        { name: 'Google Advanced Search Operators', url: 'https://www.google.com/advanced_search', note: 'Search within specific platforms with exact matches' },
-        { name: 'Picuki / Dumpor (Instagram Viewers)', url: 'https://www.picuki.com', note: 'Browse public Instagram profiles and tags without logging in' }
+        { name: 'Picuki (Instagram Web Viewer)', url: 'https://www.picuki.com', note: 'Browse public Instagram profiles and captions without signing in' },
+        { name: 'Google Cache / Archive Today', url: 'https://archive.is', note: 'Inspect archived social media posts' }
       ],
       offlineTools: [
-        { name: 'Instaloader (Python CLI)', url: 'https://instaloader.github.io', note: 'Download pictures, captions, and metadata from public profiles' },
-        { name: 'Maltego', url: 'https://www.maltego.com', note: 'Visual link analysis tool mapping social relationships' }
+        { name: 'Instaloader', url: 'https://instaloader.github.io', note: 'CLI tool to download Instagram photos, stories, and metadata' }
       ]
     }
   },
-  Stegano: {
-    1: {
-      topic: 'Least Significant Bit (LSB) Steganography',
-      whatIsIt: 'Digital image pixels are made of Red, Green, and Blue values (0 to 255). Changing the very last bit (the Least Significant Bit) of a color value alters the pixel by such a tiny fraction that human eyes cannot notice the difference. Steganographers hide secret binary data by replacing these last bits.',
-      whyItMatters: 'Malware authors hide malicious download commands inside ordinary image memes on websites to evade antivirus file scanners.',
-      keyTerms: [
-        { term: 'LSB', meaning: 'Least Significant Bit — the lowest bit in a binary number with minimal visual impact.' },
-        { term: 'Carrier Image', meaning: 'The innocent host image containing the hidden payload.' }
-      ],
-      links: [
-        { label: 'Aperisolve Steganography Guide', url: 'https://www.aperisolve.com', note: 'Visualizes color bit planes and LSB extractions' }
-      ],
-      onlineTools: [
-        { name: 'Aperisolve', url: 'https://www.aperisolve.com', note: 'Online multi-layer image analysis tool' },
-        { name: 'StegOnline', url: 'https://stegonline.georgeom.net', note: 'In-browser pixel color plane and LSB viewer' }
-      ],
-      offlineTools: [
-        { name: 'Zsteg (Ruby gem)', url: 'https://github.com/zed-0xff/zsteg', note: 'Detects hidden data in PNG and BMP files automatically' }
-      ]
-    },
-    2: {
-      topic: 'Audio Spectrograms & Frequency Concealment',
-      whatIsIt: 'Audio files can hide images and text visually within their frequency spectrum. While the audio sounds like normal noise or music to human ears, visualizing it with a spectrogram reveals clear words and pictures drawn in frequency waves.',
-      whyItMatters: 'Shows that data can exist in alternate representations that normal playback programs ignore.',
-      keyTerms: [
-        { term: 'Spectrogram', meaning: 'A visual representation of sound frequencies over time.' },
-        { term: 'Sonic Stego', meaning: 'Encoding data or graphics into high audio frequencies.' }
-      ],
-      links: [
-        { label: 'Audacity Spectrogram View Tutorial', url: 'https://manual.audacityteam.org/man/spectrogram_view.html', note: 'Official guide on revealing hidden audio pictures' }
-      ],
-      onlineTools: [
-        { name: 'Academo Spectrum Analyzer', url: 'https://academo.org/demos/spectrum-analyzer/', note: 'In-browser sound wave and spectrogram generator' }
-      ],
-      offlineTools: [
-        { name: 'Audacity', url: 'https://www.audacityteam.org', note: 'Free audio editor with built-in Spectrogram view mode' },
-        { name: 'Sonic Visualiser', url: 'https://www.sonicvisualiser.org', note: 'Advanced acoustic analysis tool' }
-      ]
-    },
-    3: {
-      topic: 'File Structure & Appended Trailing Bytes',
-      whatIsIt: 'Image file formats like PNG and JPEG have strict start and end markers (like `IEND` in PNGs or `FF D9` in JPEGs). Image viewers stop reading after this marker. If someone attaches secret text or a whole ZIP file after that marker, the image still opens normally, but the secret rides along unnoticed.',
-      whyItMatters: 'Threat actors append malware payloads to legitimate files, bypassing basic inspection.',
-      keyTerms: [
-        { term: 'Magic Bytes', meaning: 'Specific byte sequences at the start and end of files indicating file type.' },
-        { term: 'Polyglot File', meaning: 'A single file that can validly execute as two different formats (e.g. GIF and ZIP).' }
-      ],
-      links: [
-        { label: 'Gary Kessler File Signatures Table', url: 'https://www.garykessler.net/library/file_sigs.html', note: 'Reference list of all file header and trailer magic bytes' }
-      ],
-      onlineTools: [
-        { name: 'HexEd.it', url: 'https://hexed.it', note: 'Browser-based hex editor to inspect trailing bytes' }
-      ],
-      offlineTools: [
-        { name: 'Binwalk', url: 'https://github.com/ReFirmLabs/binwalk', note: 'Fast firmware and image carving tool' },
-        { name: 'HxD Hex Editor', url: 'https://mh-nexus.de/en/hxd/', note: 'Classic fast Windows hex viewer' }
-      ]
-    },
-    4: {
-      topic: 'Steghide & Password-Protected Stego',
-      whatIsIt: 'Steghide is a classical steganography program that embeds data into JPEG and WAV files using graph-theoretic algorithms, encrypted with a passphrase. Without the passphrase, statistical tests cannot even detect the presence of data.',
-      whyItMatters: 'Combines the concealment of steganography with the mathematical strength of password-based encryption.',
-      keyTerms: [
-        { term: 'Passphrase Salt', meaning: 'A secret key used to scramble where bits are stored.' },
-        { term: 'Carving', meaning: 'Extracting an embedded file using known dictionary attacks.' }
-      ],
-      links: [
-        { label: 'Steghide Project Homepage', url: 'http://steghide.sourceforge.net', note: 'Manual and algorithmic background' }
-      ],
-      onlineTools: [
-        { name: 'FutureBoy Stego Decoders', url: 'https://futureboy.us/stegano/decinput.html', note: 'Online Steghide extraction tool' }
-      ],
-      offlineTools: [
-        { name: 'Steghide CLI', url: 'http://steghide.sourceforge.net', note: 'Command-line embedding and extraction tool' },
-        { name: 'Stegcracker', url: 'https://github.com/Paradoxis/StegCracker', note: 'Dictionary attack tool against Steghide passphrases' }
-      ]
-    },
-    5: {
-      topic: 'Color Plane & Palette Separation',
-      whatIsIt: 'An image is made of color channels (Red, Green, Blue, Alpha). Sometimes secrets are hidden not in the raw pixels, but only in the Alpha transparency layer or a single isolated color channel with high brightness contrast.',
-      whyItMatters: 'Demonstrates multi-dimensional data storage and visual forensics.',
-      keyTerms: [
-        { term: 'Color Plane', meaning: 'The isolated grayscale layer representing one color intensity.' },
-        { term: 'Alpha Channel', meaning: 'The transparency channel of an image.' }
-      ],
-      links: [
-        { label: 'GIMP Color Channel Separation Tutorial', url: 'https://docs.gimp.org', note: 'How to split RGB layers' }
-      ],
-      onlineTools: [
-        { name: 'Aperisolve', url: 'https://www.aperisolve.com', note: 'Shows all 8 bit planes per channel simultaneously' }
-      ],
-      offlineTools: [
-        { name: 'GIMP', url: 'https://www.gimp.org', note: 'Free image manipulation program' }
-      ]
-    }
-  },
+
+  // ===================================================================
+  //  CRYPTOGRAPHY DOMAIN (7 QUESTIONS) :: ANTI-CORPO EVILCORP ARC
+  // ===================================================================
   Crypto: {
     1: {
-      topic: 'Caesar & Shift Ciphers',
-      whatIsIt: 'The earliest known historical cipher, used by Julius Caesar to protect military messages by shifting each letter of the alphabet forward by a fixed number of spaces.',
-      whyItMatters: 'Understanding shift ciphers introduces the foundational concept of keys, algorithms, and key spaces.',
-      keyTerms: [{ term: 'Shift Offset', meaning: 'The numeric distance each letter moves along the alphabet.' }],
-      links: [{ label: 'Khan Academy Shift Ciphers', url: 'https://www.khanacademy.org' }],
-      onlineTools: [{ name: 'CyberChef', url: 'https://gchq.github.io/CyberChef/' }],
-      offlineTools: [{ name: 'Python string.ascii_lowercase', url: 'https://python.org' }]
+      topic: 'Corporate Obfuscation: Caesar Shift & ROT13 (Warm-Up 1)',
+      whatIsIt: 'Megacorporations like EvilCorp often hide controversial internal policies from public scrutiny using the simplest monoalphabetic substitution: the Caesar Cipher. In ROT13, every letter of the alphabet is shifted by exactly 13 places. Because the Latin alphabet has 26 letters, applying ROT13 twice restores the original text!',
+      whyItMatters: 'EvilCorp uses ROT13 in compliance documentation to obscure anti-whistleblower rules from basic keyword search crawlers. Learning to identify and decode ROT13 exposes corporate duplicity in seconds.',
+      keyTerms: [
+        { term: 'Symmetric Shift', meaning: 'Advancing every letter by a static number of alphabet positions.' },
+        { term: 'ROT13', meaning: 'Rotate by 13 positions. Symmetrical because 13 + 13 = 26.' },
+        { term: 'Monoalphabetic', meaning: 'A single fixed shift is used across every letter in the message.' }
+      ],
+      links: [
+        { label: 'Khan Academy: Caesar Cipher Mathematics', url: 'https://www.khanacademy.org/computing/computer-science/cryptography/ciphers/a/caesar-cipher', note: 'Interactive math behind modular alphabet shifts' }
+      ],
+      onlineTools: [
+        { name: 'CyberChef (ROT13 Recipe)', url: 'https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,false,13)', note: 'Highlight: Drag the ROT13 operation into CyberChef and paste the ciphertext' },
+        { name: 'ROT13.com', url: 'https://rot13.com', note: 'Instant in-browser ROT13 encoder/decoder' }
+      ],
+      offlineTools: [
+        { name: 'tr command (Unix / Linux / macOS)', url: 'https://man7.org/linux/man-pages/man1/tr.1.html', note: 'tr "A-Za-z" "N-ZA-Mn-za-m"' }
+      ]
     },
     2: {
-      topic: 'Encoding vs Hashing vs Encryption',
-      whatIsIt: 'Encoding (Base64, Hex) transforms data for transmission (not for security). Hashing (MD5, SHA256) is a one-way fingerprint. Encryption (AES, RSA) scrambles data so only someone with the key can reverse it.',
-      whyItMatters: 'A widespread mistake in apps is using Base64 and believing it protects passwords!',
+      topic: 'The Fake Telemetry "Encryption": Base64 vs Real Security (Warm-Up 2)',
+      whatIsIt: 'EvilCorp advertises that their software features "end-to-end encrypted telemetry." In reality, they are using Base64! Base64 is NOT encryption—it is an encoding scheme that translates arbitrary binary bytes into 64 ASCII characters (A-Z, a-z, 0-9, +, /) so data can travel over web protocols without transmission errors. Anyone who sees a Base64 string can decode it instantly without a key.',
+      whyItMatters: 'Tech monopolies intentionally conflate "encoding" with "encryption" in marketing materials to deceive users into trusting intrusive tracking beacons. Recognizing Base64 (identified by its trailing = padding) allows you to audit what data apps are secretly uploading.',
       keyTerms: [
-        { term: 'Base64', meaning: 'An encoding scheme that represents binary in 64 printable ASCII characters.' },
-        { term: 'One-Way Hash', meaning: 'A function that cannot be mathematically inverted.' }
+        { term: 'Encoding', meaning: 'Format conversion for transport; completely reversible without any secret key.' },
+        { term: 'Encryption', meaning: 'Mathematical scrambling that requires a secret cryptographic key to invert.' },
+        { term: 'Padding (=)', meaning: 'Base64 characters end with = or == to pad bytes to a multiple of 4.' }
       ],
-      links: [{ label: 'OWASP Guide to Cryptography', url: 'https://owasp.org' }],
-      onlineTools: [{ name: 'CyberChef', url: 'https://gchq.github.io/CyberChef/' }],
-      offlineTools: [{ name: 'OpenSSL CLI', url: 'https://openssl.org' }]
+      links: [
+        { label: 'MDN Web Docs: Base64 Decoded', url: 'https://developer.mozilla.org/en-US/docs/Glossary/Base64', note: 'How Base64 converts 3 8-bit bytes into 4 6-bit chunks' }
+      ],
+      onlineTools: [
+        { name: 'CyberChef (From Base64)', url: 'https://gchq.github.io/CyberChef/#recipe=From_Base64(\'A-Za-z0-9%2B/%3D\',true,false)', note: 'Highlight: Add "From Base64" operation and paste the encoded string' },
+        { name: 'Base64Decode.org', url: 'https://www.base64decode.org', note: 'Instant in-browser decoder' }
+      ],
+      offlineTools: [
+        { name: 'base64 command (CLI)', url: 'https://man7.org/linux/man-pages/man1/base64.1.html', note: 'echo "string" | base64 -d' }
+      ]
     },
     3: {
-      topic: 'Pseudo-Random Number Generators (PRNG)',
-      whatIsIt: 'Computers cannot generate truly random numbers without special hardware; they use algorithms called PRNGs seeded with a starting value (often the current timestamp). If the seed is known or predictable, all future numbers are known in advance.',
-      whyItMatters: 'Predictable PRNGs allow attackers to guess password reset tokens and session IDs.',
-      keyTerms: [{ term: 'Seed Value', meaning: 'The starting state for a pseudo-random sequence.' }],
-      links: [{ label: 'Randomness in Cryptography', url: 'https://wikipedia.org' }],
-      onlineTools: [{ name: 'CyberChef', url: 'https://gchq.github.io/CyberChef/' }],
-      offlineTools: [{ name: 'Python secrets module', url: 'https://python.org' }]
+      topic: 'The Whistleblower\'s Raw Hex Packet (Chain Stage 1)',
+      whatIsIt: 'Inside EvilCorp\'s profiling server, network packets travel as raw binary bytes. To make packets human-readable, engineers display them in Hexadecimal (Base 16, using 0-9 and A-F), where each byte is represented by two hex digits (e.g. 0x43 is the ASCII character "C").',
+      whyItMatters: 'Whistleblowers exfiltrating data dumps from surveillance clusters often capture raw hex streams. Converting hex bytes into plaintext ASCII reveals internal passwords and keys that EvilCorp never intended the public to see.',
+      keyTerms: [
+        { term: 'Hexadecimal (Hex)', meaning: 'Base 16 numbering system using 0-9 and A-F.' },
+        { term: 'Nibble', meaning: 'A 4-bit group represented by a single hexadecimal digit.' },
+        { term: 'ASCII Table', meaning: 'The international standard mapping numbers (0-127) to characters.' }
+      ],
+      links: [
+        { label: 'ASCII Table & Hexadecimal Converter', url: 'https://www.asciitable.com', note: 'Map characters to hex, decimal, and binary' }
+      ],
+      onlineTools: [
+        { name: 'CyberChef (From Hex)', url: 'https://gchq.github.io/CyberChef/#recipe=From_Hex(\'Auto\')', note: 'Highlight: Add "From Hex" operation to decrypt the raw packet and extract the secret key' },
+        { name: 'HexEd.it Online Hex Editor', url: 'https://hexed.it', note: 'Inspect hex streams directly in your browser' }
+      ],
+      offlineTools: [
+        { name: 'xxd / hexdump', url: 'https://linux.die.net/man/1/xxd', note: 'Command line hex dumper and reverser' }
+      ]
     },
     4: {
-      topic: 'XOR Encryption & Key Re-use',
-      whatIsIt: 'XOR (exclusive OR) is the fundamental operation powering symmetric encryption. If a message is XORed with a key, XORing it again with the same key restores the original plaintext.',
-      whyItMatters: 'Reusing a one-time key with XOR completely breaks secrecy through frequency analysis.',
-      keyTerms: [{ term: 'XOR Operation', meaning: 'Returns 1 if bits differ, 0 if bits match.' }],
-      links: [{ label: 'XOR Cipher Explanation', url: 'https://wikipedia.org' }],
-      onlineTools: [{ name: 'CyberChef XOR Recipe', url: 'https://gchq.github.io/CyberChef/' }],
-      offlineTools: [{ name: 'Python itertools.cycle', url: 'https://python.org' }]
+      topic: 'The Boardroom Vigenère Dispatch (Chain Stage 2)',
+      whatIsIt: 'While the Caesar cipher shifts every letter by the same fixed number, the Vigenère Cipher shifts letters using a repeating secret keyword. Each letter of the keyword tells you how far to shift the corresponding message letter. Because the letter "E" might be encoded as "M" in one word and "T" in another, simple frequency analysis fails to crack it!',
+      whyItMatters: 'EvilCorp directors use Vigenère ciphers with secret corporate passphrases to encrypt internal communications regarding data monetization pipelines. To decrypt the dispatch, you must use the key extracted from the whistleblower\'s hex dump in Question 3 (SHADOWCORP)!',
+      keyTerms: [
+        { term: 'Polyalphabetic', meaning: 'Using multiple shifting alphabets across the same message.' },
+        { term: 'Passphrase Key', meaning: 'The secret word whose letters dictate the shift for each character position.' },
+        { term: 'Tabula Recta', meaning: 'The classic 26x26 grid of shifted alphabets used to compute Vigenère ciphers.' }
+      ],
+      links: [
+        { label: 'Khan Academy: Polyalphabetic Ciphers', url: 'https://www.khanacademy.org/computing/computer-science/cryptography/ciphers/a/polyalphabetic-ciphers', note: 'Why Vigenère defeated classic frequency analysis' }
+      ],
+      onlineTools: [
+        { name: 'CyberChef (Vigenère Decode)', url: 'https://gchq.github.io/CyberChef/#recipe=Vigen%C3%A8re_Decode(\'SHADOWCORP\')', note: 'Highlight: Add "Vigenère Decode", paste the key SHADOWCORP, and decode the dispatch' },
+        { name: 'dcode.fr Vigenère Solver', url: 'https://www.dcode.fr/vigenere-cipher', note: 'Comprehensive solver with automatic key recognition' }
+      ],
+      offlineTools: [
+        { name: 'Python itertools.cycle script', url: 'https://python.org', note: 'Implement repeating-key Vigenère in 5 lines of Python' }
+      ]
     },
     5: {
-      topic: 'Hash Collisions & Legacy Hashing (MD5)',
-      whatIsIt: 'A hash collision occurs when two completely different inputs produce the exact same output hash. Legacy algorithms like MD5 are broken because collisions can be generated on standard laptops in seconds.',
-      whyItMatters: 'Attackers can forge digital certificates and malware signatures using MD5 collisions.',
-      keyTerms: [{ term: 'Collision', meaning: 'Two distinct inputs sharing an identical hash.' }],
-      links: [{ label: 'MD5 Collision Demo', url: 'https://wikipedia.org' }],
-      onlineTools: [{ name: 'CyberChef MD5', url: 'https://gchq.github.io/CyberChef/' }],
-      offlineTools: [{ name: 'md5sum CLI', url: 'https://gnu.org' }]
+      topic: 'The Scrambled Vault Backdoor: Derived Shifts (Chain Stage 3)',
+      whatIsIt: 'In multi-stage cryptanalysis, cracking one intercept yields the key or numeric parameters needed to decipher the next intercept. When you discover that an adversary is using a specific shift offset (revealed from Question 4, which is 7 positions), you can shift the scrambled letters backward by that exact amount to restore clarity.',
+      whyItMatters: 'EvilCorp uses Caesar shifts on logging servers to scramble database codenames. Breaking the offset allows you to unmask the target codename needed for the credential attack.',
+      keyTerms: [
+        { term: 'Shift Key', meaning: 'The integer offset (e.g. 7 positions) by which characters are advanced.' },
+        { term: 'Modulo 26 Arithmetic', meaning: 'Wrapping around the alphabet when a shift goes past Z or before A.' }
+      ],
+      links: [
+        { label: 'Brute-forcing Caesar Shifts Online', url: 'https://www.dcode.fr/caesar-cipher', note: 'Shows all 25 possible rotations simultaneously' }
+      ],
+      onlineTools: [
+        { name: 'CyberChef (ROT13 with Custom Amount)', url: 'https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,false,19)', note: 'Highlight: To shift backward by 7 in CyberChef, use ROT13 with Amount = 19 (since 26 - 7 = 19)' },
+        { name: 'Cryptii Caesar Tool', url: 'https://cryptii.com/pipes/caesar-cipher', note: 'Interactive slider to set shift offset directly to 7' }
+      ],
+      offlineTools: [
+        { name: 'Python string rotate', url: 'https://python.org', note: 'One-line list comprehension for Caesar shifting' }
+      ]
     },
     6: {
-      topic: 'Asymmetric Encryption & RSA Mathematics',
-      whatIsIt: 'Asymmetric encryption uses a key pair: a public key that anyone can use to encrypt messages, and a private key that only the recipient possesses to decrypt them.',
-      whyItMatters: 'Forms the security foundation of HTTPS, SSH, and digital signatures worldwide.',
-      keyTerms: [{ term: 'Public Key', meaning: 'Shared openly for encryption and signature verification.' }],
-      links: [{ label: 'RSA Simplified Explained', url: 'https://wikipedia.org' }],
-      onlineTools: [{ name: 'CyberChef RSA Decrypt', url: 'https://gchq.github.io/CyberChef/' }],
-      offlineTools: [{ name: 'RsaCtfTool', url: 'https://github.com/RsaCtfTool/RsaCtfTool' }]
+      topic: 'Cracking the EvilCorp CISO Hash: Rainbow Tables (Chain Stage 4)',
+      whatIsIt: 'Cryptographic hash functions (like MD5) are mathematical one-way streets: they ingest any input and compute a fixed-size digital fingerprint. You cannot mathematically "decrypt" a hash. Instead, analysts crack hashes using precomputed tables called Rainbow Tables, or by hashing billions of dictionary words until an identical match is found.',
+      whyItMatters: 'EvilCorp\'s Chief Information Security Officer (CISO) arrogantly believed their master password was uncrackable, but stored it as an unsalted MD5 hash combining the vault codename from Question 5 (cerberus) with common numbers. Online lookup tables crack it in milliseconds!',
+      keyTerms: [
+        { term: 'One-Way Hash', meaning: 'A function that cannot be mathematically inverted.' },
+        { term: 'MD5', meaning: 'Message Digest 5 — produces 128-bit hashes, now considered cryptographically broken.' },
+        { term: 'Rainbow Table', meaning: 'A precomputed lookup table mapping common passwords to their hashes.' },
+        { term: 'Salt', meaning: 'Random data added to passwords before hashing to defeat lookup tables.' }
+      ],
+      links: [
+        { label: 'How Rainbow Table Attacks Work', url: 'https://www.geeksforgeeks.org/understanding-rainbow-table-attack/', note: 'Explains precomputed hash chains and reduction functions' }
+      ],
+      onlineTools: [
+        { name: 'CrackStation (Free Hash Lookup)', url: 'https://crackstation.net', note: 'Highlight: Paste the MD5 hash directly to look up its plaintext in massive 15GB lookup tables' },
+        { name: 'CyberChef (Generate MD5 / Hashes)', url: 'https://gchq.github.io/CyberChef/#recipe=MD5()', note: 'Verify that the cracked password hashes to the exact target' },
+        { name: 'MD5Decrypt.net', url: 'https://md5decrypt.net/en/', note: 'Alternative online database with billions of cracked hashes' }
+      ],
+      offlineTools: [
+        { name: 'Hashcat', url: 'https://hashcat.net/hashcat/', note: 'The world\'s fastest GPU-accelerated password recovery utility' },
+        { name: 'John the Ripper', url: 'https://www.openwall.com/john/', note: 'Classic command-line password security auditing tool' }
+      ]
+    },
+    7: {
+      topic: 'Neutralizing the Surveillance Master Payload: Chained XOR (Chain Stage 5)',
+      whatIsIt: 'To prevent rebels from deactivating their surveillance network, EvilCorp enveloped their master kill-switch payload: first encrypting the plaintext with repeating-key XOR (using the CISO\'s password cracked in Question 6), and then encoding the raw bytes in Base64 for transport.',
+      whyItMatters: 'Deciphering corporate kill-switches requires chaining operations in reverse: first stripping the outer Base64 layer, and then decrypting the inner stream XOR cipher with the cracked password.',
+      keyTerms: [
+        { term: 'XOR Encryption', meaning: 'A symmetric stream operation where data ^ key ^ key = original data.' },
+        { term: 'Repeating Key XOR', meaning: 'Repeating a secret passphrase cyclically across the entire payload.' },
+        { term: 'Cipher Recipe Chaining', meaning: 'Executing multiple cryptographic transformations in sequential order.' }
+      ],
+      links: [
+        { label: 'The Cryptopals Crypto Challenges: Set 1', url: 'https://cryptopals.com/sets/1', note: 'The legendary cryptography exercises on XOR and stream ciphers' }
+      ],
+      onlineTools: [
+        { name: 'CyberChef (Chained Recipe: From Base64 + XOR)', url: 'https://gchq.github.io/CyberChef/#recipe=From_Base64(\'A-Za-z0-9%2B/%3D\',true,false)XOR(%7B\'option\':\'UTF8\',\'string\':\'cerberus123\'%7D,\'Standard\',false)', note: 'Highlight: In CyberChef, add [From Base64], then add [XOR] with Key = cerberus123 (UTF8), and paste the payload to reveal the victory flag!' }
+      ],
+      offlineTools: [
+        { name: 'Python pwntools xor()', url: 'https://docs.pwntools.com/en/stable/util/cyclic.html', note: 'Fast binary XOR manipulation library for exploit writers' }
+      ]
     }
   },
-  'Web Sec': {
+
+  // ===================================================================
+  //  STEGANOGRAPHY DOMAIN (7 QUESTIONS)
+  // ===================================================================
+  Stegano: {
     1: {
-      topic: 'Cookies, Sessions & Privilege Flags',
-      whatIsIt: 'Because HTTP is stateless, servers use cookies stored in your browser to remember who you are. Cookies contain session tokens and privilege flags (e.g. `role=user` or `isAdmin=false`).',
-      whyItMatters: 'If cookies are not signed or encrypted, users can open dev tools, change `isAdmin=true`, and gain root administrative rights.',
-      keyTerms: [{ term: 'Session Cookie', meaning: 'A piece of state stored by the browser for authentication.' }],
-      links: [{ label: 'MDN Web Docs: HTTP Cookies', url: 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies' }],
-      onlineTools: [{ name: 'Browser DevTools (F12 Application/Storage)', url: 'https://developer.chrome.com' }],
-      offlineTools: [{ name: 'Burp Suite Community', url: 'https://portswigger.net/burp' }]
+      topic: 'EXIF & File Header Comments (Warm-Up 1)',
+      whatIsIt: 'Steganography begins with the simplest hiding places: metadata tags, user comment fields, and header descriptions inside image files.',
+      whyItMatters: 'Users and malware droppers frequently stash base64 keys inside EXIF Artist or UserComment tags.',
+      keyTerms: [{ term: 'Header Comment', meaning: 'Freeform text fields embedded in image headers.' }],
+      links: [{ label: 'ExifTool Overview', url: 'https://exiftool.org' }],
+      onlineTools: [{ name: 'Jimpl EXIF Viewer', url: 'https://jimpl.com', note: 'Inspect image metadata online' }],
+      offlineTools: [{ name: 'exiftool CLI', url: 'https://exiftool.org' }]
     },
     2: {
-      topic: 'Client-Side Validation & Hidden Input Fields',
-      whatIsIt: 'Web forms often use hidden input tags (`<input type="hidden">`) to pass values like product prices. Any restriction enforced purely in the browser can be modified by the user.',
-      whyItMatters: 'Never trust user input—servers must validate every field independently.',
-      keyTerms: [{ term: 'Client-Side Bypass', meaning: 'Editing browser HTML/JS to circumvent intended rules.' }],
-      links: [{ label: 'OWASP Input Validation Cheat Sheet', url: 'https://cheatsheetseries.owasp.org' }],
-      onlineTools: [{ name: 'Browser Inspector (Inspect Element)', url: 'https://developer.chrome.com' }],
+      topic: 'Magic Bytes & File Signature Integrity (Warm-Up 2)',
+      whatIsIt: 'Every file format has distinct leading bytes (magic bytes). A PNG always starts with 89 50 4E 47. Changing the file extension does not fool real security scanners.',
+      whyItMatters: 'Attackers rename executables to .jpg to bypass upload filters.',
+      keyTerms: [{ term: 'Magic Bytes', meaning: 'Leading byte sequence defining the true file type.' }],
+      links: [{ label: 'Gary Kessler File Signatures Table', url: 'https://www.garykessler.net/library/file_sigs.html' }],
+      onlineTools: [{ name: 'HexEd.it', url: 'https://hexed.it', note: 'Browser hex editor to check leading magic bytes' }],
+      offlineTools: [{ name: 'file command', url: 'https://man7.org/linux/man-pages/man1/file.1.html' }]
+    },
+    3: {
+      topic: 'Appended Trailing Bytes (Chain Stage 1)',
+      whatIsIt: 'Image viewers stop parsing when they hit the end-of-file marker (IEND in PNG). Anything pasted after the trailer marker remains hidden from standard image viewers.',
+      whyItMatters: 'Malware often glues encrypted archives to the tail of legitimate meme pictures.',
+      keyTerms: [{ term: 'Trailing Bytes', meaning: 'Data appended after the official EOF marker.' }],
+      links: [{ label: 'PNG Specification (IEND chunk)', url: 'http://www.libpng.org/pub/png/spec/1.2/PNG-Chunks.html' }],
+      onlineTools: [{ name: 'HexEd.it', url: 'https://hexed.it', note: 'Scroll to bottom of hex viewer to find appended text' }],
+      offlineTools: [{ name: 'binwalk', url: 'https://github.com/ReFirmLabs/binwalk' }]
+    },
+    4: {
+      topic: 'Least Significant Bit (LSB) Extraction (Chain Stage 2)',
+      whatIsIt: 'Colors are stored as numbers from 0 to 255. Altering the least significant bit (the 1s column) changes a color value by only 1 point, which is completely invisible to the human eye.',
+      whyItMatters: 'Allows embedding entire secret books or executable files inside cover photos without altering visual appearance.',
+      keyTerms: [{ term: 'LSB', meaning: 'Least Significant Bit — the bit that has the least visual impact on pixel color.' }],
+      links: [{ label: 'LSB Steganography Explained', url: 'https://wikipedia.org' }],
+      onlineTools: [{ name: 'Aperisolve', url: 'https://www.aperisolve.com', note: 'Automated online LSB layer extractor' }],
+      offlineTools: [{ name: 'zsteg (Ruby)', url: 'https://github.com/zed-0xff/zsteg' }]
+    },
+    5: {
+      topic: 'Color Plane & Alpha Channel Separation (Chain Stage 3)',
+      whatIsIt: 'Images have 4 channels: Red, Green, Blue, and Alpha (transparency). Secret messages can be painted exclusively into an unused color plane or transparent layer.',
+      whyItMatters: 'Teaches multi-dimensional data manipulation and forensics.',
+      keyTerms: [{ term: 'Alpha Channel', meaning: 'The opacity/transparency layer of an image.' }],
+      links: [{ label: 'Steganography in Color Planes', url: 'https://wikipedia.org' }],
+      onlineTools: [{ name: 'Aperisolve', url: 'https://www.aperisolve.com', note: 'Split RGB and Alpha channels online' }],
+      offlineTools: [{ name: 'GIMP', url: 'https://www.gimp.org' }]
+    },
+    6: {
+      topic: 'Audio Spectrogram Visualizer (Chain Stage 4)',
+      whatIsIt: 'Sound files can be converted into spectrograms showing frequency over time. Artists and steganographers draw visual images directly into ultrasonic frequencies.',
+      whyItMatters: 'Listening to the audio reveals ordinary music or static; visualizing it reveals the hidden image.',
+      keyTerms: [{ term: 'Spectrogram', meaning: 'Visual representation of the spectrum of audio frequencies over time.' }],
+      links: [{ label: 'Audacity Spectrogram View Tutorial', url: 'https://manual.audacityteam.org/man/spectrogram_view.html' }],
+      onlineTools: [{ name: 'Academo Spectrum Analyzer', url: 'https://academo.org/demos/spectrum-analyzer/', note: 'In-browser sound wave analyzer' }],
+      offlineTools: [{ name: 'Audacity', url: 'https://www.audacityteam.org' }]
+    },
+    7: {
+      topic: 'Passphrase-Protected Steghide (Chain Stage 5)',
+      whatIsIt: 'Steghide combines graph-theoretic concealment with password-based encryption so bits cannot be extracted without the passphrase.',
+      whyItMatters: 'Represents the pinnacle of covert digital communications.',
+      keyTerms: [{ term: 'Steghide', meaning: 'Algorithm embedding data into JPEG and WAV with passphrases.' }],
+      links: [{ label: 'Steghide Sourceforge', url: 'http://steghide.sourceforge.net' }],
+      onlineTools: [{ name: 'FutureBoy Stego Decoders', url: 'https://futureboy.us/stegano/decinput.html', note: 'Online Steghide extraction tool' }],
+      offlineTools: [{ name: 'Steghide CLI', url: 'http://steghide.sourceforge.net' }]
+    }
+  },
+
+  // ===================================================================
+  //  WEB SECURITY DOMAIN (7 QUESTIONS)
+  // ===================================================================
+  'Web Sec': {
+    1: {
+      topic: 'HTTP Verbs, Headers & Status Codes (Warm-Up 1)',
+      whatIsIt: 'The web communicates using HTTP methods (GET, POST, PUT, DELETE, OPTIONS). Servers inspect request headers to decide how to respond.',
+      whyItMatters: 'Unrestricted HTTP verbs allow attackers to upload files or inspect hidden endpoints.',
+      keyTerms: [{ term: 'HTTP Method', meaning: 'The verb indicating the action to perform on a resource.' }],
+      links: [{ label: 'MDN: HTTP Request Methods', url: 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods' }],
+      onlineTools: [{ name: 'Hoppscotch Online API Client', url: 'https://hoppscotch.io', note: 'Browser-based HTTP request tester' }],
+      offlineTools: [{ name: 'cURL', url: 'https://curl.se' }]
+    },
+    2: {
+      topic: 'Client-Side DOM & Hidden Form Bypass (Warm-Up 2)',
+      whatIsIt: 'Web forms often use hidden inputs (<input type="hidden">) to store values like product prices. Any restriction enforced purely in the browser can be edited in developer tools.',
+      whyItMatters: 'Never trust user input—servers must validate all data independently.',
+      keyTerms: [{ term: 'Client-Side Bypass', meaning: 'Modifying browser HTML/JS to bypass restrictions.' }],
+      links: [{ label: 'OWASP Input Validation', url: 'https://cheatsheetseries.owasp.org' }],
+      onlineTools: [{ name: 'Browser Developer Tools (F12)', url: 'https://developer.chrome.com', note: 'Inspect and edit DOM elements' }],
       offlineTools: [{ name: 'cURL', url: 'https://curl.se' }]
     },
     3: {
-      topic: 'SQL Injection (SQLi)',
-      whatIsIt: "When user input is directly concatenated into database queries without sanitization, an attacker can input SQL commands like `' OR 1=1--` to bypass logins or dump database contents.",
-      whyItMatters: 'One of the most destructive web vulnerabilities in history, responsible for massive data leaks.',
-      keyTerms: [{ term: 'SQLi', meaning: 'Injecting malicious database queries via user input fields.' }],
-      links: [{ label: 'PortSwigger Web Security Academy: SQLi', url: 'https://portswigger.net/web-security/sql-injection' }],
-      onlineTools: [{ name: 'PortSwigger SQLi Labs', url: 'https://portswigger.net' }],
-      offlineTools: [{ name: 'sqlmap', url: 'https://sqlmap.org' }]
+      topic: 'Insecure Session Cookie Privilege Flags (Chain Stage 1)',
+      whatIsIt: 'Servers use cookies to remember active user sessions. Cookies often hold privilege flags like role=user or isAdmin=false.',
+      whyItMatters: 'If cookies are not signed or encrypted, editing isAdmin=true gives instant administrative privileges.',
+      keyTerms: [{ term: 'Session Cookie', meaning: 'State held by the browser to maintain login identity.' }],
+      links: [{ label: 'MDN Web Docs: HTTP Cookies', url: 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies' }],
+      onlineTools: [{ name: 'Browser DevTools (Application/Storage Tab)', url: 'https://developer.chrome.com', note: 'Inspect and modify session cookies' }],
+      offlineTools: [{ name: 'Burp Suite Community', url: 'https://portswigger.net/burp' }]
     },
     4: {
-      topic: 'Cross-Site Scripting (XSS)',
-      whatIsIt: 'XSS happens when a website includes untrusted data in a page without proper validation, allowing attackers to execute malicious JavaScript in the victim’s browser.',
-      whyItMatters: 'Allows attackers to hijack active user accounts, steal session cookies, and deface websites.',
-      keyTerms: [{ term: 'Reflected XSS', meaning: 'Script payload reflected immediately from the HTTP request.' }],
-      links: [{ label: 'OWASP XSS Prevention', url: 'https://owasp.org' }],
-      onlineTools: [{ name: 'PortSwigger XSS Academy', url: 'https://portswigger.net' }],
-      offlineTools: [{ name: 'OWASP ZAP', url: 'https://zaproxy.org' }]
+      topic: 'Parameter Tampering & IDOR (Chain Stage 2)',
+      whatIsIt: 'Insecure Direct Object References (IDOR) occur when an app uses predictable user-supplied IDs (like /profile?id=101) to fetch private records without verifying permission.',
+      whyItMatters: 'Changing 101 to 102 lets anyone view other users\' private profiles or download bank statements.',
+      keyTerms: [{ term: 'IDOR', meaning: 'Missing access control when accessing internal object keys.' }],
+      links: [{ label: 'PortSwigger IDOR Guide', url: 'https://portswigger.net/web-security/access-control/idor' }],
+      onlineTools: [{ name: 'Browser URL Navigation', url: 'https://developer.chrome.com', note: 'Test query string parameter modifications' }],
+      offlineTools: [{ name: 'Postman', url: 'https://postman.com' }]
     },
     5: {
-      topic: 'Insecure Direct Object References (IDOR)',
-      whatIsIt: 'When an app uses user-supplied input to access objects directly (e.g. `/profile?id=101`), changing the number to `102` can reveal another user\'s private data if the server fails to verify authorization.',
-      whyItMatters: 'Trivial to exploit and extremely prevalent across modern web apps and APIs.',
-      keyTerms: [{ term: 'IDOR', meaning: 'Missing access control when referencing internal database objects.' }],
-      links: [{ label: 'PortSwigger IDOR Guide', url: 'https://portswigger.net' }],
-      onlineTools: [{ name: 'Browser URL bar & Network tab', url: 'https://developer.chrome.com' }],
-      offlineTools: [{ name: 'Postman / cURL', url: 'https://postman.com' }]
+      topic: 'Directory Path Traversal (Chain Stage 3)',
+      whatIsIt: 'An attacker uses relative path syntax (../../etc/passwd) inside file request parameters to break out of the website folder and read operating system files.',
+      whyItMatters: 'Exposes server configuration files, passwords, and source code.',
+      keyTerms: [{ term: 'Dot-Dot-Slash (../)', meaning: 'Relative path syntax to move up one folder.' }],
+      links: [{ label: 'PortSwigger Directory Traversal', url: 'https://portswigger.net/web-security/file-path-traversal' }],
+      onlineTools: [{ name: 'PortSwigger Web Academy Labs', url: 'https://portswigger.net', note: 'Free interactive web security playground' }],
+      offlineTools: [{ name: 'ffuf', url: 'https://github.com/ffuf/ffuf' }]
     },
     6: {
-      topic: 'Directory Path Traversal',
-      whatIsIt: 'An attacker uses dot-dot-slash (`../../etc/passwd`) syntax in file request parameters to escape the web root and read restricted files on the host server.',
-      whyItMatters: 'Exposes operating system configuration files, passwords, and source code.',
-      keyTerms: [{ term: 'Path Traversal', meaning: 'Navigating outside target folders using relative path notation.' }],
-      links: [{ label: 'OWASP Path Traversal', url: 'https://owasp.org' }],
-      onlineTools: [{ name: 'PortSwigger Directory Traversal', url: 'https://portswigger.net' }],
-      offlineTools: [{ name: 'wfuzz / ffuf', url: 'https://github.com/ffuf/ffuf' }]
+      topic: 'SQL Injection Authentication Bypass (Chain Stage 4)',
+      whatIsIt: 'When user input is directly glued into SQL queries without sanitization, entering special characters like \' OR 1=1-- tricks the database into returning TRUE, logging the attacker in as administrator without any password.',
+      whyItMatters: 'One of the most destructive web vulnerabilities in history, responsible for massive corporate database breaches.',
+      keyTerms: [{ term: 'SQLi', meaning: 'Injecting malicious database query fragments via user input fields.' }],
+      links: [{ label: 'PortSwigger SQL Injection Guide', url: 'https://portswigger.net/web-security/sql-injection' }],
+      onlineTools: [{ name: 'PortSwigger SQLi Labs', url: 'https://portswigger.net', note: 'Interactive browser SQL injection training' }],
+      offlineTools: [{ name: 'sqlmap', url: 'https://sqlmap.org' }]
     },
     7: {
-      topic: 'Cross-Site Request Forgery (CSRF)',
-      whatIsIt: 'Tricks an authenticated victim into executing unwanted actions on a web application in which they are currently logged in (like changing passwords or transferring funds).',
-      whyItMatters: 'Mitigated by anti-CSRF tokens and SameSite cookie attributes.',
-      keyTerms: [{ term: 'CSRF Token', meaning: 'A unique secret token included in forms to verify request origin.' }],
-      links: [{ label: 'OWASP CSRF Prevention', url: 'https://owasp.org' }],
-      onlineTools: [{ name: 'Browser Console / Network tab', url: 'https://developer.chrome.com' }],
-      offlineTools: [{ name: 'Burp Suite CSRF PoC Generator', url: 'https://portswigger.net' }]
-    },
-    8: {
-      topic: 'Command Injection (RCE)',
-      whatIsIt: 'When an application passes unsafe user-supplied data to a system shell (e.g. executing `ping [user_ip]`), appending `; cat /etc/passwd` or `& whoami` executes arbitrary system commands.',
-      whyItMatters: 'Leads to complete server takeover (Remote Code Execution).',
-      keyTerms: [{ term: 'RCE', meaning: 'Remote Code Execution — executing commands directly on the server OS.' }],
-      links: [{ label: 'PortSwigger OS Command Injection', url: 'https://portswigger.net' }],
-      onlineTools: [{ name: 'Browser DevTools', url: 'https://developer.chrome.com' }],
-      offlineTools: [{ name: 'Netcat / Commix', url: 'https://github.com/commixproject/commix' }]
+      topic: 'Reflected XSS & Session Exfiltration (Chain Stage 5)',
+      whatIsIt: 'Cross-Site Scripting (XSS) occurs when an application echoes unescaped user input directly into HTML. An attacker crafts a link containing JavaScript that steals the victim\'s session cookie when clicked.',
+      whyItMatters: 'Allows complete account takeover and credential harvesting.',
+      keyTerms: [{ term: 'Reflected XSS', meaning: 'Malicious script payload delivered via URL query parameters and executed in the victim browser.' }],
+      links: [{ label: 'OWASP XSS Prevention Cheat Sheet', url: 'https://cheatsheetseries.owasp.org' }],
+      onlineTools: [{ name: 'PortSwigger XSS Academy', url: 'https://portswigger.net/web-security/cross-site-scripting' }],
+      offlineTools: [{ name: 'OWASP ZAP', url: 'https://zaproxy.org' }]
     }
   }
 };

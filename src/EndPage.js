@@ -1,7 +1,7 @@
 import React from 'react';
 import { TROPHY_CAT } from './ascii';
 
-export default function EndPage({ timeTaken, onBackToQuestions, onBackToMain, finalScore }) {
+export default function EndPage({ domain = 'OSINT', timeTaken, onBackToQuestions, onBackToMain, finalScore }) {
   const formatTime = (ms) => {
     if (ms === null || ms === undefined) return "00:00";
     let totalSeconds = Math.floor(ms / 1000);
@@ -21,13 +21,13 @@ export default function EndPage({ timeTaken, onBackToQuestions, onBackToMain, fi
         </div>
         <div className="doc-meta" style={{ justifyContent: 'center' }}>
           <span className="doc-tag" style={{ color: 'var(--gb-green)' }}>[MISSION_ACCOMPLISHED]</span>
-          <span className="doc-tag">[ARENA_COMPLETE::OSINT]</span>
+          <span className="doc-tag">[ARENA_COMPLETE::{domain.toUpperCase()}]</span>
         </div>
         <h1 style={{ fontSize: '26px', borderBottom: 'none', margin: '8px 0 6px 0', color: 'var(--gb-fg0)' }}>
           Mission Accomplished!
         </h1>
         <p className="doc-subtitle" style={{ margin: '0 auto', maxWidth: '620px' }}>
-          Congratulations on completing the OSINT Investigation arena! You've successfully practiced identifying digital footprints and uncovering open-source clues.
+          Congratulations on completing the {domain} challenge arena! You've successfully practiced identifying vulnerabilities and capturing proof flags.
         </p>
 
         {/* Stats Grid */}

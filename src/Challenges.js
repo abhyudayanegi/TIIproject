@@ -2,13 +2,53 @@ import { useState } from 'react';
 import TextbookPanel from './TextbookPanel';
 import { CAT_DETECTIVE } from './ascii';
 
+const ACCEPTED_OSINT_FLAGS = {
+  1: ['pizzaexpress', 'pizza express'],
+  2: ['mumbai', 'bombay'],
+  3: ['cat', 'the cat', 'stray cat'],
+  4: ['mahapatraabheek0@gmail.com'],
+  5: ['github', 'github.com'],
+  6: ['ironeye_abheek', 'ironeye abheek'],
+  7: ['CAT{H1DD3N_1N_PL41N_51GH7}', 'CTF{H1DD3N_1N_PL41N_51GH7}', 'H1DD3N_1N_PL41N_51GH7']
+};
+
+const normalizeOsintFlag = (str) => {
+  if (!str) return '';
+  return str
+    .trim()
+    .toLowerCase()
+    .replace(/^(cat|ctf)\{/i, '')
+    .replace(/\}$/, '');
+};
+
+const checkOsintLocally = (id, input) => {
+  if (!input) return false;
+  const cleanInput = input.trim().toLowerCase();
+  const normInput = normalizeOsintFlag(input);
+  const targets = ACCEPTED_OSINT_FLAGS[id] || [];
+  return targets.some(target => {
+    const cleanTarget = target.trim().toLowerCase();
+    const normTarget = normalizeOsintFlag(target);
+    return cleanInput === cleanTarget || normInput === normTarget;
+  });
+};
+
 export default function Challenges(props) {
   let [hintsVisible, setHintsVisible] = useState({});
   let [answers, setAnswers] = useState({});
-  let [results, setResults] = useState({});
+  let [localResults, setLocalResults] = useState({});
   let [isSubmitting, setIsSubmitting] = useState(false);
   let [activeTextbook, setActiveTextbook] = useState(null);
   let [errorMessage, setErrorMessage] = useState(null);
+
+  const results = props.results !== undefined ? props.results : localResults;
+
+  function updateResult(id, isCorrect) {
+    setLocalResults(prev => ({ ...prev, [id]: isCorrect }));
+    if (props.onResultChange) {
+      props.onResultChange(id, isCorrect);
+    }
+  }
 
   function openTextbook(id, title) {
     setActiveTextbook({ id, title });
@@ -30,9 +70,7 @@ export default function Challenges(props) {
     setAnswers(newAnswers);
     
     if (results[id] !== undefined) {
-      let newResults = Object.assign({}, results);
-      newResults[id] = undefined;
-      setResults(newResults);
+      updateResult(id, undefined);
     }
   }
 
@@ -41,24 +79,33 @@ export default function Challenges(props) {
     if (flag === undefined || flag === "") return;
     
     setErrorMessage(null);
+    const isLocalValid = checkOsintLocally(id, flag);
+
+    if (isLocalValid) {
+      updateResult(id, true);
+    }
+
     fetch('http://localhost:3001/api/validate-single', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: id, flag: flag })
+      body: JSON.stringify({ domain: 'OSINT', id: id, flag: flag })
     })
     .then(function(response) {
       return response.json().then(function(data) {
         if (response.ok === false) {
-          setErrorMessage(data.error || "Failed to validate answer.");
+          if (!isLocalValid) {
+            setErrorMessage(data.error || "Failed to validate answer.");
+          }
         } else {
-          let updatedResults = Object.assign({}, results);
-          updatedResults[id] = data.correct;
-          setResults(updatedResults);
+          const isCorrect = data.correct || isLocalValid;
+          updateResult(id, isCorrect);
         }
       });
     })
     .catch(function() {
-      setErrorMessage("Could not connect to backend server. Make sure `node server.js` is running on port 3001!");
+      if (!isLocalValid) {
+        setErrorMessage("Could not connect to backend server. Make sure `node server.js` is running on port 3001!");
+      }
     });
   }
 
@@ -74,20 +121,19 @@ export default function Challenges(props) {
     fetch('http://localhost:3001/api/validate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ answers: payload })
+      body: JSON.stringify({ domain: 'OSINT', answers: payload })
     })
     .then(function(response) {
       return response.json().then(function(data) {
-        if (response.ok === false) {
-          setErrorMessage("Server error during final validation.");
-        } else {
-          props.onSubmit(data.score, data.total);
-        }
+        const localScore = Object.values(results).filter(v => v === true).length;
+        const finalScore = data.score !== undefined && data.score >= localScore ? data.score : localScore;
+        props.onSubmit(finalScore, 7);
         setIsSubmitting(false);
       });
     })
     .catch(function() {
-      setErrorMessage("Failed to connect to backend SQL server. Is `node server.js` running?");
+      const localScore = Object.values(results).filter(v => v === true).length;
+      props.onSubmit(localScore, 7);
       setIsSubmitting(false);
     });
   }
@@ -250,6 +296,16 @@ export default function Challenges(props) {
             <span>&gt;&gt; Check the photo metadata (EXIF data) or search it up. Answer is 6 letters.</span>
           </div>
         )}
+      </div>
+
+      {/* Phase Divider between Warm-ups (Q1-Q2) and Linked Chain (Q3-Q7) */}
+      <div className="chain-divider">
+        <div className="chain-divider-header">
+          <span className="chain-divider-badge">• • • [ PHASE 2: 5-STAGE LINKED INVESTIGATION (Q3 &rarr; Q7) ] • • •</span>
+        </div>
+        <p className="chain-divider-desc">
+          Questions 1 &amp; 2 were standalone photo warm-ups. The next 5 questions form a connected intelligence trail: finding the avatar leads to the personal email, which reveals the host platform, the cipher clue, and the final profile flag!
+        </p>
       </div>
 
       {/* Challenge 3 */}
