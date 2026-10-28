@@ -140,8 +140,8 @@ CTF_PROJECT/
 
 ## Team & Credits
 
-* **Course:** Web Technologies
-* **Institution:** NMIMS MPSTME — Semester 2 Term-End Project
+* **Course:** Turning Ideas Into Innovations
+* **Institution:** NMIMS MPSTME - Sem III Project
 
 **Authors:**
 * Abhyudaya Negi — K053
