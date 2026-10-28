@@ -82,7 +82,7 @@ Install [Node.js](https://nodejs.org) (version 16 or newer).
 
 ### 2. Clone the Repository
 ```bash
-git clone https://github.com/Aweek07/CTF_PROJECT.git
+git clone https://github.com/abhyudayanegi/TIIproject.git
 cd CTF_PROJECT/ctf_proj
 ```
 
