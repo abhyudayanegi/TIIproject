@@ -23,13 +23,13 @@ const DOMAIN_CARDS = [
     title: '2. Steganography',
     shortName: 'Stegano',
     fullName: 'Steganography',
-    badge: '[7 CHALLENGES]',
-    badgeType: 'badge-wireframe',
+    badge: '[LIVE ARENA]',
+    badgeType: 'badge-live',
     questions: 7,
-    about: 'The subtle art of hiding secrets in plain sight. Unlike encryption which obscures data, steganography conceals the fact that a message exists at all.',
-    requirements: 'Hex editor, image inspection software, online stego decoders.',
-    teaches: 'File headers, LSB (Least Significant Bit), metadata payloads.',
-    actionLabel: '[ Enter Stegano Mission Brief &rarr; ]',
+    about: 'Follow the whistleblower trail through EvilCorp. Uncover white-on-white text in legal agreements, extract EXIF mug annotations, bright-shift blackbook documents, crack steghide payloads, read EOF bytes, and visualize audio spectrums.',
+    requirements: 'Photopea, HexEd.it, Academo Spectrum Analyzer, Steghide online (zero local downloads).',
+    teaches: 'Font masking, EXIF comments, luminance levels, Steghide, JPEG EOF overlays, audio spectrograms.',
+    actionLabel: '[ Enter Stegano Live Arena &rarr; ]',
   },
   {
     id: 'Crypto',
@@ -65,8 +65,10 @@ export default function MainPage({
   onSelectDomain,
   osintScore,
   cryptoScore,
+  stegoScore,
   osintSolvedCount = 0,
-  cryptoSolvedCount = 0
+  cryptoSolvedCount = 0,
+  stegoSolvedCount = 0
 }) {
   return (
     <div className="main-page">
@@ -79,7 +81,7 @@ export default function MainPage({
                 [DOMAINS_DASHBOARD]
               </span>
               <span style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
-                4 domains &bull; 7 questions each &bull; 2 live arenas
+                4 domains &bull; 7 questions each &bull; 3 live arenas
               </span>
             </div>
             <h1 style={{ fontSize: '24px', borderBottom: 'none', margin: '6px 0 6px 0', color: 'var(--gb-fg0)' }}>
@@ -106,6 +108,9 @@ export default function MainPage({
           }
           if (card.id === 'Crypto') {
             currentProgress = cryptoScore ? cryptoScore.score : cryptoSolvedCount;
+          }
+          if (card.id === 'Stegano') {
+            currentProgress = stegoScore ? stegoScore.score : stegoSolvedCount;
           }
           const progressPercent = Math.min(100, Math.round((currentProgress / card.questions) * 100));
 
@@ -157,7 +162,7 @@ export default function MainPage({
                 </div>
 
                 <button
-                  className="card-action-btn"
+                  className="btn-card-action"
                   onClick={(e) => {
                     e.stopPropagation();
                     onSelectDomain(card.id);

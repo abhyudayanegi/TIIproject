@@ -217,6 +217,7 @@ export default function CryptoChallenges(props) {
               autoComplete="off"
               value={answers[1] || ''}
               onChange={(e) => handleInputChange(1, e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleSingleSubmit(1); }}
             />
           </div>
           <button className="btn-small btn-primary" onClick={() => handleSingleSubmit(1)}>
@@ -269,6 +270,7 @@ export default function CryptoChallenges(props) {
               autoComplete="off"
               value={answers[2] || ''}
               onChange={(e) => handleInputChange(2, e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleSingleSubmit(2); }}
             />
           </div>
           <button className="btn-small btn-primary" onClick={() => handleSingleSubmit(2)}>
@@ -348,6 +350,7 @@ export default function CryptoChallenges(props) {
               autoComplete="off"
               value={answers[3] || ''}
               onChange={(e) => handleInputChange(3, e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleSingleSubmit(3); }}
             />
           </div>
           <button className="btn-small btn-primary" onClick={() => handleSingleSubmit(3)}>
@@ -411,6 +414,7 @@ export default function CryptoChallenges(props) {
               autoComplete="off"
               value={answers[4] || ''}
               onChange={(e) => handleInputChange(4, e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleSingleSubmit(4); }}
             />
           </div>
           <button className="btn-small btn-primary" onClick={() => handleSingleSubmit(4)}>
@@ -468,6 +472,7 @@ export default function CryptoChallenges(props) {
               autoComplete="off"
               value={answers[5] || ''}
               onChange={(e) => handleInputChange(5, e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleSingleSubmit(5); }}
             />
           </div>
           <button className="btn-small btn-primary" onClick={() => handleSingleSubmit(5)}>
@@ -525,6 +530,7 @@ export default function CryptoChallenges(props) {
               autoComplete="off"
               value={answers[6] || ''}
               onChange={(e) => handleInputChange(6, e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleSingleSubmit(6); }}
             />
           </div>
           <button className="btn-small btn-primary" onClick={() => handleSingleSubmit(6)}>
@@ -588,6 +594,7 @@ export default function CryptoChallenges(props) {
               autoComplete="off"
               value={answers[7] || ''}
               onChange={(e) => handleInputChange(7, e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleSingleSubmit(7); }}
             />
           </div>
           <button className="btn-small btn-primary" onClick={() => handleSingleSubmit(7)}>

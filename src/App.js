@@ -5,6 +5,7 @@ import MainPage from './MainPage';
 import DomainPage from './DomainPage';
 import Challenges from './Challenges';
 import CryptoChallenges from './CryptoChallenges';
+import StegChallenges from './StegChallenges';
 import WireframeChallenges from './WireframeChallenges';
 import EndPage from './EndPage';
 import NavBar from './NavBar';
@@ -38,9 +39,16 @@ function App() {
   const [cryptoTimeTaken, setCryptoTimeTaken] = useState(null);
   const [cryptoScore, setCryptoScore] = useState(null);
 
+  // Stegano state
+  const [stegoStarted, setStegoStarted] = useState(false);
+  const [stegoStartTime, setStegoStartTime] = useState(null);
+  const [stegoTimeTaken, setStegoTimeTaken] = useState(null);
+  const [stegoScore, setStegoScore] = useState(null);
+
   // Live results tracking across arenas (updates progress bars in real-time)
   const [osintResults, setOsintResults] = useState({});
   const [cryptoResults, setCryptoResults] = useState({});
+  const [stegoResults, setStegoResults] = useState({});
 
   const handleOsintResultChange = useCallback((id, isCorrect) => {
     setOsintResults(prev => ({ ...prev, [id]: isCorrect }));
@@ -50,8 +58,13 @@ function App() {
     setCryptoResults(prev => ({ ...prev, [id]: isCorrect }));
   }, []);
 
+  const handleStegoResultChange = useCallback((id, isCorrect) => {
+    setStegoResults(prev => ({ ...prev, [id]: isCorrect }));
+  }, []);
+
   const osintSolvedCount = Object.values(osintResults).filter(v => v === true).length;
   const cryptoSolvedCount = Object.values(cryptoResults).filter(v => v === true).length;
+  const stegoSolvedCount = Object.values(stegoResults).filter(v => v === true).length;
 
   // Hook into browser history so browser buttons work
   useEffect(() => {
@@ -78,7 +91,11 @@ function App() {
       setCryptoStarted(true);
       setCryptoStartTime(Date.now());
     }
-  }, [view, osintStarted, cryptoStarted]);
+    if (view === 'stegano' && !stegoStarted) {
+      setStegoStarted(true);
+      setStegoStartTime(Date.now());
+    }
+  }, [view, osintStarted, cryptoStarted, stegoStarted]);
 
   const navigate = useCallback(
     (nextView, nextDomain = null) => {
@@ -107,6 +124,7 @@ function App() {
   const handleDomainContinue = (d) => {
     if (d === 'OSINT') navigate('osint', 'OSINT');
     else if (d === 'Crypto') navigate('crypto', 'Crypto');
+    else if (d === 'Stegano') navigate('stegano', 'Stegano');
     else navigate('wireframe', d);
   };
 
@@ -120,6 +138,12 @@ function App() {
     if (cryptoStartTime) setCryptoTimeTaken(Date.now() - cryptoStartTime);
     setCryptoScore({ score, total });
     navigate('end', 'Crypto');
+  };
+
+  const handleStegoSubmit = (score, total) => {
+    if (stegoStartTime) setStegoTimeTaken(Date.now() - stegoStartTime);
+    setStegoScore({ score, total });
+    navigate('end', 'Stegano');
   };
 
   const nextDomainAfter = (d) => {
@@ -156,6 +180,12 @@ function App() {
           next: finalScore ? { label: 'results', go: () => navigate('end', 'OSINT') } : null,
           nextHint: finalScore ? null : 'submit your answers to see results',
         };
+      case 'stegano':
+        return {
+          prev: { label: 'stegano brief', go: () => navigate('domain', 'Stegano') },
+          next: stegoScore ? { label: 'results', go: () => navigate('end', 'Stegano') } : null,
+          nextHint: stegoScore ? null : 'submit your answers to see results',
+        };
       case 'crypto':
         return {
           prev: { label: 'crypto brief', go: () => navigate('domain', 'Crypto') },
@@ -171,14 +201,19 @@ function App() {
             : { label: 'dashboard', go: () => navigate('main') },
         };
       }
-      case 'end':
+      case 'end': {
+        let returnView = 'osint';
+        if (domain === 'Crypto') returnView = 'crypto';
+        else if (domain === 'Stegano') returnView = 'stegano';
+
         return {
           prev: {
             label: `${(domain || 'osint').toLowerCase()} challenges`,
-            go: () => navigate(domain === 'Crypto' ? 'crypto' : 'osint', domain || 'OSINT'),
+            go: () => navigate(returnView, domain || 'OSINT'),
           },
           next: { label: 'dashboard', go: () => navigate('main') },
         };
+      }
       default:
         return { prev: null, next: null };
     }
@@ -199,8 +234,10 @@ function App() {
           onSelectDomain={(d) => navigate('domain', d)}
           osintScore={finalScore}
           cryptoScore={cryptoScore}
+          stegoScore={stegoScore}
           osintSolvedCount={osintSolvedCount}
           cryptoSolvedCount={cryptoSolvedCount}
+          stegoSolvedCount={stegoSolvedCount}
         />
       );
       break;
@@ -217,13 +254,25 @@ function App() {
       content = <WireframeChallenges domain={domain} onBack={() => navigate('main')} />;
       break;
     case 'end': {
-      const isCrypto = domain === 'Crypto';
+      let finalScoreObj = finalScore;
+      let finalDuration = timeTaken;
+      let returnView = 'osint';
+      if (domain === 'Crypto') {
+        finalScoreObj = cryptoScore;
+        finalDuration = cryptoTimeTaken;
+        returnView = 'crypto';
+      } else if (domain === 'Stegano') {
+        finalScoreObj = stegoScore;
+        finalDuration = stegoTimeTaken;
+        returnView = 'stegano';
+      }
+
       content = (
         <EndPage
           domain={domain || 'OSINT'}
-          timeTaken={isCrypto ? cryptoTimeTaken : timeTaken}
-          finalScore={isCrypto ? cryptoScore : finalScore}
-          onBackToQuestions={() => navigate(isCrypto ? 'crypto' : 'osint', domain || 'OSINT')}
+          timeTaken={finalDuration}
+          finalScore={finalScoreObj}
+          onBackToQuestions={() => navigate(returnView, domain || 'OSINT')}
           onBackToMain={() => navigate('main')}
         />
       );
@@ -255,6 +304,18 @@ function App() {
               onBack={() => navigate('domain', 'OSINT')}
               results={osintResults}
               onResultChange={handleOsintResultChange}
+            />
+          </div>
+        )}
+
+        {/* Stegano challenges stay mounted once started */}
+        {stegoStarted && (
+          <div style={{ display: view === 'stegano' ? 'block' : 'none' }}>
+            <StegChallenges
+              onSubmit={handleStegoSubmit}
+              onBack={() => navigate('domain', 'Stegano')}
+              results={stegoResults}
+              onResultChange={handleStegoResultChange}
             />
           </div>
         )}

@@ -23,16 +23,16 @@ const DOMAIN_DETAILS = {
     icon: '🎨',
     title: 'Steganography (Stego)',
     tagline: 'The art of concealing secret messages within innocent-looking media files.',
-    whatIsIt: 'Derived from the Greek words for "hidden writing", Steganography is the science of hiding data inside ordinary cover mediums like PNG images, MP3 songs, or WAV audio files without visibly altering the host carrier.',
-    howUseful: 'While historically used by undercover spies, malware authors and state-sponsored APT groups now use steganography to conceal command-and-control payloads inside innocent meme images on social media, evading deep packet inspection and antivirus firewalls.',
-    criticalWarning: 'What looks like a harmless cat picture or music track can harbor an encrypted executable or banking trojan within the least-significant bits of its pixels. Believing that "if it looks fine, it is safe" is a dangerous fallacy in modern cyber warfare.',
+    whatIsIt: 'Derived from the Greek words for "hidden writing", Steganography is the science of hiding data inside ordinary cover mediums like Word docs, JPEG images, or WAV audio broadcasts without visibly altering the host carrier.',
+    howUseful: 'While historically used by undercover spies, malware authors and corporate leakers now use steganography to conceal sensitive payloads inside innocent documents and images, evading deep packet inspection and corporate firewalls.',
+    criticalWarning: 'What looks like an ordinary corporate terms-of-service document or mug photo can harbor an entire hidden whistleblower archive within metadata comments, shadow luminance, or ultrasonic audio spectrograms.',
     requirements: [
-      'Hex Editor (e.g. HxD or online hex tools)',
-      'Steganography tools (Steghide, Zsteg, Aperisolve)',
-      'Image inspection and color plane splitters',
-      'Audio spectrum visualizer (Audacity)'
+      'Photopea (Free In-Browser Photoshop Alternative)',
+      'HexEd.it (Online Browser Hex Editor)',
+      'Academo Spectrum Analyzer (In-Browser Sound Wave Inspector)',
+      'Steghide Online Decoder (Zero Local Downloads Needed)'
     ],
-    isLive: false,
+    isLive: true,
     totalQuestions: 7,
   },
   Crypto: {
@@ -59,105 +59,104 @@ const DOMAIN_DETAILS = {
     howUseful: 'The entire global economy runs on web applications. Ethical hackers and security engineers audit web platforms to protect user data from account takeovers, payment tampering, and database exfiltration.',
     criticalWarning: 'Web developers frequently trust user input blindly. A single unescaped quote mark can trigger SQL Injection to dump an entire customer database; a missing parameter validation can allow any user to edit another person\'s bank account.',
     requirements: [
-      'Browser Developer Tools (Network tab, Console, Storage inspector)',
-      'Hoppscotch / Postman for API request crafting',
-      'HTML/JS/HTTP inspection awareness'
+      'Browser Developer Tools (F12 / Inspect Element)',
+      'Hoppscotch / Postman (HTTP Request Dispatcher)',
+      'cURL Command Line Utility',
+      'Cookie Inspector and DOM Modifiers'
     ],
     isLive: false,
     totalQuestions: 7,
   },
 };
 
-export default function DomainPage({ domain: rawDomain, onBack, onContinue }) {
-  const domain = DOMAIN_DETAILS[rawDomain] ? rawDomain : 'OSINT';
-  const info = DOMAIN_DETAILS[domain];
+export default function DomainPage({ domain, onBack, onContinue }) {
+  const details = DOMAIN_DETAILS[domain] || DOMAIN_DETAILS.OSINT;
 
   return (
-    <div className="terminal-document">
-      {/* Terminal Mission Brief Header */}
-      <div className="doc-header">
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
+    <div className="domain-page">
+      {/* Clean Terminal Header */}
+      <div className="terminal-page-header">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
           <div>
-            <div className="doc-meta">
-              <span className="doc-tag" style={{ color: 'var(--gb-yellow)' }}>
-                [MISSION_BRIEF::{domain.toUpperCase().replace(/\s+/g, '_')}]
+            <div className="header-meta">
+              <span className={`badge-tag ${details.isLive ? 'badge-live' : 'badge-wireframe'}`}>
+                {details.isLive ? '[STATUS: LIVE ARENA READY]' : '[STATUS: 7 CHALLENGES CONCEPT]'}
               </span>
-              <span className="doc-tag" style={{ color: info.isLive ? 'var(--gb-green)' : 'var(--gb-orange)' }}>
-                {info.isLive ? '[LIVE ARENA]' : '[WIREFRAME BETA]'}
+              <span style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
+                Field Manual &bull; Section {domain} &bull; {details.totalQuestions} Questions
               </span>
-              <span className="doc-tag">[{info.totalQuestions} challenges]</span>
             </div>
-            <h1 style={{ fontSize: '24px', borderBottom: 'none', margin: '6px 0 6px 0', color: 'var(--gb-fg0)' }}>
-              {info.icon} {info.title}
+            <h1 style={{ fontSize: '24px', borderBottom: 'none', margin: '6px 0 4px 0', color: 'var(--gb-fg0)' }}>
+              {details.icon} {details.title}
             </h1>
-            <p className="doc-subtitle" style={{ margin: 0 }}>
-              {info.tagline}
+            <p style={{ color: 'var(--gb-yellow)', fontSize: '14px', margin: 0 }}>
+              &gt; {details.tagline}
             </p>
           </div>
-          <pre className="ascii ascii-purple doc-ascii">
-            {DOMAIN_ART[domain]}
+          <pre className="ascii ascii-yellow header-ascii">
+            {DOMAIN_ART[domain] || DOMAIN_ART.OSINT}
           </pre>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px', paddingTop: '10px', borderTop: '1px dashed var(--gb-bg3)' }}>
+          <button className="btn-small" onClick={onBack}>
+            [ &larr; Back to Dashboard ]
+          </button>
+          <div style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
+            Read through the discipline dossier below before launching into the challenges.
+          </div>
         </div>
       </div>
 
       <div className="terminal-hr" />
 
-      {/* Section 1: Core Concept */}
-      <section className="doc-section">
-        <h2 className="doc-heading text-aqua">
-          <span className="heading-prefix">[01]</span> Core Concept &amp; Definition
-        </h2>
-        <p>{info.whatIsIt}</p>
-      </section>
-
-      <div className="terminal-hr" />
-
-      {/* Section 2: Real-World Application */}
-      <section className="doc-section">
-        <h2 className="doc-heading text-blue">
-          <span className="heading-prefix">[02]</span> Real-World Impact &amp; Investigation
-        </h2>
-        <p>{info.howUseful}</p>
-      </section>
-
-      <div className="terminal-hr" />
-
-      {/* Section 3: Critical Warning */}
-      <section className="doc-section">
-        <h2 className="doc-heading text-orange">
-          <span className="heading-prefix">[!]</span> Why You Cannot Take This Discipline Lightly
-        </h2>
-        <div className="terminal-callout text-orange">
-          <span className="callout-symbol">&gt;&gt;</span>
-          <span>{info.criticalWarning}</span>
+      {/* Field Dossier Grid */}
+      <div className="dossier-grid">
+        <div className="dossier-card">
+          <div className="dossier-card-header">
+            <h3>[01] Concept Definition: What is it?</h3>
+          </div>
+          <p>{details.whatIsIt}</p>
         </div>
-      </section>
 
-      <div className="terminal-hr" />
+        <div className="dossier-card">
+          <div className="dossier-card-header">
+            <h3>[02] Practical Application: Real-World Use</h3>
+          </div>
+          <p>{details.howUseful}</p>
+        </div>
+      </div>
 
-      {/* Section 4: Recommended Toolkit */}
-      <section className="doc-section">
-        <h2 className="doc-heading text-green">
-          <span className="heading-prefix">[04]</span> Recommended Toolkit &amp; Environment
-        </h2>
-        <ul className="doc-list">
-          {info.requirements.map((req, idx) => (
-            <li key={idx}>
-              <span className="list-sym">&gt;</span> <span>{req}</span>
+      <div className="dossier-card warning-card" style={{ marginTop: '16px' }}>
+        <div className="dossier-card-header">
+          <h3 style={{ color: 'var(--gb-red)' }}>[!] Threat Profile: Why This Matters to You</h3>
+        </div>
+        <p>{details.criticalWarning}</p>
+      </div>
+
+      <div className="dossier-card" style={{ marginTop: '16px' }}>
+        <div className="dossier-card-header">
+          <h3>[03] Recommended Toolkit &amp; Methodology</h3>
+        </div>
+        <ul className="requirements-list">
+          {details.requirements.map((req, i) => (
+            <li key={i}>
+              <span className="prompt-arrow">&gt;</span>
+              <span>{req}</span>
             </li>
           ))}
         </ul>
-      </section>
+      </div>
 
-      <div className="terminal-hr" />
-
-      {/* Actions */}
-      <div className="doc-actions-row">
+      {/* Action Footer */}
+      <div className="domain-footer-actions">
         <button className="btn-small" onClick={onBack}>
           [ &larr; Back to Dashboard ]
         </button>
-        <button className="btn-primary" onClick={() => onContinue(domain)}>
-          {info.isLive ? `[ Launch ${domain} Challenges Arena → ]` : `[ Enter ${domain} CTF Arena (Wireframe) → ]`}
+        <button className="btn-small btn-primary" onClick={() => onContinue(domain)}>
+          {details.isLive
+            ? `[ Launch ${domain} Live Arena (7 Questions) &rarr; ]`
+            : `[ Inspect ${domain} Wireframe (7 Questions) &rarr; ]`}
         </button>
       </div>
     </div>

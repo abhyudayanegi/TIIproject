@@ -55,6 +55,13 @@ export const CAT_GUARD = String.raw`
    |_______|
 `;
 
+export const CAT_STEGO = String.raw`
+   +-------------+
+   |  /\_/\  .   |   *peeks from pixels*
+   | ( o.o )  !  |   "can you see me now?"
+   +-------------+
+`;
+
 export const TROPHY_CAT = String.raw`
          /\_/\
         ( ^.^ )  *purrrrr*

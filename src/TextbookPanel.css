@@ -15,7 +15,7 @@
   top: 0;
   left: 0;
   height: 100vh;
-  width: min(500px, 94vw);
+  width: min(560px, 94vw);
   background: var(--gb-bg0h);
   border-right: 2px solid var(--gb-yellow);
   box-shadow: 10px 0 35px rgba(0, 0, 0, 0.65);

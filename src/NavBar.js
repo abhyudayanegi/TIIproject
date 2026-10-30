@@ -17,6 +17,7 @@ function pathFor(view, domain) {
     case 'domain': return `~/dashboard/${slug}`;
     case 'osint': return '~/dashboard/osint/arena';
     case 'crypto': return '~/dashboard/crypto/arena';
+    case 'stegano': return '~/dashboard/stegano/arena';
     case 'wireframe': return `~/dashboard/${slug}/arena`;
     case 'end': return `~/dashboard/${slug || 'mission'}/results`;
     default: return '~';
@@ -38,6 +39,7 @@ export default function NavBar({
     ((view === 'domain' || view === 'wireframe') && domain === d) ||
     (d === 'OSINT' && view === 'osint') ||
     (d === 'Crypto' && view === 'crypto') ||
+    (d === 'Stegano' && view === 'stegano') ||
     (view === 'end' && domain === d);
 
   return (
@@ -58,15 +60,14 @@ export default function NavBar({
           <span className="nav-mascot">{NAV_CAT}</span>
           <span className="user">guest</span>
           <span className="sym">@</span>
-          <span className="host">cyber-academy</span>
-          <span className="sym">:</span>
+          <span className="host">cat-academy</span>
+          <span className="colon">:</span>
           <span className="path">{pathFor(view, domain)}</span>
-          <span className="sym">$</span>
-          <span className="cursor" />
+          <span className="dollar">$</span>
         </div>
 
-        {/* Crisp terminal nav buttons */}
-        <div className="nav-links">
+        {/* Terminal breadcrumbs */}
+        <div className="nav-breadcrumbs">
           <button
             className={`nav-link ${view === 'home' ? 'active' : ''}`}
             onClick={() => onNavigate('home')}

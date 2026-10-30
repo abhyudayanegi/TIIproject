@@ -8,13 +8,13 @@ const db = new sqlite3.Database(dbPath);
 // Answers for all CTF domains (7 questions each, CAT{...} standard)
 const defaultAnswers = {
   OSINT: [
-    { id: 1, flag: 'pizzaexpress' },
-    { id: 2, flag: 'mumbai' },
-    { id: 3, flag: 'cat' },
-    { id: 4, flag: 'mahapatraabheek0@gmail.com' },
-    { id: 5, flag: 'github' },
-    { id: 6, flag: 'ironeye_abheek' },
-    { id: 7, flag: 'CAT{H1DD3N_1N_PL41N_51GH7}' }
+    { id: 1, flag: 'CAT{eiffeltower}' },
+    { id: 2, flag: 'CAT{google}' },
+    { id: 3, flag: 'CAT{football}' },
+    { id: 4, flag: 'CAT{church_gate}' },
+    { id: 5, flag: 'CAT{beatlesashram}' },
+    { id: 6, flag: 'CAT{abhyudaya}' },
+    { id: 7, flag: 'CAT{9:30-19:00}' }
   ],
   Crypto: [
     { id: 1, flag: 'CAT{evilcorp_privacy_is_a_myth}' },
@@ -26,13 +26,13 @@ const defaultAnswers = {
     { id: 7, flag: 'CAT{evilcorp_surveillance_neutralized_2026}' }
   ],
   Stegano: [
-    { id: 1, flag: 'CAT{exif_metadata_revealed}' },
-    { id: 2, flag: 'CAT{png_magic_header_valid}' },
-    { id: 3, flag: 'CAT{trailing_hex_data}' },
-    { id: 4, flag: 'CAT{stego_lsb_found}' },
-    { id: 5, flag: 'CAT{rgb_channel_secret}' },
-    { id: 6, flag: 'CAT{sound_of_silence}' },
-    { id: 7, flag: 'CAT{master_steganographer_unmasked}' }
+    { id: 1, flag: 'CAT{but_i_refuse}' },
+    { id: 2, flag: 'CAT{detailed_search}' },
+    { id: 3, flag: 'CAT{l1ghtw0rks}' },
+    { id: 4, flag: 'CAT{whysoserious}' },
+    { id: 5, flag: 'CAT{saveaseat}' },
+    { id: 6, flag: 'CAT{waverunner}' },
+    { id: 7, flag: 'CAT{youfoundme!}' }
   ],
   'Web Sec': [
     { id: 1, flag: 'CAT{http_verbs_mastered}' },
@@ -47,14 +47,27 @@ const defaultAnswers = {
 
 // Alternate accepted flag forms for beginner convenience
 const alternateAnswers = {
-  'OSINT_7': ['H1DD3N_1N_PL41N_51GH7', 'CTF{H1DD3N_1N_PL41N_51GH7}'],
+  'OSINT_1': ['eiffeltower', 'eiffel_tower', 'eiffel tower', 'the eiffel tower'],
+  'OSINT_2': ['google', 'google llc', 'google inc'],
+  'OSINT_3': ['football', 'soccer'],
+  'OSINT_4': ['church_gate', 'churchgate', 'church gate', 'CAT{churchgate}'],
+  'OSINT_5': ['beatlesashram', 'beatles_ashram', 'beatles ashram', 'the beatles ashram', 'chaurasi kutia'],
+  'OSINT_6': ['abhyudaya', 'abhyudaya negi'],
+  'OSINT_7': ['9:30-19:00', '09:30-19:00', '9:30 - 19:00', '09:30 - 19:00', 'CAT{09:30-19:00}'],
   'Crypto_1': ['evilcorp_privacy_is_a_myth'],
   'Crypto_2': ['telemetry_is_not_encrypted'],
   'Crypto_3': ['SHADOWCORP', 'whistleblower_key_is_SHADOWCORP', 'key_is_SHADOWCORP'],
   'Crypto_4': ['seven', '7', 'shift_is_seven', 'caesar_shift_is_seven'],
   'Crypto_5': ['cerberus', 'target_vault_cerberus', 'vault_cerberus'],
   'Crypto_6': ['cerberus123'],
-  'Crypto_7': ['evilcorp_surveillance_neutralized_2026']
+  'Crypto_7': ['evilcorp_surveillance_neutralized_2026'],
+  'Stegano_1': ['but_i_refuse'],
+  'Stegano_2': ['detailed_search'],
+  'Stegano_3': ['l1ghtw0rks'],
+  'Stegano_4': ['whysoserious'],
+  'Stegano_5': ['saveaseat'],
+  'Stegano_6': ['waverunner', 'cat{waverunner}'],
+  'Stegano_7': ['youfoundme!', 'youfoundme', 'CAT{youfoundme}']
 };
 
 // Initialize SQLite table and populate answers
