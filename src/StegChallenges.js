@@ -152,7 +152,7 @@ export default function StegChallenges(props) {
               </span>
             </div>
             <h1 style={{ fontSize: '22px', borderBottom: 'none', margin: '6px 0 4px 0', color: 'var(--gb-fg0)' }}>
-              🎨 Steganography Arena :: The Whistleblower Trail
+              Steganography Arena :: The Whistleblower Trail
             </h1>
             <p style={{ color: 'var(--gb-fg2)', fontSize: '13.5px', margin: 0, maxWidth: '620px' }}>
               EvilCorp executives thought their internal documents, propaganda mugs, and audio memory-wipes were clean. An insider left a trail of hidden payloads encoded across files, images, and audio frequencies. Uncover the truth.
@@ -168,7 +168,7 @@ export default function StegChallenges(props) {
             [ &larr; Back to Dashboard ]
           </button>
           <div style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
-            Zero local downloads needed! Questions with recommended online tools are tagged with ⚡. Standard flag prefix: <code>CAT&#123;...&#125;</code>
+            Zero local downloads needed! Questions with recommended online tools are tagged with [Online Tool]. Standard flag prefix: <code>CAT&#123;...&#125;</code>
           </div>
         </div>
       </div>
@@ -190,10 +190,10 @@ export default function StegChallenges(props) {
         <div className="challenge-header">
           <h3>
             <span style={{ color: 'var(--gb-yellow)' }}>[01]</span>
-            <span>Evil Terms Of Service (Warm-Up 1) ⚡</span>
+            <span>Evil Terms Of Service (Warm-Up 1)</span>
           </h3>
           <span className={`badge-tag ${results[1] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[1] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[1] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
 
@@ -208,7 +208,7 @@ export default function StegChallenges(props) {
             className="btn-small"
             style={{ textDecoration: 'none', background: 'var(--gb-bg1)' }}
           >
-            [ 📥 Download: Evil_Terms_Of_Service.docx ]
+            [ Download: Evil_Terms_Of_Service.docx ]
           </a>
           <span style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
             Tip: Open in Word / LibreOffice / Google Docs or view strings in CyberChef.
@@ -231,14 +231,14 @@ export default function StegChallenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(1)}>
-            {hintsVisible[1] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[1] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(1, '1. Document Hidden Text & Whitespace')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
 
-        {results[1] === true && <div className="feedback-box feedback-success"><span>[✓] Document inspected! Hidden text revealed: "but_i_refuse".</span></div>}
+        {results[1] === true && <div className="feedback-box feedback-success"><span>[+] Document inspected! Hidden text revealed: "but_i_refuse".</span></div>}
         {results[1] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect. The flag is white text on a white page at the very end. Select all (Ctrl+A) and change font color!</span></div>}
         {hintsVisible[1] && (
           <div className="visible-hint">
@@ -252,10 +252,10 @@ export default function StegChallenges(props) {
         <div className="challenge-header">
           <h3>
             <span style={{ color: 'var(--gb-yellow)' }}>[02]</span>
-            <span>Evil Mug (Warm-Up 2) ⚡</span>
+            <span>Evil Mug (Warm-Up 2)</span>
           </h3>
           <span className={`badge-tag ${results[2] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[2] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[2] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
 
@@ -276,7 +276,7 @@ export default function StegChallenges(props) {
               className="btn-small"
               style={{ textDecoration: 'none', background: 'var(--gb-bg1)', alignSelf: 'flex-start' }}
             >
-              [ 📥 Download: Evil_Mug.jpg ]
+              [ Download: Evil_Mug.jpg ]
             </a>
             <span style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
               Inspect image metadata headers or upload to exif.tools!
@@ -300,14 +300,14 @@ export default function StegChallenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(2)}>
-            {hintsVisible[2] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[2] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(2, '2. Image EXIF & Metadata Comments')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
 
-        {results[2] === true && <div className="feedback-box feedback-success"><span>[✓] Mug inspected! EXIF comment extracted: "detailed_search".</span></div>}
+        {results[2] === true && <div className="feedback-box feedback-success"><span>[+] Mug inspected! EXIF comment extracted: "detailed_search".</span></div>}
         {results[2] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect. Look inside the image metadata (EXIF "Comments"). Right-click -> Properties -> Details or use exif.tools!</span></div>}
         {hintsVisible[2] && (
           <div className="visible-hint">
@@ -333,10 +333,10 @@ export default function StegChallenges(props) {
         <div className="challenge-header">
           <h3>
             <span style={{ color: 'var(--gb-yellow)' }}>[03]</span>
-            <span>BLACKBOOK (Chain Stage 1) ⚡</span>
+            <span>BLACKBOOK (Chain Stage 1)</span>
           </h3>
           <span className={`badge-tag ${results[3] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[3] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[3] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
 
@@ -357,7 +357,7 @@ export default function StegChallenges(props) {
               className="btn-small"
               style={{ textDecoration: 'none', background: 'var(--gb-bg1)', alignSelf: 'flex-start' }}
             >
-              [ 📥 Download: BLACKBOOK.png ]
+              [ Download: BLACKBOOK.png ]
             </a>
             <span style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
               Online tool: Photopea (photopea.com) &rarr; Image &rarr; Adjustments &rarr; Brightness/Contrast
@@ -381,14 +381,14 @@ export default function StegChallenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(3)}>
-            {hintsVisible[3] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[3] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(3, '3. Low-Contrast Pixel Luminance')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
 
-        {results[3] === true && <div className="feedback-box feedback-success"><span>[✓] Shadows brightened! Hidden blackbook text recovered: "l1ghtw0rks".</span></div>}
+        {results[3] === true && <div className="feedback-box feedback-success"><span>[+] Shadows brightened! Hidden blackbook text recovered: "l1ghtw0rks".</span></div>}
         {results[3] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect. The text is dark gray on black. Open in Photopea, adjust Brightness/Contrast or Levels to make it pop!</span></div>}
         {hintsVisible[3] && (
           <div className="visible-hint">
@@ -402,10 +402,10 @@ export default function StegChallenges(props) {
         <div className="challenge-header">
           <h3>
             <span style={{ color: 'var(--gb-yellow)' }}>[04]</span>
-            <span>Gimmick Boss (Chain Stage 2) ⚡</span>
+            <span>Gimmick Boss (Chain Stage 2)</span>
           </h3>
           <span className={`badge-tag ${results[4] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[4] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[4] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
 
@@ -426,7 +426,7 @@ export default function StegChallenges(props) {
               className="btn-small"
               style={{ textDecoration: 'none', background: 'var(--gb-bg1)', alignSelf: 'flex-start' }}
             >
-              [ 📥 Download: Gimmick_Boss.jpg ]
+              [ Download: Gimmick_Boss.jpg ]
             </a>
             <span style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
               Step 1: Check EXIF comment for password &bull; Step 2: Extract with Steghide &bull; Step 3: Decode binary
@@ -450,14 +450,14 @@ export default function StegChallenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(4)}>
-            {hintsVisible[4] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[4] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(4, '4. Steghide Passphrase & Binary')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
 
-        {results[4] === true && <div className="feedback-box feedback-success"><span>[✓] Steghide payload unpacked and binary decoded: "whysoserious".</span></div>}
+        {results[4] === true && <div className="feedback-box feedback-success"><span>[+] Steghide payload unpacked and binary decoded: "whysoserious".</span></div>}
         {results[4] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect. Metadata says password:lifeisajoke. Use Steghide to extract, then decode the ending binary to ASCII!</span></div>}
         {hintsVisible[4] && (
           <div className="visible-hint">
@@ -471,10 +471,10 @@ export default function StegChallenges(props) {
         <div className="challenge-header">
           <h3>
             <span style={{ color: 'var(--gb-yellow)' }}>[05]</span>
-            <span>EvilChair (Chain Stage 3) ⚡</span>
+            <span>EvilChair (Chain Stage 3)</span>
           </h3>
           <span className={`badge-tag ${results[5] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[5] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[5] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
 
@@ -495,7 +495,7 @@ export default function StegChallenges(props) {
               className="btn-small"
               style={{ textDecoration: 'none', background: 'var(--gb-bg1)', alignSelf: 'flex-start' }}
             >
-              [ 📥 Download: EvilChair.jpg ]
+              [ Download: EvilChair.jpg ]
             </a>
             <span style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
               Online tool: HexEd.it (hexed.it) or CyberChef (Strings operation)
@@ -519,14 +519,14 @@ export default function StegChallenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(5)}>
-            {hintsVisible[5] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[5] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(5, '5. Appended Trailing Payloads')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
 
-        {results[5] === true && <div className="feedback-box feedback-success"><span>[✓] Appended bytes read past EOF: "saveaseat".</span></div>}
+        {results[5] === true && <div className="feedback-box feedback-success"><span>[+] Appended bytes read past EOF: "saveaseat".</span></div>}
         {results[5] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect. Open the file in HexEd.it or run strings on it and scroll to the very end!</span></div>}
         {hintsVisible[5] && (
           <div className="visible-hint">
@@ -540,10 +540,10 @@ export default function StegChallenges(props) {
         <div className="challenge-header">
           <h3>
             <span style={{ color: 'var(--gb-yellow)' }}>[06]</span>
-            <span>EvilCorp Memory Wipe (Chain Stage 4) ⚡</span>
+            <span>EvilCorp Memory Wipe (Chain Stage 4)</span>
           </h3>
           <span className={`badge-tag ${results[6] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[6] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[6] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
 
@@ -559,7 +559,7 @@ export default function StegChallenges(props) {
               className="btn-small"
               style={{ textDecoration: 'none', background: 'var(--gb-bg1)' }}
             >
-              [ 📥 Download: EvilCorp_memory_wipe.wav (16 MB) ]
+              [ Download: EvilCorp_memory_wipe.wav (16 MB) ]
             </a>
             <span style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
               Online tool: Academo Spectrum Analyzer or AudioMass. Look between 5 kHz and 15 kHz.
@@ -589,14 +589,14 @@ export default function StegChallenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(6)}>
-            {hintsVisible[6] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[6] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(6, '6. Audio Spectrogram Steganography')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
 
-        {results[6] === true && <div className="feedback-box feedback-success"><span>[✓] Spectrogram visualized! Sound frequencies spell: "waverunner".</span></div>}
+        {results[6] === true && <div className="feedback-box feedback-success"><span>[+] Spectrogram visualized! Sound frequencies spell: "waverunner".</span></div>}
         {results[6] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect. Open the audio in an online spectrogram viewer (like academo.org) and inspect the 5 kHz - 15 kHz band!</span></div>}
         {hintsVisible[6] && (
           <div className="visible-hint">
@@ -610,10 +610,10 @@ export default function StegChallenges(props) {
         <div className="challenge-header">
           <h3>
             <span style={{ color: 'var(--gb-yellow)' }}>[07]</span>
-            <span>tryfindme (Master Flag & Chain Finale) ⚡</span>
+            <span>tryfindme (Master Flag & Chain Finale)</span>
           </h3>
           <span className={`badge-tag ${results[7] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[7] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[7] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
 
@@ -634,7 +634,7 @@ export default function StegChallenges(props) {
               className="btn-small"
               style={{ textDecoration: 'none', background: 'var(--gb-bg1)', alignSelf: 'flex-start' }}
             >
-              [ 📥 Download: tryfindme.jpg ]
+              [ Download: tryfindme.jpg ]
             </a>
             <span style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
               Step 1: Boost brightness/levels &bull; Step 2: Find password &bull; Step 3: Steghide unpack &bull; Step 4: Base64 decode
@@ -658,14 +658,14 @@ export default function StegChallenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(7)}>
-            {hintsVisible[7] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[7] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(7, '7. Visual Password & Base64 Payload')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
 
-        {results[7] === true && <div className="feedback-box feedback-success"><span>[✓] Password extracted, steghide unpacked, Base64 decoded: "youfoundme!". Stegano master unmasked!</span></div>}
+        {results[7] === true && <div className="feedback-box feedback-success"><span>[+] Password extracted, steghide unpacked, Base64 decoded: "youfoundme!". Stegano master unmasked!</span></div>}
         {results[7] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect. Adjust levels until 0004 appears below the silhouettes, use it as steghide password, and decode the Base64!</span></div>}
         {hintsVisible[7] && (
           <div className="visible-hint">

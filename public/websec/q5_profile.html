@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EvilCorp Employee Record Viewer :: Stage 3</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f1419;
+      color: #e6edf3;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand { color: #ff7b72; font-weight: 700; font-size: 18px; }
+    .badge { font-family: monospace; font-size: 12px; background: #21262d; border: 1px solid #30363d; padding: 4px 10px; color: #8b949e; }
+    main { flex: 1; display: flex; justify-content: center; align-items: center; padding: 32px; }
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      max-width: 620px;
+      width: 100%;
+      padding: 28px 32px;
+    }
+    h1 { margin: 0 0 8px 0; font-size: 21px; }
+    p { color: #8b949e; font-size: 14px; line-height: 1.6; }
+    .url-bar {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      padding: 10px 14px;
+      font-family: monospace;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 14px 0;
+      flex-wrap: wrap;
+    }
+    input {
+      background: #161b22;
+      border: 1px solid #58a6ff;
+      color: #fff;
+      font-family: monospace;
+      padding: 6px 10px;
+      width: 90px;
+      font-size: 13px;
+    }
+    button {
+      background: #238636;
+      border: 1px solid #2ea043;
+      color: #fff;
+      font-family: monospace;
+      font-weight: 700;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+    .profile-box {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      padding: 16px;
+      font-family: monospace;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .ceo-box {
+      background: rgba(46, 160, 67, 0.14);
+      border: 1px solid #2ea043;
+      color: #7ee787;
+    }
+    .guide {
+      margin-top: 20px;
+      padding: 12px 14px;
+      background: #1c2128;
+      border-left: 3px solid #58a6ff;
+      font-family: monospace;
+      font-size: 12.5px;
+      color: #c9d1d9;
+      line-height: 1.55;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">EVILCORP // HR RECORD VIEWER (IDOR)</div>
+    <div class="badge">Chain Stage 3 of 5 (WebSec Q5)</div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h1>Employee Dossier Lookup</h1>
+      <p>
+        This portal loads employee records directly from the <code>?id=</code> number in the URL without checking if that record belongs to you (an <strong>Insecure Direct Object Reference / IDOR</strong> flaw).
+      </p>
+
+      <div class="url-bar">
+        <span style="color:#8b949e;">GET /websec/q5_profile.html?id=</span>
+        <input type="text" id="id-input" value="1001" />
+        <button onclick="navigateToId()">[ Load Record ]</button>
+      </div>
+
+      <div id="record-output" class="profile-box"></div>
+
+      <div class="guide">
+        <strong>[HOW TO EXPLOIT THIS IDOR VULNERABILITY]</strong><br/>
+        1. Right now you are viewing Employee ID <code>1001</code> (a junior intern).<br/>
+        2. Remember the clue you unlocked in Question 4: the CEO's confidential Employee ID is <strong><code>1042</code></strong>.<br/>
+        3. Change <code>1001</code> to <strong><code>1042</code></strong> either in your browser's top URL address bar (<code>?id=1042</code>) or in the URL box above, then press Enter!
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const RECORDS = {
+      '1001': {
+        name: 'Samir Patel (Junior Intern)',
+        dept: 'Mailroom & Coffee Operations',
+        clearance: 'Level 1 (Low)',
+        notes: 'Standard intern record. Nothing confidential here. Try changing ?id=1001 to the CEO ID from Question 4!'
+      },
+      '1002': {
+        name: 'Elena Rostova (Payroll Clerk)',
+        dept: 'Accounting',
+        clearance: 'Level 2',
+        notes: 'Routine payroll account. Keep looking for the CEO ID from Question 4 (1042)!'
+      },
+      '1042': {
+        isCeo: true,
+        name: 'Marcus Sterling (Chief Executive Officer)',
+        dept: 'Executive Boardroom // Project Glasshouse',
+        clearance: 'Level 10 (OMEGA)',
+        flag: 'CAT{idor_exposes_everyone}',
+        nextClue: '../../etc/evilcorp_shadow.conf'
+      }
+    };
+
+    function renderProfile() {
+      const params = new URLSearchParams(window.location.search);
+      const id = (params.get('id') || '1001').trim();
+      document.getElementById('id-input').value = id;
+      const box = document.getElementById('record-output');
+
+      const rec = RECORDS[id];
+      if (!rec) {
+        box.className = 'profile-box';
+        box.innerHTML = `<span style="color:#f85149;">[!] Record #${id} not found. Use the CEO Employee ID discovered in Question 4 (1042).</span>`;
+        return;
+      }
+
+      if (rec.isCeo) {
+        box.className = 'profile-box ceo-box';
+        box.innerHTML = `
+          <strong>[+] UNAUTHORIZED CEO DOSSIER ACCESSED (ID #1042)!</strong><br/><br/>
+          <strong>EMPLOYEE:</strong> ${rec.name}<br/>
+          <strong>CLEARANCE:</strong> ${rec.clearance}<br/>
+          <strong>STAGE 3 FLAG:</strong> <span style="color:#fff; background:#0d1117; padding:2px 6px;">${rec.flag}</span><br/><br/>
+          <strong>CLUE FOR QUESTION 6 (NEXT STAGE):</strong><br/>
+          CEO Private Backup Note: "I hid our master server configuration two folders above the web root at <strong><code>${rec.nextClue}</code></strong>. Enter that exact path into the Document Viewer in Question 6!"
+        `;
+      } else {
+        box.className = 'profile-box';
+        box.innerHTML = `
+          <strong>RECORD ID #${id}</strong><br/>
+          <strong>EMPLOYEE:</strong> ${rec.name}<br/>
+          <strong>DEPARTMENT:</strong> ${rec.dept}<br/>
+          <strong>CLEARANCE:</strong> ${rec.clearance}<br/>
+          <strong>NOTES:</strong> <span style="color:#8b949e;">${rec.notes}</span>
+        `;
+      }
+    }
+
+    function navigateToId() {
+      const val = document.getElementById('id-input').value.trim();
+      window.location.search = '?id=' + encodeURIComponent(val);
+    }
+
+    renderProfile();
+  </script>
+</body>
+</html>

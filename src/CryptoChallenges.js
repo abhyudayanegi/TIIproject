@@ -154,7 +154,7 @@ export default function CryptoChallenges(props) {
               </span>
             </div>
             <h1 style={{ fontSize: '22px', borderBottom: 'none', margin: '6px 0 4px 0', color: 'var(--gb-fg0)' }}>
-              🔐 Cryptography Arena :: The Anti-Corpo Infiltration
+              Cryptography Arena :: The Anti-Corpo Infiltration
             </h1>
             <p style={{ color: 'var(--gb-fg2)', fontSize: '13.5px', margin: 0, maxWidth: '620px' }}>
               EvilCorp harvests citizen data behind opaque, marketed "encryption". Infiltrate their surveillance clusters, crack their executive dispatches, and neutralize their master telemetry payload.
@@ -170,7 +170,7 @@ export default function CryptoChallenges(props) {
             [ &larr; Back to Dashboard ]
           </button>
           <div style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
-            Zero local downloads needed! Questions with recommended online tools are tagged with ⚡. Standard flag prefix: <code>CAT&#123;...&#125;</code>
+            Zero local downloads needed! Questions with recommended online tools are tagged with [Online Tool]. Standard flag prefix: <code>CAT&#123;...&#125;</code>
           </div>
         </div>
       </div>
@@ -195,7 +195,7 @@ export default function CryptoChallenges(props) {
             <span>The Leaked Executive Memo (Warm-Up 1)</span>
           </h3>
           <span className={`badge-tag ${results[1] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[1] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[1] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
 
@@ -224,14 +224,14 @@ export default function CryptoChallenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(1)}>
-            {hintsVisible[1] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[1] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(1, '1. Caesar Shift & ROT13')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
 
-        {results[1] === true && <div className="feedback-box feedback-success"><span>[✓] Memo decoded! EvilCorp's slogan exposed: "evilcorp_privacy_is_a_myth".</span></div>}
+        {results[1] === true && <div className="feedback-box feedback-success"><span>[+] Memo decoded! EvilCorp's slogan exposed: "evilcorp_privacy_is_a_myth".</span></div>}
         {results[1] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect. Rotate each letter forward or backward by 13!</span></div>}
         {hintsVisible[1] && (
           <div className="visible-hint">
@@ -248,7 +248,7 @@ export default function CryptoChallenges(props) {
             <span>The Fake Telemetry "Encryption" (Warm-Up 2)</span>
           </h3>
           <span className={`badge-tag ${results[2] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[2] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[2] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
 
@@ -277,14 +277,14 @@ export default function CryptoChallenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(2)}>
-            {hintsVisible[2] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[2] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(2, '2. Base64 Encoding vs True Encryption')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
 
-        {results[2] === true && <div className="feedback-box feedback-success"><span>[✓] Deception busted! Telemetry is only Base64-encoded, not encrypted.</span></div>}
+        {results[2] === true && <div className="feedback-box feedback-success"><span>[+] Deception busted! Telemetry is only Base64-encoded, not encrypted.</span></div>}
         {results[2] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect. Decode the Base64 string directly in browser!</span></div>}
         {hintsVisible[2] && (
           <div className="visible-hint">
@@ -318,11 +318,11 @@ export default function CryptoChallenges(props) {
               <span>The Whistleblower's Hex Packet (Chain Stage 1)</span>
             </h3>
             <span className="badge-tag" style={{ background: 'var(--gb-tint-aqua)', color: 'var(--gb-aqua)', marginTop: '4px', border: '1px solid rgba(142, 192, 124, 0.4)' }}>
-              [⚡ Online Tool: CyberChef (From Hex)]
+              [Online Tool: CyberChef (From Hex)]
             </span>
           </div>
           <span className={`badge-tag ${results[3] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[3] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[3] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
 
@@ -337,7 +337,7 @@ export default function CryptoChallenges(props) {
 
         <div className="link-group">
           <a href="/crypto_raw_transmission.hex" download="raw_transmission.hex" className="btn-small" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-            <span>[ 📄 Download raw_transmission.hex ]</span>
+            <span>[ Download: raw_transmission.hex ]</span>
           </a>
         </div>
 
@@ -357,14 +357,14 @@ export default function CryptoChallenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(3)}>
-            {hintsVisible[3] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[3] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(3, '3. Raw Hex Representation')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
 
-        {results[3] === true && <div className="feedback-box feedback-success"><span>[✓] Packet decoded! Note down the secret key "SHADOWCORP"—you will need it to unlock Question 4!</span></div>}
+        {results[3] === true && <div className="feedback-box feedback-success"><span>[+] Packet decoded! Note down the secret key "SHADOWCORP"—you will need it to unlock Question 4!</span></div>}
         {results[3] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect. Convert the 2-digit hexadecimal pairs into ASCII characters.</span></div>}
         {hintsVisible[3] && (
           <div className="visible-hint">
@@ -382,11 +382,11 @@ export default function CryptoChallenges(props) {
               <span>The Boardroom Vigenère Dispatch (Chain Stage 2)</span>
             </h3>
             <span className="badge-tag" style={{ background: 'var(--gb-tint-aqua)', color: 'var(--gb-aqua)', marginTop: '4px', border: '1px solid rgba(142, 192, 124, 0.4)' }}>
-              [⚡ Online Tool: CyberChef (Vigenère Decode)]
+              [Online Tool: CyberChef (Vigenère Decode)]
             </span>
           </div>
           <span className={`badge-tag ${results[4] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[4] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[4] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
 
@@ -401,7 +401,7 @@ export default function CryptoChallenges(props) {
 
         <div className="link-group">
           <a href="/crypto_intercepted_dispatch.txt" download="intercepted_dispatch.txt" className="btn-small" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-            <span>[ 📄 Download intercepted_dispatch.txt ]</span>
+            <span>[ Download: intercepted_dispatch.txt ]</span>
           </a>
         </div>
 
@@ -421,14 +421,14 @@ export default function CryptoChallenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(4)}>
-            {hintsVisible[4] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[4] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(4, '4. Polyalphabetic Vigenère Ciphers')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
 
-        {results[4] === true && <div className="feedback-box feedback-success"><span>[✓] Boardroom memo unmasked! Notice the shift offset "seven" (7) revealed in the flag.</span></div>}
+        {results[4] === true && <div className="feedback-box feedback-success"><span>[+] Boardroom memo unmasked! Notice the shift offset "seven" (7) revealed in the flag.</span></div>}
         {results[4] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect. Did you use the whistleblower's key from Question 3 ("SHADOWCORP") as the Vigenère passphrase?</span></div>}
         {hintsVisible[4] && (
           <div className="visible-hint">
@@ -446,11 +446,11 @@ export default function CryptoChallenges(props) {
               <span>The Scrambled Vault Backdoor (Chain Stage 3)</span>
             </h3>
             <span className="badge-tag" style={{ background: 'var(--gb-tint-aqua)', color: 'var(--gb-aqua)', marginTop: '4px', border: '1px solid rgba(142, 192, 124, 0.4)' }}>
-              [⚡ Online Tool: CyberChef (ROT13 / Caesar)]
+              [Online Tool: CyberChef (ROT13 / Caesar)]
             </span>
           </div>
           <span className={`badge-tag ${results[5] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[5] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[5] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
 
@@ -479,14 +479,14 @@ export default function CryptoChallenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(5)}>
-            {hintsVisible[5] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[5] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(5, '5. Caesar Decryption with Derived Shift')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
 
-        {results[5] === true && <div className="feedback-box feedback-success"><span>[✓] Vault target revealed! The codename is "cerberus".</span></div>}
+        {results[5] === true && <div className="feedback-box feedback-success"><span>[+] Vault target revealed! The codename is "cerberus".</span></div>}
         {results[5] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect. Shift backward by 7 positions (e.g. J - 7 = C, H - 7 = A, A - 7 = T).</span></div>}
         {hintsVisible[5] && (
           <div className="visible-hint">
@@ -504,11 +504,11 @@ export default function CryptoChallenges(props) {
               <span>Cracking the EvilCorp CISO Hash (Chain Stage 4)</span>
             </h3>
             <span className="badge-tag" style={{ background: 'var(--gb-tint-aqua)', color: 'var(--gb-aqua)', marginTop: '4px', border: '1px solid rgba(142, 192, 124, 0.4)' }}>
-              [⚡ Online Tool: CrackStation / CyberChef]
+              [Online Tool: CrackStation / CyberChef]
             </span>
           </div>
           <span className={`badge-tag ${results[6] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[6] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[6] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
 
@@ -537,14 +537,14 @@ export default function CryptoChallenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(6)}>
-            {hintsVisible[6] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[6] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(6, '6. Cryptographic Hashing & Rainbow Tables')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
 
-        {results[6] === true && <div className="feedback-box feedback-success"><span>[✓] CISO hash cracked! Password "cerberus123" recovered. This is your master key for Question 7!</span></div>}
+        {results[6] === true && <div className="feedback-box feedback-success"><span>[+] CISO hash cracked! Password "cerberus123" recovered. This is your master key for Question 7!</span></div>}
         {results[6] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect. Paste the MD5 hash into CrackStation or CyberChef to look up the plaintext.</span></div>}
         {hintsVisible[6] && (
           <div className="visible-hint">
@@ -562,11 +562,11 @@ export default function CryptoChallenges(props) {
               <span>Neutralizing the Surveillance Master Payload (Chain Stage 5)</span>
             </h3>
             <span className="badge-tag" style={{ background: 'var(--gb-tint-aqua)', color: 'var(--gb-aqua)', marginTop: '4px', border: '1px solid rgba(142, 192, 124, 0.4)' }}>
-              [⚡ Online Tool: CyberChef (Recipe: From Base64 + XOR)]
+              [Online Tool: CyberChef (Recipe: From Base64 + XOR)]
             </span>
           </div>
           <span className={`badge-tag ${results[7] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[7] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[7] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
 
@@ -581,7 +581,7 @@ export default function CryptoChallenges(props) {
 
         <div className="link-group">
           <a href="/crypto_master_payload.enc" download="master_payload.enc" className="btn-small" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-            <span>[ 📄 Download master_payload.enc ]</span>
+            <span>[ Download: master_payload.enc ]</span>
           </a>
         </div>
 
@@ -601,14 +601,14 @@ export default function CryptoChallenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(7)}>
-            {hintsVisible[7] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[7] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(7, '7. Multi-Layered Cryptographic Envelopes')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
 
-        {results[7] === true && <div className="feedback-box feedback-success"><span>[✓] EvilCorp surveillance neutralized! Master flag verified. Digital privacy liberated!</span></div>}
+        {results[7] === true && <div className="feedback-box feedback-success"><span>[+] EvilCorp surveillance neutralized! Master flag verified. Digital privacy liberated!</span></div>}
         {results[7] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect. Make sure your CyberChef recipe has: 1) From Base64, and 2) XOR with Key = cerberus123 (UTF8).</span></div>}
         {hintsVisible[7] && (
           <div className="visible-hint">

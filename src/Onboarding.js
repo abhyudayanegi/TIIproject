@@ -112,7 +112,7 @@ export default function Onboarding({ onComplete }) {
                 <span>{q.title}</span>
               </h3>
               <span className={`badge-tag ${isSolved ? 'badge-live' : 'badge-wireframe'}`}>
-                {isSolved ? '[✓ SOLVED]' : '[○ PENDING]'}
+                {isSolved ? '[SOLVED]' : '[PENDING]'}
               </span>
             </div>
 
@@ -132,7 +132,7 @@ export default function Onboarding({ onComplete }) {
                 onClick={() => handleAutoFill(q.id, q.flagToFind)}
                 title="Click to copy into the input box"
               >
-                [📋 Auto-fill]
+                [Auto-fill]
               </button>
             </div>
 
@@ -154,17 +154,17 @@ export default function Onboarding({ onComplete }) {
                 onClick={() => handleSingleSubmit(q.id, q.flagToFind)}
                 disabled={isSolved}
               >
-                {isSolved ? '[✓ Solved]' : '[Submit]'}
+                {isSolved ? '[Solved]' : '[Submit]'}
               </button>
 
               <button className="btn-small btn-hint" onClick={() => toggleHint(q.id)}>
-                {showHint[q.id] ? '[Hide Hint]' : '[💡 Hint]'}
+                {showHint[q.id] ? '[Hide Hint]' : '[Hint]'}
               </button>
             </div>
 
             {isSolved && (
               <div className="feedback-box feedback-success">
-                <span>[✓] Correct flag submitted! Great job.</span>
+                <span>[+] Correct flag submitted! Great job.</span>
               </div>
             )}
             {isFailed && (
@@ -188,7 +188,7 @@ export default function Onboarding({ onComplete }) {
             <pre className="ascii ascii-yellow" style={{ textAlign: 'left' }}>{TUTORIAL_PARTY}</pre>
           </div>
           <h2 style={{ color: 'var(--gb-green)', margin: '8px 0 4px 0', fontSize: '20px' }}>
-            [✓] Calibration Complete! Tutorial Passed!
+            [+] Calibration Complete! Tutorial Passed!
           </h2>
           <p style={{ color: 'var(--gb-fg2)', margin: '0 auto 16px auto', fontSize: '14px', maxWidth: '600px' }}>
             You've mastered how flags work, how syntax parsing operates, and how to verify solutions. The main CTF domains are now unlocked!

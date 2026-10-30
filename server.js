@@ -35,13 +35,13 @@ const defaultAnswers = {
     { id: 7, flag: 'CAT{youfoundme!}' }
   ],
   'Web Sec': [
-    { id: 1, flag: 'CAT{http_verbs_mastered}' },
-    { id: 2, flag: 'CAT{inspect_element_pro}' },
-    { id: 3, flag: 'CAT{cookie_admin_true}' },
-    { id: 4, flag: 'CAT{idor_data_leakage}' },
-    { id: 5, flag: 'CAT{path_traversal_master}' },
-    { id: 6, flag: 'CAT{sqli_bypass_successful}' },
-    { id: 7, flag: 'CAT{master_websec_pwned}' }
+    { id: 1, flag: 'CAT{always_view_the_source}' },
+    { id: 2, flag: 'CAT{robots_reveal_secrets}' },
+    { id: 3, flag: 'CAT{never_trust_the_client}' },
+    { id: 4, flag: 'CAT{cookies_are_not_secure}' },
+    { id: 5, flag: 'CAT{idor_exposes_everyone}' },
+    { id: 6, flag: 'CAT{dot_dot_slash_escape}' },
+    { id: 7, flag: 'CAT{sqli_shatters_evilcorp}' }
   ]
 };
 
@@ -67,7 +67,14 @@ const alternateAnswers = {
   'Stegano_4': ['whysoserious'],
   'Stegano_5': ['saveaseat'],
   'Stegano_6': ['waverunner', 'cat{waverunner}'],
-  'Stegano_7': ['youfoundme!', 'youfoundme', 'CAT{youfoundme}']
+  'Stegano_7': ['youfoundme!', 'youfoundme', 'CAT{youfoundme}'],
+  'Web Sec_1': ['always_view_the_source'],
+  'Web Sec_2': ['robots_reveal_secrets'],
+  'Web Sec_3': ['never_trust_the_client'],
+  'Web Sec_4': ['cookies_are_not_secure'],
+  'Web Sec_5': ['idor_exposes_everyone'],
+  'Web Sec_6': ['dot_dot_slash_escape'],
+  'Web Sec_7': ['sqli_shatters_evilcorp']
 };
 
 // Initialize SQLite table and populate answers
@@ -119,7 +126,7 @@ const server = http.createServer((req, res) => {
     res.end(JSON.stringify(data));
   };
 
-  // Normalizes flags by stripping CAT{...} or CTF{...} and lowercase trimming
+  // Normalizes flags by stripping CAT{...} prefix and lowercase trimming
   const normalize = (str) => {
     if (!str) return '';
     return str
@@ -136,7 +143,7 @@ const server = http.createServer((req, res) => {
     // Direct match
     if (cleanUser === cleanTarget) return true;
     
-    // Normalized match (ignoring outer CAT{...} or CTF{...})
+    // Normalized match (ignoring outer CAT{...})
     if (normalize(cleanUser) === normalize(cleanTarget)) return true;
 
     // Check alternate accepted forms

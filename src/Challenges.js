@@ -152,7 +152,7 @@ export default function Challenges(props) {
               </span>
             </div>
             <h1 style={{ fontSize: '22px', borderBottom: 'none', margin: '6px 0 4px 0', color: 'var(--gb-fg0)' }}>
-              🔍 Open Source Intelligence (OSINT) Arena
+              Open Source Intelligence (OSINT) Arena
             </h1>
             <p style={{ color: 'var(--gb-fg2)', fontSize: '13.5px', margin: 0, maxWidth: '620px' }}>
               Investigate geographic coordinates, track suspicious server IP ownership, unmask an elusive Instagram persona, and reconstruct an individual's digital life pattern from public breadcrumbs.
@@ -169,7 +169,7 @@ export default function Challenges(props) {
             [ &larr; Back to Dashboard ]
           </button>
           <div style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
-            Zero local downloads needed! Questions with recommended online tools are tagged with ⚡. Standard flag prefix: <code>CAT&#123;...&#125;</code>
+            Zero local downloads needed! Questions with recommended online tools are tagged with [Online Tool]. Standard flag prefix: <code>CAT&#123;...&#125;</code>
           </div>
         </div>
       </div>
@@ -192,10 +192,10 @@ export default function Challenges(props) {
         <div className="challenge-header">
           <h3>
             <span style={{ color: 'var(--gb-yellow)' }}>[01]</span>
-            <span>Coordinates (Warm-Up 1) ⚡</span>
+            <span>Coordinates (Warm-Up 1)</span>
           </h3>
           <span className={`badge-tag ${results[1] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[1] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[1] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
         
@@ -213,7 +213,7 @@ export default function Challenges(props) {
             <span className="input-prompt-icon">&gt;</span>
             <input 
               type="text" 
-              placeholder="Enter landmark (e.g. CTF{...})" 
+              placeholder="Enter landmark (e.g. CAT{...})" 
               autoComplete="off" 
               value={answers[1] || ''}
               onChange={(e) => handleInputChange(1, e.target.value)}
@@ -224,14 +224,14 @@ export default function Challenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(1)}>
-            {hintsVisible[1] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[1] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(1, '1. Geographic Coordinates & Map OSINT')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
         
-        {results[1] === true && <div className="feedback-box feedback-success"><span>[✓] Coordinates resolved! The landmark is the Eiffel Tower in Paris: "eiffeltower".</span></div>}
+        {results[1] === true && <div className="feedback-box feedback-success"><span>[+] Coordinates resolved! The landmark is the Eiffel Tower in Paris: "eiffeltower".</span></div>}
         {results[1] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect landmark. Paste 48.8584, 2.2945 into Google Maps and check what monument sits at the pin!</span></div>}
         {hintsVisible[1] && (
           <div className="visible-hint">
@@ -245,10 +245,10 @@ export default function Challenges(props) {
         <div className="challenge-header">
           <h3>
             <span style={{ color: 'var(--gb-yellow)' }}>[02]</span>
-            <span>Who owns this IP? (Warm-Up 2) ⚡</span>
+            <span>Who owns this IP? (Warm-Up 2)</span>
           </h3>
           <span className={`badge-tag ${results[2] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[2] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[2] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
         
@@ -266,7 +266,7 @@ export default function Challenges(props) {
             <span className="input-prompt-icon">&gt;</span>
             <input 
               type="text" 
-              placeholder="Enter company name (e.g. CTF{...})" 
+              placeholder="Enter company name (e.g. CAT{...})" 
               autoComplete="off" 
               value={answers[2] || ''}
               onChange={(e) => handleInputChange(2, e.target.value)}
@@ -277,14 +277,14 @@ export default function Challenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(2)}>
-            {hintsVisible[2] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[2] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(2, '2. IP Address Reconnaissance & Whois')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
         
-        {results[2] === true && <div className="feedback-box feedback-success"><span>[✓] IP owner verified! ASN WHOIS points directly to "google".</span></div>}
+        {results[2] === true && <div className="feedback-box feedback-success"><span>[+] IP owner verified! ASN WHOIS points directly to "google".</span></div>}
         {results[2] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect organization. Use an IP lookup tool like ipinfo.io or whois to query 8.8.8.8!</span></div>}
         {hintsVisible[2] && (
           <div className="visible-hint">
@@ -310,10 +310,10 @@ export default function Challenges(props) {
         <div className="challenge-header">
           <h3>
             <span style={{ color: 'var(--gb-yellow)' }}>[03]</span>
-            <span>The Target's Sport (Chain Stage 1) ⚡</span>
+            <span>The Target's Sport (Chain Stage 1)</span>
           </h3>
           <span className={`badge-tag ${results[3] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[3] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[3] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
         
@@ -331,7 +331,7 @@ export default function Challenges(props) {
             <span className="input-prompt-icon">&gt;</span>
             <input 
               type="text" 
-              placeholder="Enter sport (e.g. CTF{...})" 
+              placeholder="Enter sport (e.g. CAT{...})" 
               autoComplete="off" 
               value={answers[3] || ''}
               onChange={(e) => handleInputChange(3, e.target.value)}
@@ -342,14 +342,14 @@ export default function Challenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(3)}>
-            {hintsVisible[3] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[3] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(3, '3. Social Media Intelligence (SOCMINT)')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
         
-        {results[3] === true && <div className="feedback-box feedback-success"><span>[✓] Instagram feed analyzed! Sport confirmed: "football".</span></div>}
+        {results[3] === true && <div className="feedback-box feedback-success"><span>[+] Instagram feed analyzed! Sport confirmed: "football".</span></div>}
         {results[3] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect sport. Search Instagram for "a guy who hates to click photos" and inspect his post captions!</span></div>}
         {hintsVisible[3] && (
           <div className="visible-hint">
@@ -363,10 +363,10 @@ export default function Challenges(props) {
         <div className="challenge-header">
           <h3>
             <span style={{ color: 'var(--gb-yellow)' }}>[04]</span>
-            <span>Favorite Place (Chain Stage 2) ⚡</span>
+            <span>Favorite Place (Chain Stage 2)</span>
           </h3>
           <span className={`badge-tag ${results[4] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[4] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[4] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
         
@@ -384,7 +384,7 @@ export default function Challenges(props) {
             <span className="input-prompt-icon">&gt;</span>
             <input 
               type="text" 
-              placeholder="Enter location (e.g. CTF{...})" 
+              placeholder="Enter location (e.g. CAT{...})" 
               autoComplete="off" 
               value={answers[4] || ''}
               onChange={(e) => handleInputChange(4, e.target.value)}
@@ -395,14 +395,14 @@ export default function Challenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(4)}>
-            {hintsVisible[4] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[4] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(4, '4. Geotag Clustering & Pattern-of-Life')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
         
-        {results[4] === true && <div className="feedback-box feedback-success"><span>[✓] Location cluster identified! His favorite place to visit is "church_gate".</span></div>}
+        {results[4] === true && <div className="feedback-box feedback-success"><span>[+] Location cluster identified! His favorite place to visit is "church_gate".</span></div>}
         {results[4] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect place. Check which location or landmark is tagged most frequently across his feed!</span></div>}
         {hintsVisible[4] && (
           <div className="visible-hint">
@@ -416,10 +416,10 @@ export default function Challenges(props) {
         <div className="challenge-header">
           <h3>
             <span style={{ color: 'var(--gb-yellow)' }}>[05]</span>
-            <span>The Start (Chain Stage 3) ⚡</span>
+            <span>The Start (Chain Stage 3)</span>
           </h3>
           <span className={`badge-tag ${results[5] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[5] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[5] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
         
@@ -437,7 +437,7 @@ export default function Challenges(props) {
             <span className="input-prompt-icon">&gt;</span>
             <input 
               type="text" 
-              placeholder="Enter location (e.g. CTF{...})" 
+              placeholder="Enter location (e.g. CAT{...})" 
               autoComplete="off" 
               value={answers[5] || ''}
               onChange={(e) => handleInputChange(5, e.target.value)}
@@ -448,14 +448,14 @@ export default function Challenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(5)}>
-            {hintsVisible[5] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[5] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(5, '5. Visual GeoINT & Historical Photo Analysis')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
         
-        {results[5] === true && <div className="feedback-box feedback-success"><span>[✓] Origin landmark identified! The first photo was taken at "beatlesashram".</span></div>}
+        {results[5] === true && <div className="feedback-box feedback-success"><span>[+] Origin landmark identified! The first photo was taken at "beatlesashram".</span></div>}
         {results[5] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect location. Scroll to his very first uploaded picture and run a reverse image search on it!</span></div>}
         {hintsVisible[5] && (
           <div className="visible-hint">
@@ -469,10 +469,10 @@ export default function Challenges(props) {
         <div className="challenge-header">
           <h3>
             <span style={{ color: 'var(--gb-yellow)' }}>[06]</span>
-            <span>The Connection (Chain Stage 4) ⚡</span>
+            <span>The Connection (Chain Stage 4)</span>
           </h3>
           <span className={`badge-tag ${results[6] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[6] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[6] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
         
@@ -490,7 +490,7 @@ export default function Challenges(props) {
             <span className="input-prompt-icon">&gt;</span>
             <input 
               type="text" 
-              placeholder="Enter first name (e.g. CTF{...})" 
+              placeholder="Enter first name (e.g. CAT{...})" 
               autoComplete="off" 
               value={answers[6] || ''}
               onChange={(e) => handleInputChange(6, e.target.value)}
@@ -501,14 +501,14 @@ export default function Challenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(6)}>
-            {hintsVisible[6] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[6] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(6, '6. Cross-Platform Pivot to YouTube')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
         
-        {results[6] === true && <div className="feedback-box feedback-success"><span>[✓] Identity unmasked! The account owner's first name is "abhyudaya".</span></div>}
+        {results[6] === true && <div className="feedback-box feedback-success"><span>[+] Identity unmasked! The account owner's first name is "abhyudaya".</span></div>}
         {results[6] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect name. Search the account handle on Google / YouTube to find the community post!</span></div>}
         {hintsVisible[6] && (
           <div className="visible-hint">
@@ -522,10 +522,10 @@ export default function Challenges(props) {
         <div className="challenge-header">
           <h3>
             <span style={{ color: 'var(--gb-yellow)' }}>[07]</span>
-            <span>The Final Clue (Chain Finale) ⚡</span>
+            <span>The Final Clue (Chain Finale)</span>
           </h3>
           <span className={`badge-tag ${results[7] === true ? 'badge-live' : 'badge-wireframe'}`}>
-            {results[7] === true ? '[✓ SOLVED]' : '[○ PENDING]'}
+            {results[7] === true ? '[SOLVED]' : '[PENDING]'}
           </span>
         </div>
         
@@ -543,7 +543,7 @@ export default function Challenges(props) {
             <span className="input-prompt-icon">&gt;</span>
             <input 
               type="text" 
-              placeholder="Enter Monday hours (e.g. CTF{...})" 
+              placeholder="Enter Monday hours (e.g. CAT{...})" 
               autoComplete="off" 
               value={answers[7] || ''}
               onChange={(e) => handleInputChange(7, e.target.value)}
@@ -554,14 +554,14 @@ export default function Challenges(props) {
             [Submit]
           </button>
           <button className="btn-small btn-hint" onClick={() => toggleHint(7)}>
-            {hintsVisible[7] ? '[Hide Hint]' : '[💡 Hint]'}
+            {hintsVisible[7] ? '[Hide Hint]' : '[Hint]'}
           </button>
           <button className="btn-small btn-textbook" onClick={() => openTextbook(7, '7. Civic Infrastructure & Public Operating Hours')}>
-            [📖 Theory]
+            [Theory]
           </button>
         </div>
         
-        {results[7] === true && <div className="feedback-box feedback-success"><span>[✓] Master intelligence complete! Monday library schedule verified: "9:30-19:00".</span></div>}
+        {results[7] === true && <div className="feedback-box feedback-success"><span>[+] Master intelligence complete! Monday library schedule verified: "9:30-19:00".</span></div>}
         {results[7] === false && <div className="feedback-box feedback-error"><span>[!] Incorrect hours. Find the library located in the neighborhood of his latest photo and check regular Monday hours!</span></div>}
         {hintsVisible[7] && (
           <div className="visible-hint">

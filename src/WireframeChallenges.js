@@ -87,7 +87,7 @@ export default function WireframeChallenges({ domain, onBack }) {
               {config.title}
             </h1>
             <p style={{ color: 'var(--gb-fg2)', fontSize: '13.5px', margin: 0, maxWidth: '620px' }}>
-              {config.description} Click <strong>[📖 Theory]</strong> on any question below to inspect its topic manual!
+              {config.description} Click <strong>[Theory]</strong> on any question below to inspect its topic manual!
             </p>
           </div>
           <pre className="ascii ascii-orange header-ascii">
@@ -132,12 +132,12 @@ export default function WireframeChallenges({ domain, onBack }) {
                   </h3>
                   {q.tool && (
                     <span className="badge-tag" style={{ background: 'var(--gb-tint-aqua)', color: 'var(--gb-aqua)', marginTop: '4px', border: '1px solid rgba(142, 192, 124, 0.4)' }}>
-                      [⚡ Online Tool: {q.tool}]
+                      [Online Tool: {q.tool}]
                     </span>
                   )}
                 </div>
                 <span className={`badge-tag ${isCorrect ? 'badge-live' : 'badge-wireframe'}`}>
-                  {isCorrect ? '[✓ SOLVED]' : '[○ PENDING]'}
+                  {isCorrect ? '[SOLVED]' : '[PENDING]'}
                 </span>
               </div>
 
@@ -167,13 +167,13 @@ export default function WireframeChallenges({ domain, onBack }) {
                   [Submit]
                 </button>
                 <button className="btn-small btn-textbook" onClick={() => openTextbook(q.id, q.title)}>
-                  [📖 Theory]
+                  [Theory]
                 </button>
               </div>
 
               {isCorrect && (
                 <div className="feedback-box feedback-success">
-                  <span>[✓] Correct flag captured!</span>
+                  <span>[+] Correct flag captured!</span>
                 </div>
               )}
               {isWrong && (

@@ -1,0 +1,18 @@
+# =========================================================
+# EVILCORP WEB CRAWLER POLICY (robots.txt)
+# =========================================================
+# Notice to Googlebot, Bingbot, and all search spiders:
+# Do NOT index our secret compliance stash below!
+# =========================================================
+
+User-agent: *
+Allow: /public/
+Allow: /press-releases/
+Disallow: /admin-portal/
+Disallow: /websec/q2_secret_stash.html
+
+# Internal Compliance Note:
+# Since search engines obey Disallow rules, no member of the
+# public will ever find our secret flag:
+#
+# CAT{robots_reveal_secrets}

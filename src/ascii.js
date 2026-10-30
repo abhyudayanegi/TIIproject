@@ -67,7 +67,7 @@ export const TROPHY_CAT = String.raw`
         ( ^.^ )  *purrrrr*
        .-'---'-.
       /  VICTORY \
-     |  [ ★★★ ]   |
+     |  [ *** ]   |
       \          /
        '-..__..-'
           ||||

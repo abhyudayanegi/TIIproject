@@ -6,6 +6,7 @@ import DomainPage from './DomainPage';
 import Challenges from './Challenges';
 import CryptoChallenges from './CryptoChallenges';
 import StegChallenges from './StegChallenges';
+import WebSecChallenges from './WebSecChallenges';
 import WireframeChallenges from './WireframeChallenges';
 import EndPage from './EndPage';
 import NavBar from './NavBar';
@@ -45,10 +46,17 @@ function App() {
   const [stegoTimeTaken, setStegoTimeTaken] = useState(null);
   const [stegoScore, setStegoScore] = useState(null);
 
+  // WebSec state
+  const [websecStarted, setWebsecStarted] = useState(false);
+  const [websecStartTime, setWebsecStartTime] = useState(null);
+  const [websecTimeTaken, setWebsecTimeTaken] = useState(null);
+  const [websecScore, setWebsecScore] = useState(null);
+
   // Live results tracking across arenas (updates progress bars in real-time)
   const [osintResults, setOsintResults] = useState({});
   const [cryptoResults, setCryptoResults] = useState({});
   const [stegoResults, setStegoResults] = useState({});
+  const [websecResults, setWebsecResults] = useState({});
 
   const handleOsintResultChange = useCallback((id, isCorrect) => {
     setOsintResults(prev => ({ ...prev, [id]: isCorrect }));
@@ -62,9 +70,14 @@ function App() {
     setStegoResults(prev => ({ ...prev, [id]: isCorrect }));
   }, []);
 
+  const handleWebSecResultChange = useCallback((id, isCorrect) => {
+    setWebsecResults(prev => ({ ...prev, [id]: isCorrect }));
+  }, []);
+
   const osintSolvedCount = Object.values(osintResults).filter(v => v === true).length;
   const cryptoSolvedCount = Object.values(cryptoResults).filter(v => v === true).length;
   const stegoSolvedCount = Object.values(stegoResults).filter(v => v === true).length;
+  const websecSolvedCount = Object.values(websecResults).filter(v => v === true).length;
 
   // Hook into browser history so browser buttons work
   useEffect(() => {
@@ -95,7 +108,11 @@ function App() {
       setStegoStarted(true);
       setStegoStartTime(Date.now());
     }
-  }, [view, osintStarted, cryptoStarted, stegoStarted]);
+    if (view === 'websec' && !websecStarted) {
+      setWebsecStarted(true);
+      setWebsecStartTime(Date.now());
+    }
+  }, [view, osintStarted, cryptoStarted, stegoStarted, websecStarted]);
 
   const navigate = useCallback(
     (nextView, nextDomain = null) => {
@@ -125,6 +142,7 @@ function App() {
     if (d === 'OSINT') navigate('osint', 'OSINT');
     else if (d === 'Crypto') navigate('crypto', 'Crypto');
     else if (d === 'Stegano') navigate('stegano', 'Stegano');
+    else if (d === 'Web Sec') navigate('websec', 'Web Sec');
     else navigate('wireframe', d);
   };
 
@@ -144,6 +162,13 @@ function App() {
     if (stegoStartTime) setStegoTimeTaken(Date.now() - stegoStartTime);
     setStegoScore({ score, total });
     navigate('end', 'Stegano');
+  };
+
+  const handleWebSecSubmit = (scoreObj) => {
+    if (websecStartTime) setWebsecTimeTaken(Date.now() - websecStartTime);
+    const s = typeof scoreObj === 'object' ? scoreObj : { score: scoreObj, total: 7 };
+    setWebsecScore(s);
+    navigate('end', 'Web Sec');
   };
 
   const nextDomainAfter = (d) => {
@@ -192,6 +217,12 @@ function App() {
           next: cryptoScore ? { label: 'results', go: () => navigate('end', 'Crypto') } : null,
           nextHint: cryptoScore ? null : 'submit your answers to see results',
         };
+      case 'websec':
+        return {
+          prev: { label: 'web sec brief', go: () => navigate('domain', 'Web Sec') },
+          next: websecScore ? { label: 'results', go: () => navigate('end', 'Web Sec') } : null,
+          nextHint: websecScore ? null : 'submit your answers to see results',
+        };
       case 'wireframe': {
         const nd = nextDomainAfter(domain);
         return {
@@ -205,6 +236,7 @@ function App() {
         let returnView = 'osint';
         if (domain === 'Crypto') returnView = 'crypto';
         else if (domain === 'Stegano') returnView = 'stegano';
+        else if (domain === 'Web Sec') returnView = 'websec';
 
         return {
           prev: {
@@ -235,9 +267,11 @@ function App() {
           osintScore={finalScore}
           cryptoScore={cryptoScore}
           stegoScore={stegoScore}
+          websecScore={websecScore}
           osintSolvedCount={osintSolvedCount}
           cryptoSolvedCount={cryptoSolvedCount}
           stegoSolvedCount={stegoSolvedCount}
+          websecSolvedCount={websecSolvedCount}
         />
       );
       break;
@@ -265,6 +299,10 @@ function App() {
         finalScoreObj = stegoScore;
         finalDuration = stegoTimeTaken;
         returnView = 'stegano';
+      } else if (domain === 'Web Sec') {
+        finalScoreObj = websecScore;
+        finalDuration = websecTimeTaken;
+        returnView = 'websec';
       }
 
       content = (
@@ -332,6 +370,18 @@ function App() {
           </div>
         )}
 
+        {/* WebSec challenges stay mounted once started */}
+        {websecStarted && (
+          <div style={{ display: view === 'websec' ? 'block' : 'none' }}>
+            <WebSecChallenges
+              onSubmit={handleWebSecSubmit}
+              onBack={() => navigate('domain', 'Web Sec')}
+              results={websecResults}
+              onResultChange={handleWebSecResultChange}
+            />
+          </div>
+        )}
+
         {content}
       </div>
 
@@ -340,7 +390,7 @@ function App() {
           {steps.prev ? `< prev: ${steps.prev.label}` : '< prev'}
         </button>
         <span className="pager-hint">
-          {steps.nextHint || 'tip: your browser back/forward buttons work too'}
+          {steps.nextHint || ''}
         </span>
         <button onClick={steps.next?.go} disabled={!steps.next}>
           {steps.next ? `next: ${steps.next.label} >` : 'next >'}

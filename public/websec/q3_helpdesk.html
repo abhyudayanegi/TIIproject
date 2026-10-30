@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EvilCorp Internal Helpdesk :: Stage 1</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f1419;
+      color: #e6edf3;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand { color: #ff7b72; font-weight: 700; font-size: 18px; }
+    .badge { font-family: monospace; font-size: 12px; background: #21262d; border: 1px solid #30363d; padding: 4px 10px; color: #8b949e; }
+    main { flex: 1; display: flex; justify-content: center; align-items: center; padding: 32px; }
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      max-width: 560px;
+      width: 100%;
+      padding: 28px 32px;
+    }
+    h1 { margin: 0 0 10px 0; font-size: 21px; }
+    p { color: #8b949e; font-size: 14px; line-height: 1.6; }
+    .status-box {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      padding: 14px;
+      font-family: monospace;
+      font-size: 13px;
+      margin: 16px 0;
+    }
+    #unlock-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: monospace;
+      border: 1px solid #2ea043;
+      background: #238636;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    #unlock-btn:disabled {
+      background: #21262d;
+      border-color: #30363d;
+      color: #6e7681;
+      cursor: not-allowed;
+    }
+    .guide {
+      margin-top: 20px;
+      padding: 12px 14px;
+      background: #1c2128;
+      border-left: 3px solid #58a6ff;
+      font-family: monospace;
+      font-size: 12.5px;
+      color: #c9d1d9;
+      line-height: 1.55;
+    }
+    #secret-output {
+      display: none;
+      margin-top: 18px;
+      padding: 16px;
+      background: rgba(46, 160, 67, 0.12);
+      border: 1px solid #2ea043;
+      font-family: monospace;
+      font-size: 13px;
+      color: #7ee787;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">EVILCORP // INTRANET HELPDESK</div>
+    <div class="badge">Chain Stage 1 of 5 (WebSec Q3)</div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h1>Internal Directory Export</h1>
+      <p>
+        EvilCorp's engineers disabled the export button below in the HTML code so regular employees cannot click it. However, your browser lets you edit any HTML element on your screen!
+      </p>
+
+      <div class="status-box">
+        BUTTON DOM STATE: <span id="state-label" style="color:#f85149;">LOCKED (disabled attribute present)</span>
+      </div>
+
+      <button id="unlock-btn" disabled onclick="revealSecret()">
+        [ Export Classified Directory &amp; Stage 1 Flag ]
+      </button>
+
+      <div id="secret-output">
+        <strong>[+] CLIENT-SIDE RESTRICTION BYPASSED!</strong><br/><br/>
+        <strong>STAGE 1 FLAG:</strong> <span style="color:#fff; background:#0d1117; padding:2px 6px;">CAT{never_trust_the_client}</span><br/><br/>
+        <strong>CLUE FOR QUESTION 4 (NEXT STAGE):</strong><br/>
+         The Executive Dashboard in Question 4 checks a browser cookie named <code>evilcorp_role</code>. Change its value from <code>guest</code> to <strong><code>admin</code></strong> to unlock Stage 2!
+      </div>
+
+      <div class="guide">
+        <strong>[HOW TO ENABLE THIS BUTTON IN 10 SECONDS]</strong><br/>
+        1. Right-click directly on the greyed-out button above and select <strong>Inspect</strong> (or press <strong>F12</strong>).<br/>
+        2. In the Elements panel, you will see:<br/>
+        <code>&lt;button id="unlock-btn" disabled ...&gt;</code><br/>
+        3. Double-click the word <strong><code>disabled</code></strong>, press Backspace to delete it, and press <strong>Enter</strong>.<br/>
+        4. The button will turn green! Click it to get your flag and the clue for Question 4.
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const btn = document.getElementById('unlock-btn');
+    const stateLabel = document.getElementById('state-label');
+
+    const observer = new MutationObserver(() => {
+      if (!btn.hasAttribute('disabled')) {
+        stateLabel.textContent = 'UNLOCKED (disabled attribute removed!)';
+        stateLabel.style.color = '#7ee787';
+      }
+    });
+    observer.observe(btn, { attributes: true });
+
+    function revealSecret() {
+      document.getElementById('secret-output').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

@@ -21,7 +21,7 @@ Unlike traditional platforms like TryHackMe or HackTheBox that require virtual m
 * **100% In-Browser Gameplay:** No virtual machines, no Docker containers, and no VPN profiles. Launch the link and start investigating immediately.
 * **Standardized Flag Format (`CAT{...}`):** Every challenge uses the consistent feline rebel format `CAT{secret_flag}`, supported by an intelligent normalizer that forgives whitespace and capitalization variations.
 * **The 2+5 Linked Cascade Model:** Every domain features 7 questions. The first two are accessible standalone warm-ups, separated by a dotted divider from a 5-stage linked chain where each discovered secret or cracked key directly unlocks the next challenge.
-* **Zero Local Tool Downloads:** Every single puzzle can be solved directly in your browser using free, trusted online utilities (CyberChef, Photopea, HexEd.it, CrackStation, Google Lens, and Academo). Questions requiring external tools are badged with `[⚡ Online Tool]`.
+* **Zero Local Tool Downloads:** Every single puzzle can be solved directly in your browser using free, trusted online utilities (CyberChef, Photopea, HexEd.it, CrackStation, Google Lens, and Academo). Questions requiring external tools are badged with `[ Online Tool]`.
 * **Interactive Slide-Out Field Manual (`[Theory]`):** Every challenge includes an in-app textbook chapter written in plain English, featuring real-world corporate breach case studies, everyday analogies for non-technical users, step-by-step tool recipes, and jargon busters.
 * **Guided Flag Calibration Sandbox:** An interactive 3-step tutorial that teaches beginners how CTF flags work, how syntax validation behaves, and why casing matters before they step into active arenas.
 * **Live State & Real-Time Progress Bars:** The main dashboard features dynamic domain cards and animated progress bars (`Solved: X/7`) that update instantaneously as flags are submitted.
@@ -43,10 +43,10 @@ Every discipline contains **exactly 7 questions** organized into two distinct ph
 
 | Discipline | Status | Challenge Count | Mission Narrative & Core Vector |
 |---|:---:|:---:|---|
-| **OSINT (Open Source Intelligence)** | Live Arena | 7 Challenges | Track digital footprints across public registries, reverse-search landmarks with Google Lens, analyze Instagram location tags, uncover username correlation on YouTube, and cross-reference public municipal records. |
-| **Steganography** | Live Arena | 7 Challenges | Intercept leaked insider files from `/public/steg/`. Uncover white-on-white text in DOCX terms of service, extract hidden EXIF metadata, boost near-black pixel levels in Photopea, extract Steghide payloads, inspect trailing JPEG bytes in HexEd.it, and read audio spectrograms in Academo. |
-| **Cryptography (Operation Blackbox)** | Live Arena | 7 Challenges | Expose EvilCorp's fake security claims. Reverse ROT13 compliance memos, decode Base64 app telemetry, parse raw hex telemetry, decipher Vigenère boardroom dispatches, calculate Caesar shifts, crack unsalted MD5 hashes on CrackStation, and neutralize repeating-key XOR surveillance payloads. |
-| **Web Security** | Interactive Arena | 7 Challenges | Understand client-server web flaws. Inspect hidden DOM comments, analyze HTTP request verbs, re-enable disabled interface buttons in DevTools, hijack session cookies (`role=admin`), exploit IDOR parameters, traverse directory paths, and bypass authentication with SQL injection (`' OR 1=1 --`). |
+| **OSINT (Open Source Intelligence)** | Ready | 7 Challenges | Track digital footprints across public registries, reverse-search landmarks with Google Lens, analyze Instagram location tags, uncover username correlation on YouTube, and cross-reference public municipal records. |
+| **Steganography** | Ready | 7 Challenges | Intercept leaked insider files from `/public/steg/`. Uncover white-on-white text in DOCX terms of service, extract hidden EXIF metadata, boost near-black pixel levels in Photopea, extract Steghide payloads, inspect trailing JPEG bytes in HexEd.it, and read audio spectrograms in Academo. |
+| **Cryptography (Operation Blackbox)** | Ready | 7 Challenges | Expose EvilCorp's fake security claims. Reverse ROT13 compliance memos, decode Base64 app telemetry, parse raw hex telemetry, decipher Vigenère boardroom dispatches, calculate Caesar shifts, crack unsalted MD5 hashes on CrackStation, and neutralize repeating-key XOR surveillance payloads. |
+| **Web Security (Operation Glasshouse)** | Ready | 7 Challenges | Breach 7 live EvilCorp target webpages served from `/public/websec/`. View HTML page source comments, inspect `robots.txt`, enable disabled DOM buttons in DevTools, forge `evilcorp_role=admin` cookies, exploit IDOR employee IDs, traverse folders (`../../`), and inject SQL (`' OR 1=1 --`). |
 
 ---
 
@@ -82,15 +82,15 @@ Every discipline contains **exactly 7 questions** organized into two distinct ph
 * **Q6: Cracking the CISO's Password Hash (Chain 4):** Search an unsalted MD5 hash against CrackStation's rainbow tables to recover `cerberus123`.
 * **Q7: Neutralizing the Surveillance Master Payload (Chain 5):** Construct a multi-stage CyberChef recipe (`From Base64` + `XOR` with key `cerberus123`) to unlock the master flag.
 
-### 4. Web Security Curriculum
-* **Q1: HTML Source Inspection (Warm-Up 1):** Inspect browser page source comments to locate leaked developer credentials.
-* **Q2: HTTP Request Verbs (Warm-Up 2):** Understand the difference between `GET` and state-changing `POST`/`PUT` requests.
+### 4. Web Security (Operation Glasshouse)
+* **Q1: The Forgotten Developer Note (Warm-Up 1):** Open `/websec/q1_login.html` and right-click -> **View Page Source** (`Ctrl+U`) to find the developer's forgotten HTML comment (`CAT{always_view_the_source}`).
+* **Q2: Where Search Spiders Fear to Tread (Warm-Up 2):** Open `/websec/q2_robots.txt` to inspect EvilCorp's `Disallow:` directives and uncover `CAT{robots_reveal_secrets}`.
 * *--- Dotted Line Divider ---*
-* **Q3: Client-Side Bypass (Chain 1):** Use browser Developer Tools to delete `disabled` attributes on submit buttons.
-* **Q4: Cookie Privilege Escalation (Chain 2):** Tamper with session cookies, modifying `role=user` to `role=admin`.
-* **Q5: Insecure Direct Object References (IDOR) (Chain 3):** Change numeric URL query parameters (`?user_id=1001` to `1000`) to view unowned records.
-* **Q6: Directory Path Traversal (Chain 4):** Exploit relative file paths (`../../etc/passwd`) to escape web roots.
-* **Q7: SQL Injection (Chain 5):** Inject SQL syntax (`' OR 1=1 --`) into login parameters to bypass authentication.
+* **Q3: The Greyed-Out Export Button (Chain 1):** Open `/websec/q3_helpdesk.html`, use browser **Inspect Element** (`F12`) to delete the `disabled` attribute on the export button, and click it to get `CAT{never_trust_the_client}` and the cookie role `admin` for Q4.
+* **Q4: The VIP Cookie Jar (Chain 2):** Open `/websec/q4_dashboard.html` and modify the `evilcorp_role` session cookie from `guest` to `admin` to get `CAT{cookies_are_not_secure}` and the CEO's Employee ID (`1042`) for Q5.
+* **Q5: Stepping Into the CEO's Shoes — IDOR (Chain 3):** Open `/websec/q5_profile.html?id=1001` and change the URL query parameter from `1001` to `1042` to breach the CEO's dossier (`CAT{idor_exposes_everyone}`) and discover the backup config path `../../etc/evilcorp_shadow.conf` for Q6.
+* **Q6: Climbing Out of the Web Folder — Path Traversal (Chain 4):** Open `/websec/q6_files.html?file=welcome.txt` and traverse up directories using `../../etc/evilcorp_shadow.conf` to capture `CAT{dot_dot_slash_escape}` and uncover the SQL admin username `director_vance` for Q7.
+* **Q7: Breaking the Master Vault with One Quote — SQL Injection (Chain 5):** Open `/websec/q7_vault.html`, enter username `director_vance`, and inject `' OR 1=1 --` into the password box to bypass authentication and capture `CAT{sqli_shatters_evilcorp}`.
 
 ---
 
@@ -101,7 +101,7 @@ Every discipline contains **exactly 7 questions** organized into two distinct ph
   * `POST /api/validate-single` — Validates individual flags in real time with SQLite and alias fallbacks.
   * `POST /api/validate` — Validates batch submissions for entire domains.
 * **Database:** SQLite3 (`ctf.db`), automatically provisions the schema and populates all domain answers upon launch.
-* **Static Assets:** Downloadable steganography and cryptography intercepts served via `/public/steg/` and `/public/`.
+* **Static Assets & Target Webpages:** Downloadable steganography, cryptography, and live interactive web security target pages served via `/public/steg/`, `/public/websec/`, and `/public/`.
 
 ```text
 TIIproject/
@@ -114,6 +114,14 @@ TIIproject/
 |   |   |-- q5_evil_chair.jpg          # Q5 trailing byte append
 |   |   |-- q6_memory_wipe.wav         # Q6 audio spectrogram WAV
 |   |   `-- q7_tryfindme.jpg           # Q7 multi-layer stego puzzle
+|   |-- websec/                        # Web Security live target webpages
+|   |   |-- q1_login.html              # Q1 HTML Page Source comment target
+|   |   |-- q2_robots.txt              # Q2 crawler Disallow target
+|   |   |-- q3_helpdesk.html           # Q3 disabled DOM button target
+|   |   |-- q4_dashboard.html          # Q4 cookie privilege escalation target
+|   |   |-- q5_profile.html            # Q5 IDOR employee dossier target
+|   |   |-- q6_files.html              # Q6 directory path traversal target
+|   |   `-- q7_vault.html              # Q7 interactive SQL Injection vault target
 |   |-- hint.jpg                       # OSINT landmark clue
 |   |-- crypto_raw_transmission.hex    # Crypto Q3 hex dump
 |   |-- crypto_intercepted_dispatch.txt# Crypto Q4 Vigenère text
@@ -125,7 +133,8 @@ TIIproject/
 |   |-- Challenges.js                  # Live OSINT arena (7 challenges)
 |   |-- CryptoChallenges.js            # Live Cryptography arena (7 challenges)
 |   |-- StegChallenges.js              # Live Steganography arena (7 challenges)
-|   |-- WireframeChallenges.js         # Web Security curriculum arena (7 challenges)
+|   |-- WebSecChallenges.js            # Live Web Security arena (7 challenges)
+|   |-- WireframeChallenges.js         # Curriculum fallback template
 |   |-- DomainPage.js                  # Domain briefing dossiers and threat profiles
 |   |-- EndPage.js                     # Score debrief, stopwatch summary, and takeaways
 |   |-- HomePage.js                    # Landing page and Anti-Corpo manifesto

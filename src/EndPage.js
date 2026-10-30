@@ -85,7 +85,7 @@ export default function EndPage({ domain = 'OSINT', timeTaken, onBackToQuestions
           [ &larr; Review Questions ]
         </button>
         <button className="btn-large btn-primary" style={{ marginTop: 0, flex: 1 }} onClick={onBackToMain}>
-          [ 🎯 Domains Dashboard &rarr; ]
+          [ Domains Dashboard &rarr; ]
         </button>
       </div>
     </div>

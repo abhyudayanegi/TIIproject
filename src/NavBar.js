@@ -18,6 +18,7 @@ function pathFor(view, domain) {
     case 'osint': return '~/dashboard/osint/arena';
     case 'crypto': return '~/dashboard/crypto/arena';
     case 'stegano': return '~/dashboard/stegano/arena';
+    case 'websec': return '~/dashboard/websec/arena';
     case 'wireframe': return `~/dashboard/${slug}/arena`;
     case 'end': return `~/dashboard/${slug || 'mission'}/results`;
     default: return '~';
@@ -40,6 +41,7 @@ export default function NavBar({
     (d === 'OSINT' && view === 'osint') ||
     (d === 'Crypto' && view === 'crypto') ||
     (d === 'Stegano' && view === 'stegano') ||
+    (d === 'Web Sec' && view === 'websec') ||
     (view === 'end' && domain === d);
 
   return (

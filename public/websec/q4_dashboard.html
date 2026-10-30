@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EvilCorp Executive Dashboard :: Stage 2</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f1419;
+      color: #e6edf3;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand { color: #ff7b72; font-weight: 700; font-size: 18px; }
+    .badge { font-family: monospace; font-size: 12px; background: #21262d; border: 1px solid #30363d; padding: 4px 10px; color: #8b949e; }
+    main { flex: 1; display: flex; justify-content: center; align-items: center; padding: 32px; }
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      max-width: 600px;
+      width: 100%;
+      padding: 28px 32px;
+    }
+    h1 { margin: 0 0 8px 0; font-size: 21px; }
+    p { color: #8b949e; font-size: 14px; line-height: 1.6; }
+    .cookie-box {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      padding: 16px;
+      font-family: monospace;
+      margin: 16px 0;
+    }
+    .cookie-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    input {
+      background: #161b22;
+      border: 1px solid #58a6ff;
+      color: #f0f6fc;
+      font-family: monospace;
+      padding: 8px 10px;
+      font-size: 14px;
+      width: 160px;
+    }
+    button {
+      background: #238636;
+      border: 1px solid #2ea043;
+      color: #fff;
+      font-family: monospace;
+      font-weight: 700;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+    .reset-btn {
+      background: #21262d;
+      border-color: #30363d;
+      color: #8b949e;
+      font-weight: normal;
+    }
+    .denied {
+      padding: 14px;
+      background: rgba(248, 81, 73, 0.1);
+      border: 1px solid #f85149;
+      color: #ff7b72;
+      font-family: monospace;
+      font-size: 13px;
+    }
+    .granted {
+      display: none;
+      padding: 16px;
+      background: rgba(46, 160, 67, 0.14);
+      border: 1px solid #2ea043;
+      color: #7ee787;
+      font-family: monospace;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .guide {
+      margin-top: 20px;
+      padding: 12px 14px;
+      background: #1c2128;
+      border-left: 3px solid #d29922;
+      font-family: monospace;
+      font-size: 12.5px;
+      color: #e3b341;
+      line-height: 1.55;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">EVILCORP // EXECUTIVE SESSION PORTAL</div>
+    <div class="badge">Chain Stage 2 of 5 (WebSec Q4)</div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h1>Executive Clearance Check</h1>
+      <p>
+        EvilCorp stores your account permission level inside a plain-text browser cookie named <code>evilcorp_role</code>. Using the clue from Question 3, elevate your cookie privilege to unlock the vault!
+      </p>
+
+      <div id="denied-panel" class="denied">
+        [!] ACCESS DENIED: Current session cookie is <strong>evilcorp_role=<span id="current-role-text">guest</span></strong>.<br/>
+        Only users with the role discovered in Question 3 can view this page.
+      </div>
+
+      <div id="granted-panel" class="granted">
+        <strong>[+] COOKIE PRIVILEGE ESCALATION SUCCESSFUL (evilcorp_role=admin)!</strong><br/><br/>
+        <strong>STAGE 2 FLAG:</strong> <span style="color:#fff; background:#0d1117; padding:2px 6px;">CAT{cookies_are_not_secure}</span><br/><br/>
+        <strong>CLUE FOR QUESTION 5 (NEXT STAGE):</strong><br/>
+        Welcome, Administrator. The CEO's confidential employee record is stored under Employee ID <strong><code>1042</code></strong>. Use ID <strong><code>1042</code></strong> in the Employee Profile Viewer in Question 5!
+      </div>
+
+      <div class="cookie-box">
+        <div style="font-size:12px; color:#8b949e;">LIVE BROWSER COOKIE INSPECTOR (document.cookie)</div>
+        <div class="cookie-row">
+          <span>Cookie Name: <strong>evilcorp_role</strong> =</span>
+          <input type="text" id="cookie-input" value="guest" />
+          <button onclick="updateRoleCookie()">[ Save Cookie &amp; Reload ]</button>
+          <button class="reset-btn" onclick="resetCookie()">[ Reset ]</button>
+        </div>
+      </div>
+
+      <div class="guide">
+        <strong>[TWO WAYS TO SOLVE THIS]</strong><br/>
+        <strong>Method A (Beginner Friendly):</strong> In the Live Browser Cookie Inspector box above, replace <code>guest</code> with the role from Question 3 (<strong><code>admin</code></strong>) and click <strong>[ Save Cookie &amp; Reload ]</strong>.<br/>
+        <strong>Method B (Pro DevTools):</strong> Press <strong>F12</strong> &rarr; click the <strong>Application</strong> (or <strong>Storage</strong>) tab &rarr; expand <strong>Cookies</strong> &rarr; double-click the value of <code>evilcorp_role</code>, change it to <code>admin</code>, and refresh the page!
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function getRoleCookie() {
+      const match = document.cookie.match(/(?:^|;\s*)evilcorp_role=([^;]*)/);
+      return match ? decodeURIComponent(match[1]) : null;
+    }
+
+    function checkAccess() {
+      let role = getRoleCookie();
+      if (!role) {
+        document.cookie = "evilcorp_role=guest; path=/";
+        role = "guest";
+      }
+      document.getElementById('current-role-text').textContent = role;
+      document.getElementById('cookie-input').value = role;
+
+      if (role.trim().toLowerCase() === 'admin') {
+        document.getElementById('denied-panel').style.display = 'none';
+        document.getElementById('granted-panel').style.display = 'block';
+      } else {
+        document.getElementById('denied-panel').style.display = 'block';
+        document.getElementById('granted-panel').style.display = 'none';
+      }
+    }
+
+    function updateRoleCookie() {
+      const val = document.getElementById('cookie-input').value.trim();
+      document.cookie = "evilcorp_role=" + encodeURIComponent(val) + "; path=/";
+      checkAccess();
+    }
+
+    function resetCookie() {
+      document.cookie = "evilcorp_role=guest; path=/";
+      checkAccess();
+    }
+
+    checkAccess();
+  </script>
+</body>
+</html>

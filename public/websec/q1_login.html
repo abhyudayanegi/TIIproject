@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EvilCorp Consumer Privacy Portal</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0f1419;
+      color: #e6edf3;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 18px;
+      color: #ff7b72;
+      letter-spacing: 0.5px;
+    }
+    .badge {
+      font-family: monospace;
+      font-size: 12px;
+      background: #21262d;
+      border: 1px solid #30363d;
+      padding: 4px 10px;
+      color: #8b949e;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      max-width: 480px;
+      width: 100%;
+      padding: 28px 32px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 22px;
+      color: #f0f6fc;
+    }
+    p {
+      color: #8b949e;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0 0 20px 0;
+    }
+    .field {
+      margin-bottom: 14px;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #8b949e;
+      margin-bottom: 6px;
+    }
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 12px;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      color: #c9d1d9;
+      font-family: monospace;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #238636;
+      border: 1px solid #2ea043;
+      color: #ffffff;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+    .hint-banner {
+      margin-top: 20px;
+      padding: 12px;
+      background: #1c2128;
+      border-left: 3px solid #d29922;
+      font-family: monospace;
+      font-size: 12.5px;
+      color: #e3b341;
+      line-height: 1.5;
+    }
+    #msg {
+      margin-top: 12px;
+      font-family: monospace;
+      font-size: 13px;
+      color: #f85149;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">EVILCORP // TRUST &amp; PRIVACY PORTAL v1.4</div>
+    <div class="badge">Target: WebSec Q1 (Warm-Up 1)</div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h1>Employee Opt-Out Login</h1>
+      <p>
+        At EvilCorp, we promise we value your privacy. Log in below to request removal of your personal telemetry data.
+      </p>
+
+      <div class="field">
+        <label>Employee Email</label>
+        <input type="text" placeholder="employee@evilcorp.internal" />
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" placeholder="••••••••••••" />
+      </div>
+      <button onclick="document.getElementById('msg').style.display='block'">
+        Sign In to Portal
+      </button>
+      <div id="msg">
+        [!] Login disabled. Forget the login form—check what the developer left hidden in the HTML Page Source!
+      </div>
+
+      <div class="hint-banner">
+        <strong>[INVESTIGATOR GUIDE]</strong><br/>
+        Web browsers render pretty buttons and colors, but they download the raw HTML code first.
+        <br/><br/>
+        <strong>How to inspect the source code:</strong><br/>
+        1. Right-click anywhere on this page and click <strong>View Page Source</strong> (or press <strong>Ctrl + U</strong>).<br/>
+        2. Scroll to the very bottom of the HTML code to find the developer's secret note!
+      </div>
+    </div>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- EVILCORP INTERNAL DEV NOTE (DO NOT PUSH TO PRODUCTION!)               -->
+  <!-- Hey Dave, I hid the QA test flag down here so regular users won't     -->
+  <!-- see it on the screen. Nobody ever checks View Page Source anyway:     -->
+  <!--                                                                       -->
+  <!-- FLAG: CAT{always_view_the_source}                                     -->
+  <!-- ===================================================================== -->
+</body>
+</html>

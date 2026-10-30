@@ -5,59 +5,55 @@ import { DASHBOARD_CAT, DOMAIN_ART } from './ascii';
 const DOMAIN_CARDS = [
   {
     id: 'OSINT',
-    icon: '🔍',
     title: '1. OSINT',
     shortName: 'OSINT',
     fullName: 'Open Source Intelligence',
-    badge: '[LIVE ARENA]',
+    badge: '[READY]',
     badgeType: 'badge-live',
     questions: 7,
     about: 'Master digital footprint tracking. Learn how detectives and auditors gather actionable intelligence using only publicly accessible internet data.',
     requirements: 'Browser, search engines (Google, DuckDuckGo), keen eye.',
     teaches: 'Reverse image searching, EXIF metadata, username correlation.',
-    actionLabel: '[ Enter OSINT Mission Brief &rarr; ]',
+    actionLabel: '[ View OSINT Brief &rarr; ]',
   },
   {
     id: 'Stegano',
-    icon: '🎨',
     title: '2. Steganography',
     shortName: 'Stegano',
     fullName: 'Steganography',
-    badge: '[LIVE ARENA]',
+    badge: '[READY]',
     badgeType: 'badge-live',
     questions: 7,
     about: 'Follow the whistleblower trail through EvilCorp. Uncover white-on-white text in legal agreements, extract EXIF mug annotations, bright-shift blackbook documents, crack steghide payloads, read EOF bytes, and visualize audio spectrums.',
     requirements: 'Photopea, HexEd.it, Academo Spectrum Analyzer, Steghide online (zero local downloads).',
     teaches: 'Font masking, EXIF comments, luminance levels, Steghide, JPEG EOF overlays, audio spectrograms.',
-    actionLabel: '[ Enter Stegano Live Arena &rarr; ]',
+    actionLabel: '[ View Stegano Brief &rarr; ]',
   },
   {
     id: 'Crypto',
-    icon: '🔐',
     title: '3. Cryptography',
     shortName: 'Crypto',
     fullName: 'Cryptography',
-    badge: '[LIVE ARENA]',
+    badge: '[READY]',
     badgeType: 'badge-live',
     questions: 7,
     about: 'Deconstruct the mathematical spine of digital security. Decipher ROT13, crack Vigenère, reverse Caesar shifts, lookup MD5 hashes, and peel multi-layer XOR envelopes.',
     requirements: 'CyberChef, CrackStation, online decoders (zero local downloads).',
     teaches: 'ROT13, Base64, Hex bytes, Vigenère, Caesar shifts, MD5, chained XOR.',
-    actionLabel: '[ Enter Crypto Live Arena &rarr; ]',
+    actionLabel: '[ View Crypto Brief &rarr; ]',
   },
   {
     id: 'Web Sec',
-    icon: '🌐',
     title: '4. Web Security',
     shortName: 'Web Sec',
     fullName: 'Web Security',
-    badge: '[7 CHALLENGES]',
-    badgeType: 'badge-wireframe',
+    badge: '[READY]',
+    badgeType: 'badge-live',
     questions: 7,
-    about: 'Dissect the anatomy of websites and APIs. Learn how hackers manipulate web parameters, cookies, and inputs to gain unauthorized access.',
-    requirements: 'Browser Developer Tools (F12 / Inspect element), cURL.',
-    teaches: 'Client-side bypasses, cookie manipulation, SQL injection, XSS.',
-    actionLabel: '[ Enter Web Sec Mission Brief &rarr; ]',
+    about: 'Breach EvilCorp\'s internal web portal across 7 live target webpages. Inspect HTML source comments, check robots.txt, enable disabled buttons, forge session cookies, exploit IDOR, traverse folders, and inject SQL.',
+    requirements: 'Web Browser (View Source & F12 Inspect Element — zero local downloads).',
+    teaches: 'HTML source, robots.txt, DOM bypass, cookie tampering, IDOR, path traversal, SQL injection.',
+    actionLabel: '[ View Web Sec Brief &rarr; ]',
   },
 ];
 
@@ -66,9 +62,11 @@ export default function MainPage({
   osintScore,
   cryptoScore,
   stegoScore,
+  websecScore,
   osintSolvedCount = 0,
   cryptoSolvedCount = 0,
-  stegoSolvedCount = 0
+  stegoSolvedCount = 0,
+  websecSolvedCount = 0
 }) {
   return (
     <div className="main-page">
@@ -81,7 +79,7 @@ export default function MainPage({
                 [DOMAINS_DASHBOARD]
               </span>
               <span style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
-                4 domains &bull; 7 questions each &bull; 3 live arenas
+                4 domains &bull; 7 questions each &bull; 28 challenges total
               </span>
             </div>
             <h1 style={{ fontSize: '24px', borderBottom: 'none', margin: '6px 0 6px 0', color: 'var(--gb-fg0)' }}>
@@ -112,6 +110,9 @@ export default function MainPage({
           if (card.id === 'Stegano') {
             currentProgress = stegoScore ? stegoScore.score : stegoSolvedCount;
           }
+          if (card.id === 'Web Sec') {
+            currentProgress = websecScore ? websecScore.score : websecSolvedCount;
+          }
           const progressPercent = Math.min(100, Math.round((currentProgress / card.questions) * 100));
 
           return (
@@ -123,7 +124,6 @@ export default function MainPage({
               <div>
                 <div className="card-top">
                   <h3 className="card-title">
-                    <span>{card.icon}</span>
                     <span>{card.title}</span>
                   </h3>
                   <span className={`card-badge ${card.badgeType}`}>{card.badge}</span>

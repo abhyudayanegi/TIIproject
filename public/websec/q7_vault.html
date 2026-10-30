@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EvilCorp Master SQL Vault :: Stage 5 Finale</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f1419;
+      color: #e6edf3;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand { color: #ff7b72; font-weight: 700; font-size: 18px; }
+    .badge { font-family: monospace; font-size: 12px; background: #21262d; border: 1px solid #30363d; padding: 4px 10px; color: #8b949e; }
+    main { flex: 1; display: flex; justify-content: center; align-items: center; padding: 32px; }
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      max-width: 650px;
+      width: 100%;
+      padding: 28px 32px;
+    }
+    h1 { margin: 0 0 8px 0; font-size: 21px; }
+    p { color: #8b949e; font-size: 14px; line-height: 1.6; }
+    .field { margin-bottom: 14px; }
+    label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #8b949e;
+      margin-bottom: 6px;
+      font-family: monospace;
+    }
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 12px;
+      background: #0d1117;
+      border: 1px solid #58a6ff;
+      color: #f0f6fc;
+      font-family: monospace;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 11px;
+      background: #238636;
+      border: 1px solid #2ea043;
+      color: #fff;
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+    .sql-preview {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      padding: 14px;
+      font-family: monospace;
+      font-size: 13px;
+      margin: 16px 0;
+      line-height: 1.55;
+      overflow-x: auto;
+    }
+    #result-box {
+      display: none;
+      margin-top: 16px;
+      padding: 16px;
+      font-family: monospace;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .success {
+      background: rgba(46, 160, 67, 0.14);
+      border: 1px solid #2ea043;
+      color: #7ee787;
+    }
+    .error {
+      background: rgba(248, 81, 73, 0.1);
+      border: 1px solid #f85149;
+      color: #ff7b72;
+    }
+    .guide {
+      margin-top: 20px;
+      padding: 12px 14px;
+      background: #1c2128;
+      border-left: 3px solid #58a6ff;
+      font-family: monospace;
+      font-size: 12.5px;
+      color: #c9d1d9;
+      line-height: 1.55;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">EVILCORP // MASTER SQL VAULT (STAGE 5 FINALE)</div>
+    <div class="badge">Chain Stage 5 of 5 (WebSec Q7)</div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h1>Master Surveillance Database Login</h1>
+      <p>
+        EvilCorp's developer glued your password input directly into the database SQL query without sanitizing quotes. Use the administrator username from Question 6 and a classic <strong>SQL Injection (SQLi)</strong> payload to bypass the password check!
+      </p>
+
+      <div class="field">
+        <label>Database Admin Username (From Question 6)</label>
+        <input type="text" id="user-input" placeholder="e.g. director_vance" oninput="updateSqlPreview()" />
+      </div>
+
+      <div class="field">
+        <label>Password (Enter SQL Injection Payload)</label>
+        <input type="text" id="pass-input" placeholder="e.g. ' OR 1=1 --" oninput="updateSqlPreview()" />
+      </div>
+
+      <div class="sql-preview">
+        <div style="color:#8b949e; font-size:11.5px; margin-bottom:6px;">LIVE BACKEND SQL QUERY MONITOR:</div>
+        <div id="sql-code">SELECT * FROM users WHERE username = '' AND password = '';</div>
+      </div>
+
+      <button onclick="executeLogin()">[ Execute SQL Query &amp; Unlock Master Vault ]</button>
+
+      <div id="result-box"></div>
+
+      <div class="guide">
+        <strong>[HOW TO PERFORM THIS SQL INJECTION]</strong><br/>
+        1. In the <strong>Username</strong> box, enter the admin username you discovered in Question 6: <strong><code>director_vance</code></strong><br/>
+        2. In the <strong>Password</strong> box, type: <strong><code>' OR 1=1 --</code></strong><br/>
+        3. Watch the Live Backend SQL Query Monitor above: the single quote <code>'</code> closes the password string early, <code>OR 1=1</code> is always TRUE, and <code>--</code> comments out the rest of the line!<br/>
+        4. Click <strong>[ Execute SQL Query &amp; Unlock Master Vault ]</strong> to capture the final flag.
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function escapeHtml(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function updateSqlPreview() {
+      const u = document.getElementById('user-input').value;
+      const p = document.getElementById('pass-input').value;
+      const sqlEl = document.getElementById('sql-code');
+      sqlEl.innerHTML = `SELECT * FROM users WHERE username = '<span style="color:#79c0ff;">${escapeHtml(u)}</span>' AND password = '<span style="color:#ffa657;">${escapeHtml(p)}</span>';`;
+    }
+
+    function executeLogin() {
+      const u = document.getElementById('user-input').value.trim().toLowerCase();
+      const p = document.getElementById('pass-input').value.trim().toLowerCase();
+      const box = document.getElementById('result-box');
+      box.style.display = 'block';
+
+      const isSqli =
+        p.includes("' or 1=1") ||
+        p.includes("' or '1'='1") ||
+        p.includes('" or 1=1') ||
+        p.includes("or 1=1");
+
+      if (u !== 'director_vance' && !u.includes("' or 1=1")) {
+        box.className = 'error';
+        box.innerHTML = `[!] SQL Query returned 0 rows: Unknown administrator username "${escapeHtml(u)}". Check Question 6 for the DB_ADMIN_USER (director_vance)!`;
+        return;
+      }
+
+      if (isSqli || u.includes("' or 1=1")) {
+        box.className = 'success';
+        box.innerHTML = `
+          <strong>[+] SQL INJECTION AUTHENTICATION BYPASS SUCCESSFUL!</strong><br/>
+          Query evaluated to TRUE (<code>1=1</code>) for user <strong>director_vance</strong>.<br/><br/>
+          <strong>MASTER WEBSEC FLAG (Q7):</strong><br/>
+          <span style="color:#fff; background:#0d1117; padding:4px 8px; font-size:15px;">CAT{sqli_shatters_evilcorp}</span><br/><br/>
+          EvilCorp's entire web infrastructure has been compromised. Return to the arena and submit your final flag!
+        `;
+      } else {
+        box.className = 'error';
+        box.innerHTML = `[!] Authentication Failed. Try entering the SQL injection payload <strong>' OR 1=1 --</strong> in the Password field!`;
+      }
+    }
+  </script>
+</body>
+</html>

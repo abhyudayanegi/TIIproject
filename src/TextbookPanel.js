@@ -90,7 +90,7 @@ export default function TextbookPanel({ open, domain, questionId, questionTitle,
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px' }}>
             <div>
               <div className="tb-chapter">
-                <span>📖</span> [{domain} :: CHAPTER {questionId}]
+                [{domain} :: CHAPTER {questionId}]
               </div>
               <h2>{book.topic}</h2>
               {questionTitle && <div className="tb-sub">Challenge: {questionTitle}</div>}
@@ -134,7 +134,7 @@ export default function TextbookPanel({ open, domain, questionId, questionTitle,
 
           {/* Section 2: Non-tech analogy */}
           {book.beginnerAnalogy && (
-            <Section icon="[💡]" title="The Everyday Analogy" badge="FOR NON-TECHIES">
+            <Section icon="[*]" title="The Everyday Analogy" badge="FOR NON-TECHIES">
               <div style={{ background: 'var(--gb-bg0h)', borderLeft: '3px solid var(--gb-aqua)', padding: '10px 14px' }}>
                 <p style={{ margin: 0, fontStyle: 'italic', color: 'var(--gb-fg1)' }}>
                   {book.beginnerAnalogy}
@@ -145,7 +145,7 @@ export default function TextbookPanel({ open, domain, questionId, questionTitle,
 
           {/* Section 3: Real world case study */}
           {book.realWorldCase && (
-            <Section icon="[★]" title="Real-World Case Study" badge="IN THE WILD">
+            <Section icon="[#]" title="Real-World Case Study" badge="IN THE WILD">
               <div style={{ background: 'var(--gb-bg0h)', borderLeft: '3px solid var(--gb-yellow)', padding: '10px 14px' }}>
                 <div style={{ fontWeight: 'bold', color: 'var(--gb-yellow)', fontSize: '13.5px', marginBottom: '6px' }}>
                   {book.realWorldCase.headline}
@@ -169,7 +169,7 @@ export default function TextbookPanel({ open, domain, questionId, questionTitle,
 
           {/* Section 5: Step-by-Step Investigation */}
           {book.stepByStep && book.stepByStep.length > 0 && (
-            <Section icon="[⚡]" title="How an Investigator Solves It" badge="METHODOLOGY">
+            <Section icon="[>]" title="How an Investigator Solves It" badge="METHODOLOGY">
               <ol style={{ margin: 0, paddingLeft: '18px', color: 'var(--gb-fg)' }}>
                 {book.stepByStep.map((step, i) => (
                   <li key={i} style={{ marginBottom: '6px', fontSize: '13px' }}>

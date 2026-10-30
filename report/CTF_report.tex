@@ -109,11 +109,11 @@
         \hline
         \textbf{Name} & \textbf{Roll No.} & \textbf{SAP ID / Role} \\
         \hline
-        Abhyudaya Negi & K053 & OSINT Design, Research \& Stego  \\
+        Abhyudaya Negi & K053 & OSINT Design \& Research \\
         \hline
         Swara Pawde & K055 & UI/UX \& Theory Content \\
         \hline
-        Smit Vartak & K075 & Full-Stack Dev, Crypto (70102500066) \\
+        Smit Vartak & K075 & Full-Stack Dev, Crypto \& Stego (70102500066) \\
         \hline
         Sarthak Vikas & K077 & Database \& Testing \\
         \hline
@@ -123,8 +123,15 @@
     {\normalsize\bfseries Under The Guidance Of}\\[0.35em]
     {\large Dr. Abhinaba Gupta}\\[0.2em]
     {\small Faculty Mentor}
-    \\[25pt]
+
+    \vfill
+
     \includegraphics[width=4.2cm,keepaspectratio]{nmims_logo.png}\\[0.8em]
+
+    {\large\bfseries Mukesh Patel School of Technology Management \& Engineering}\\[0.25em]
+    {\normalsize Department of B.Tech CSE Cybersecurity}\\[0.25em]
+    {\normalsize Vile Parle (W), Mumbai -- 400056}\\[0.6em]
+    {\small Academic Year 2025--2026}
 \end{center}
 \end{titlepage}
 
@@ -555,8 +562,18 @@ The Cryptography arena (\textit{Operation Blackbox}) targets how corporations mi
     \item \textbf{Q7: Neutralizing the Surveillance Master Payload (Chain Stage 5):} The final payload is encrypted with repeating-key XOR using the password from Q6 (\texttt{cerberus123}) and wrapped in Base64. Building a 2-step recipe in CyberChef (\texttt{From Base64} followed by \texttt{XOR} with key \texttt{cerberus123}) unlocks the master flag: \textbf{\texttt{CAT\{evilcorp\_\allowbreak surveillance\_\allowbreak neutralized\_2026\}}}.
 \end{itemize}
 
-\paragraph{D. Web Security Curriculum (\texttt{WireframeChallenges.js})}
-The fourth domain covers 7 foundational web vulnerabilities in the same 2+5 format: inspecting HTML source comments (Q1), HTTP request verbs (Q2), re-enabling disabled HTML buttons via Inspect Element (Q3), tampering with session cookies from \texttt{role=user} to \texttt{role=admin} (Q4), changing user ID numbers in URLs to exploit IDOR (Q5), directory path traversal (Q6), and bypassing login forms with SQL Injection \texttt{' OR 1=1 --} (Q7).
+\paragraph{D. Web Security Arena (\texttt{WebSecChallenges.js} \& \texttt{/public/websec/})}
+Because teaching web security without real webpages feels unnatural, we built 7 standalone EvilCorp target webpages hosted inside \texttt{/public/websec/} that open directly in the player's browser.
+\begin{itemize}
+    \item \textbf{Q1: The Forgotten Developer Note (Warm-Up 1):} Players open \texttt{/websec/\allowbreak q1\_login.html}, right-click the page, and select \textbf{View Page Source} (\texttt{Ctrl+U}). At the bottom of the raw HTML code is a developer comment containing \textbf{\texttt{CAT\{always\_view\_the\_source\}}}. \textit{How it teaches:} Shows beginners that anything sent in HTML source code is visible to the public even if it is hidden on screen.
+    \item \textbf{Q2: Where Search Spiders Fear to Tread (Warm-Up 2):} Players open \texttt{/websec/\allowbreak q2\_robots.txt} to see which folders EvilCorp told Google not to index, revealing \textbf{\texttt{CAT\{robots\_reveal\_secrets\}}}. \textit{How it teaches:} Demonstrates that \texttt{robots.txt} is a public roadmap, not a security lock.
+    \item \textit{--- Dotted Line Divider (Start of 5-Stage Web Infiltration Chain) ---}
+    \item \textbf{Q3: The Greyed-Out Export Button (Chain Stage 1):} On \texttt{/websec/\allowbreak q3\_helpdesk.html}, the export button is locked with the HTML \texttt{disabled} attribute. Players right-click the button, open \textbf{Inspect Element} (\texttt{F12}), delete the word \texttt{disabled}, and click the button to get \textbf{\texttt{CAT\{never\_trust\_the\_client\}}} and the required cookie role \texttt{admin} for Q4.
+    \item \textbf{Q4: The VIP Cookie Jar (Chain Stage 2):} On \texttt{/websec/\allowbreak q4\_dashboard.html}, players elevate their session cookie \texttt{evilcorp\_role} from \texttt{guest} to \texttt{admin} (using either the on-page Cookie Inspector or DevTools Storage) to unlock \textbf{\texttt{CAT\{cookies\_are\_not\_secure\}}} and learn the CEO's Employee ID (\texttt{1042}) for Q5.
+    \item \textbf{Q5: Stepping Into the CEO's Shoes --- IDOR (Chain Stage 3):} Players open \texttt{/websec/\allowbreak q5\_profile.html?id=1001} and change the URL parameter from \texttt{1001} to \texttt{1042} to access the CEO's private dossier, yielding \textbf{\texttt{CAT\{idor\_exposes\_everyone\}}} and the server backup path \texttt{../../etc/\allowbreak evilcorp\_shadow.conf} for Q6.
+    \item \textbf{Q6: Climbing Out of the Web Folder --- Path Traversal (Chain Stage 4):} On \texttt{/websec/\allowbreak q6\_files.html?\allowbreak file=welcome.txt}, players enter \texttt{../../etc/\allowbreak evilcorp\_shadow.conf} to climb out of the public folder, capturing \textbf{\texttt{CAT\{dot\_dot\_slash\_escape\}}} and uncovering the database admin username \texttt{director\_vance} for Q7.
+    \item \textbf{Q7: Breaking the Master Vault with One Quote --- SQL Injection (Chain Stage 5):} On \texttt{/websec/q7\_vault.html}, players enter username \texttt{director\_vance} and inject \texttt{' OR 1=1 --} into the password box while watching the live SQL query monitor evaluate to \texttt{TRUE}, unlocking the master flag \textbf{\texttt{CAT\{sqli\_shatters\_evilcorp\}}}.
+\end{itemize}
 
 \clearpage
 

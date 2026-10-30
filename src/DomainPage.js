@@ -4,7 +4,6 @@ import { DOMAIN_ART } from './ascii';
 
 const DOMAIN_DETAILS = {
   OSINT: {
-    icon: '🔍',
     title: 'Open Source Intelligence (OSINT)',
     tagline: 'Track footprints, connect dots, and uncover secrets hiding in plain daylight.',
     whatIsIt: 'OSINT is the intelligence discipline of collecting, assessing, and analyzing publicly available data to discover actionable insights. Everything from public social media profiles, domain registrations, photo metadata, satellite imagery, to archived cached pages is fair game.',
@@ -20,7 +19,6 @@ const DOMAIN_DETAILS = {
     totalQuestions: 7,
   },
   Stegano: {
-    icon: '🎨',
     title: 'Steganography (Stego)',
     tagline: 'The art of concealing secret messages within innocent-looking media files.',
     whatIsIt: 'Derived from the Greek words for "hidden writing", Steganography is the science of hiding data inside ordinary cover mediums like Word docs, JPEG images, or WAV audio broadcasts without visibly altering the host carrier.',
@@ -36,7 +34,6 @@ const DOMAIN_DETAILS = {
     totalQuestions: 7,
   },
   Crypto: {
-    icon: '🔐',
     title: 'Cryptography',
     tagline: 'The mathematical spine of digital secrecy, trust, and secure communications.',
     whatIsIt: 'Cryptography is the practice and study of techniques for securing communication and sensitive data against third parties. It spans classical substitution ciphers, hashing algorithms, symmetric ciphers (AES), and public-key asymmetric encryption (RSA, ECC).',
@@ -52,19 +49,18 @@ const DOMAIN_DETAILS = {
     totalQuestions: 7,
   },
   'Web Sec': {
-    icon: '🌐',
     title: 'Web Security',
     tagline: 'Dissect how the web works under the hood and hunt for systemic vulnerabilities.',
     whatIsIt: 'Web Security focuses on finding, understanding, and mitigating security vulnerabilities within web applications, browser clients, and REST APIs.',
     howUseful: 'The entire global economy runs on web applications. Ethical hackers and security engineers audit web platforms to protect user data from account takeovers, payment tampering, and database exfiltration.',
-    criticalWarning: 'Web developers frequently trust user input blindly. A single unescaped quote mark can trigger SQL Injection to dump an entire customer database; a missing parameter validation can allow any user to edit another person\'s bank account.',
+    criticalWarning: 'Web developers frequently trust the user\'s browser blindly. Hiding secrets in HTML comments, disabling buttons solely in HTML, storing admin roles in plain cookies, or gluing user input into SQL queries allows anyone with a normal browser to breach an entire server.',
     requirements: [
-      'Browser Developer Tools (F12 / Inspect Element)',
-      'Hoppscotch / Postman (HTTP Request Dispatcher)',
-      'cURL Command Line Utility',
-      'Cookie Inspector and DOM Modifiers'
+      'Browser View Page Source (Right-Click -> View Page Source / Ctrl+U)',
+      'Browser Inspect Element (Right-Click -> Inspect / F12)',
+      'Cookie Inspector & URL Bar Parameter Editing',
+      'Interactive SQL Query Monitor (Built into Target Webpages — Zero Local Downloads)'
     ],
-    isLive: false,
+    isLive: true,
     totalQuestions: 7,
   },
 };
@@ -80,14 +76,14 @@ export default function DomainPage({ domain, onBack, onContinue }) {
           <div>
             <div className="header-meta">
               <span className={`badge-tag ${details.isLive ? 'badge-live' : 'badge-wireframe'}`}>
-                {details.isLive ? '[STATUS: LIVE ARENA READY]' : '[STATUS: 7 CHALLENGES CONCEPT]'}
+                {details.isLive ? '[STATUS: READY]' : '[STATUS: CURRICULUM]'}
               </span>
               <span style={{ fontSize: '12px', color: 'var(--gb-gray)' }}>
                 Field Manual &bull; Section {domain} &bull; {details.totalQuestions} Questions
               </span>
             </div>
             <h1 style={{ fontSize: '24px', borderBottom: 'none', margin: '6px 0 4px 0', color: 'var(--gb-fg0)' }}>
-              {details.icon} {details.title}
+              {details.title}
             </h1>
             <p style={{ color: 'var(--gb-yellow)', fontSize: '14px', margin: 0 }}>
               &gt; {details.tagline}
@@ -155,8 +151,8 @@ export default function DomainPage({ domain, onBack, onContinue }) {
         </button>
         <button className="btn-small btn-primary" onClick={() => onContinue(domain)}>
           {details.isLive
-            ? `[ Launch ${domain} Live Arena (7 Questions) &rarr; ]`
-            : `[ Inspect ${domain} Wireframe (7 Questions) &rarr; ]`}
+            ? `[ Start ${domain} (7 Challenges) &rarr; ]`
+            : `[ View ${domain} Curriculum (7 Challenges) &rarr; ]`}
         </button>
       </div>
     </div>
