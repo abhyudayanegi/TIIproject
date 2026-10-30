@@ -109,13 +109,13 @@
         \hline
         \textbf{Name} & \textbf{Roll No.} & \textbf{SAP ID / Role} \\
         \hline
-        Abhyudaya Negi & K053 & OSINT Design \& Research \\
+        Abhyudaya Negi & K053 & OSINT Design \& Research (70102500067) \\
         \hline
-        Swara Pawde & K055 & UI/UX \& Theory Content \\
+        Swara Pawde & K055 & UI/UX \& Theory Content (70102500037) \\
         \hline
         Smit Vartak & K075 & Full-Stack Dev, Crypto \& Stego (70102500066) \\
         \hline
-        Sarthak Vikas & K077 & Database \& Testing \\
+        Sarthak Vikas & K077 & Database \& Testing (70102500073)\\
         \hline
     \end{tabular}
 
@@ -124,14 +124,10 @@
     {\large Dr. Abhinaba Gupta}\\[0.2em]
     {\small Faculty Mentor}
 
-    \vfill
+\vspace{1.8em}
 
     \includegraphics[width=4.2cm,keepaspectratio]{nmims_logo.png}\\[0.8em]
 
-    {\large\bfseries Mukesh Patel School of Technology Management \& Engineering}\\[0.25em]
-    {\normalsize Department of B.Tech CSE Cybersecurity}\\[0.25em]
-    {\normalsize Vile Parle (W), Mumbai -- 400056}\\[0.6em]
-    {\small Academic Year 2025--2026}
 \end{center}
 \end{titlepage}
 
@@ -155,19 +151,18 @@
 \addcontentsline{toc}{section}{Abstract}
 
 \noindent
-\textbf{Problem \& Motivation:} Most daily internet users lack basic cybersecurity awareness even though their banking, private chats, and location history live online. Because cybersecurity has a steep learning curve involving Linux terminals, networking setups, and programming, regular people feel intimidated and avoid learning it altogether. Large tech corporations take advantage of this ignorance to harvest user data through hidden metadata, unreadable terms of service, and fake encryption claims, which also leaves regular consumers much more vulnerable when real hackers breach those companies.
+\textbf{Problem \& Motivation:} Most regular internet users know very little about cybersecurity even though their banking, private chats, and location history are all online. Because learning security usually involves Linux terminals, networking setups, and heavy coding, normal people feel intimidated and skip over it completely. Big tech companies take advantage of this gap to collect user data through hidden metadata, confusing terms of service, and fake encryption claims, which also leaves everyday users much more exposed when real hackers break into those companies.
 
 \noindent
-\textbf{Approach \& Methodology:} Following the Design Thinking framework, our team surveyed 48 college students and interviewed non-technical users to understand why beginners quit existing security platforms. We used the SCAMPER ideation method and low-fidelity wireframing to design \textit{Cyber Awareness Academy}, an offline-capable, 100\% in-browser Capture The Flag (CTF) web application built with React 19, a Node.js backend, and a self-seeding SQLite3 database (\texttt{ctf.db}).
+\textbf{Approach \& Methodology:} Using the Design Thinking process, our team ran a cybersecurity awareness survey with 130 college students and beginners ($n = 130$) to see why people struggle with digital privacy and quit existing learning websites. From this data, we built our Empathy Map and User Persona (Aditi Sharma), used the SCAMPER method to brainstorm features, and created \textit{Cyber Awareness Academy}, an offline-capable, 100\% in-browser Capture The Flag (CTF) web app built with React 19, a Node.js backend, and an auto-seeding SQLite3 database (\texttt{ctf.db}).
 
 \noindent
-\textbf{Key Results:} In usability testing with 22 beginners who had never played a CTF before, 100\% passed our 3-step Flag Calibration tutorial on their first try, and 86.4\% solved the introductory warm-up challenges and entered the 5-stage linked investigation chains without needing any command-line setup.
+\textbf{Key Results:} In our survey of 130 respondents, 87 out of 130 felt cybersecurity requires basic technical literacy but is manageable, and 71 out of 130 felt genuine curiosity about it. However, 75 out of 130 rarely or never check their own digital footprint because 86 out of 130 feel existing tools assume an IT background and 29.5\% do not know where to find reliable resources. When we tested our prototype with 22 beginners who had never played a CTF before, 100\% passed our 3-step Flag Calibration tutorial on their first try, and 86.4\% solved the warm-up questions and moved into the 5-stage linked investigation chains without touching a command line.
 
 \noindent
-\textbf{Contribution \& Innovation:} Our main innovation is combining a zero-download browser CTF with an anti-corporate narrative (fighting a fictional monopoly called \textit{EvilCorp} using the \texttt{CAT\{...\}} flag format), a built-in slide-out textbook that explains concepts using real-world breaches, and a 2+5 linked question structure that helps curious newcomers build practical habits for protecting their own digital privacy.
+\textbf{Contribution \& Innovation:} Our main contribution is combining a zero-download browser CTF across four live domains (OSINT, Steganography, Cryptography, and Web Security) with an anti-corporate story against a fictional monopoly called \textit{EvilCorp} using our \texttt{CAT\{...\}} flag prefix, a slide-out textbook written in plain English, and a 2+5 connected question flow that helps beginners build real privacy habits.
 
 \vspace{1em}
-\noindent\textbf{Keywords:} \textit{Capture The Flag (CTF), Cybersecurity Education, Design Thinking, Open Source Intelligence (OSINT), Steganography, Cryptography, Consumer Privacy.}
 
 \clearpage
 
@@ -177,45 +172,44 @@
 \section{Introduction}
 
 \subsection{Context and Background}
-Almost everything we do in modern society happens on a phone or a laptop. From paying for food and booking train tickets to posting photos with friends, we leave behind a huge trail of personal information every single day. Even though people spend hours online, the average person knows almost nothing about cybersecurity. Most users treat their apps and websites like magic black boxes. You tap a button, the screen loads, and as long as nothing crashes, you naturally assume your data is safe.
+Almost everything we do today happens on a phone or a laptop. Whether we are paying for food over UPI, booking train tickets, or posting photos with friends, we leave behind a trail of personal information every single day. Even though people spend hours online, the average person knows almost nothing about cybersecurity. Most users treat their apps and websites like magic black boxes. You tap a button, the page loads, and as long as nothing crashes, you assume your data is safe.
 
-When you ask normal people why they do not learn basic digital safety, the reason is almost always the same. Cybersecurity feels way too complicated to get into. To someone outside computer science, learning security looks like an impossible mountain of Linux terminal commands, binary numbers, networking cables, and complex code. Because people think you need to be a genius programmer to understand it, they get scared off and completely skip over even the simple stuff that affects their daily life.
+When you ask normal people why they do not learn basic digital safety, the answer is almost always the same. Cybersecurity looks way too hard to get into. And honestly, it really does have a high skill ceiling. To someone outside computer science, learning security looks like an endless wall of Linux terminal commands, binary numbers, networking rules, and complicated code. Because people think you need to be an expert programmer just to start, they get put off and skip over even the simple stuff that affects their own accounts.
 
-This public blind spot is not an accident. Big tech monopolies and data brokers actively use this knowledge gap to exploit regular consumers. Companies know that a normal person is never going to read raw file headers, inspect browser cookies, or check how their data is actually being sent across the internet. So companies hide invasive tracking inside flashy, friendly menus. They bury unfair clauses at the bottom of long Terms of Service documents. Sometimes they even claim that user telemetry is ``encrypted'' when it is really just wrapped in basic Base64 encoding that anyone can reverse in two seconds. Worse, when companies train users to blindly trust software while cutting corners on their own servers, such as storing customer passwords as plain unsalted MD5 hashes, they make ordinary consumers much more vulnerable to actual hackers. When a corporate database gets breached, the company moves on, whereas the regular user gets their accounts stolen because nobody ever taught them how password cracking or digital footprints actually work.
+Big corporations and data brokers know this, and they use it to their advantage. Companies know a regular consumer is never going to check raw file headers, inspect browser cookies, or look at how their data is actually being sent over the network. Because nobody is checking, companies hide aggressive tracking behind friendly buttons. They bury unfair clauses at the bottom of long Terms of Service documents. Sometimes they even claim user telemetry is ``encrypted'' when it is just wrapped in basic Base64 encoding that anyone can reverse in two seconds. Even worse, when companies train users to blindly trust software while cutting corners on their own servers, like storing customer passwords as plain unsalted MD5 hashes, they make regular consumers much easier targets for real hackers. When a corporate database gets leaked, the company puts out a short apology, while the ordinary user gets their accounts hijacked because nobody ever showed them how password cracking or digital footprints work.
 
 \subsection{Literature Review and Market Survey}
-Gamified learning through Capture The Flag (CTF) competitions has long been recognized as one of the best ways to teach practical computer security. In a CTF, instead of reading dry theory slides, players solve a real puzzle to find a hidden text string called a ``flag'' (such as \texttt{CAT\{secret\_answer\}}), which proves they found the vulnerability.
+Capture The Flag (CTF) games have been used for years as a practical way to teach computer security. In a CTF, instead of just reading theory notes, players solve a real puzzle to find a hidden piece of text called a ``flag'' (in our platform, formatted like \texttt{CAT\{secret\_answer\}}), which proves they actually found the flaw.
 
-Carnegie Mellon University created \textbf{picoCTF} to introduce high school and college students to security concepts through story-driven puzzles. Similarly, community wargames like \textbf{OverTheWire} (especially the \textit{Bandit} and \textit{Natas} tracks) have trained thousands of students in Linux shell commands and basic web vulnerabilities. In recent years, commercial platforms like \textbf{TryHackMe} and \textbf{HackTheBox} have grown massive user bases by offering virtual labs where users can attack real virtual machines over a browser or VPN connection.
+Carnegie Mellon University built \textbf{picoCTF} to introduce high school and college students to security puzzles using a game story. Community wargames like \textbf{OverTheWire} (especially the \textit{Bandit} and \textit{Natas} levels) have also helped thousands of students learn Linux shell commands and basic web security. More recently, big platforms like \textbf{TryHackMe} and \textbf{HackTheBox} have become popular by offering virtual labs where users can attack real virtual machines over a browser or VPN connection.
 
-Academic research by Vykopal et al.\ and Švábenský et al.\ shows that hands-on CTF challenges improve long-term memory much better than passive lectures. However, studies on beginner dropout rates in cybersecurity courses point out a major catch: traditional CTFs are built by experienced engineers for other engineers. They assume the player already knows how to use a terminal, read manual pages, and install local forensic tools.
 
 \subsection{Research Gap and Problem Definition}
-When we looked closely at the existing platforms in the market during our preliminary survey, a clear gap stood out. Platforms like HackTheBox and TryHackMe are great once you already know the basics of computer science, but they are completely overwhelming for a regular person or a first-year student who just wants to understand how their privacy is compromised.
+When our team looked closely at the existing platforms during our background research, a big gap was obvious. Websites like HackTheBox and TryHackMe are great once you already know computer science basics, but they are way too confusing for a normal person or a first-year student who just wants to see how their privacy gets leaked online.
 
-Specifically, existing tools suffer from four major problems for newcomers:
+Specifically, existing platforms have four main problems for beginners:
 \begin{enumerate}
-    \item \textbf{Heavy setup friction:} Most platforms require downloading OpenVPN configuration files, spinning up Linux virtual machines, or installing command-line tools like \texttt{steghide}, \texttt{binwalk}, and \texttt{exiftool} locally before you can even start.
-    \item \textbf{Lack of plain-English theory:} When a beginner gets stuck on a traditional CTF, the platform rarely explains the concept clearly. The user is forced to search random forums and StackOverflow threads filled with heavy technical jargon.
-    \item \textbf{Disconnected puzzles:} Most beginner CTFs throw random, unrelated puzzles at the player with no story connecting them, so the user never sees how a tiny leak in one place leads to a full account takeover later.
-    \item \textbf{Artificial UI design:} Many newer student projects rely on generic, overly rounded web templates that feel artificial and clutter the screen instead of giving a clean workspace.
+    \item \textbf{Too much setup trouble:} Most sites ask you to download OpenVPN files, boot up Linux virtual machines, or install command-line tools like \texttt{steghide}, \texttt{binwalk}, and \texttt{exiftool} before you can even try the first question.
+    \item \textbf{Jargon without simple explanations:} When a newcomer gets stuck on a traditional CTF, the site rarely explains the idea in normal words. The user has to dig through random forums full of confusing acronyms.
+    \item \textbf{Unrelated questions:} Most beginner CTFs give you random puzzles that have nothing to do with each other, so the player never sees how one small mistake in real life leads to a bigger compromise later.
+    \item \textbf{Cluttered interface design:} Many student projects copy generic, overly rounded web templates that look fake and crowd the screen instead of giving a clean place to work.
 \end{enumerate}
 
 \subsection{Scope, Objectives, and Contributions}
-The purpose of our project, \textbf{Cyber Awareness Academy}, is to close this gap by building a 100\% in-browser, zero-prerequisite CTF platform that teaches everyday people how corporate tracking and hacker attacks actually work. We framed the entire platform around an ``anti-corpo'' story where the player acts as a digital investigator exposing a shady conglomerate called \textbf{EvilCorp}. Every flag across the platform uses our custom prefix \texttt{CAT\{...\}}.
+The goal of our project, \textbf{Cyber Awareness Academy}, is to fix this problem by building a 100\% in-browser CTF platform that needs zero setup and shows everyday people how corporate tracking and hacker tricks actually work. We built the whole platform around an ``anti-corpo'' story where the player acts as a rebel investigator exposing a shady monopoly called \textbf{EvilCorp}. Every flag on our platform uses the prefix \texttt{CAT\{...\}}.
 
 Our main objectives and contributions are:
 \begin{itemize}
-    \item \textbf{Zero local installations:} Every single challenge across our arenas can be solved inside a standard web browser using free online utilities like CyberChef, Photopea, HexEd.it, and Google Lens.
-    \item \textbf{The 2+5 linked challenge model:} We structured every CTF domain into 7 questions. The first 2 questions are easy standalone warm-ups separated by a dotted divider from the next 5 questions, which form a linked investigation chain where each answer unlocks the next question.
-    \item \textbf{Interactive Slide-Out Field Manual:} Every challenge has a built-in \texttt{[Theory]} button that slides open a textbook chapter written in simple English, complete with everyday analogies, real-world data breach stories, and step-by-step tool guides.
-    \item \textbf{Self-contained offline architecture:} The platform uses React 19 on the frontend and Node.js with an embedded SQLite3 database (\texttt{ctf.db}) on the backend that automatically seeds all challenges on startup.
+    \item \textbf{Zero local downloads:} Every question across all four arenas can be solved inside a normal web browser using free online tools like CyberChef, Photopea, HexEd.it, Google Lens, and browser DevTools.
+    \item \textbf{The 2+5 connected question format:} Every domain has 7 questions. The first 2 questions are easy, unrelated warm-ups separated by a dotted line from the next 5 questions, which form a connected story chain where each answer helps unlock the next step.
+    \item \textbf{Slide-Out Field Manual:} Every question card has a \texttt{[Theory]} button that opens a textbook chapter on the side of the screen, written in plain English with everyday analogies, real data breach stories, and step-by-step tool guides.
+    \item \textbf{Offline-ready full-stack setup:} The project runs on React 19 for the frontend and Node.js with an embedded SQLite3 database (\texttt{ctf.db}) on the backend that automatically loads all 28 challenges as soon as you start the server.
 \end{itemize}
 
 \subsection{Significance and Outline of the Report}
-Addressing this issue right now is crucial because corporate data collection and automated cyberattacks are growing faster than public awareness. When a regular student gets hooked on solving an approachable puzzle, they start paying much closer attention to their own digital footprint, questioning fake security claims, and building safer habits in the future.
+We felt this project matters right now because corporate data collection and online scams are growing much faster than public awareness. Once a beginner solves a few easy puzzles on their own, they stop seeing computers as magic boxes and start paying attention to their own digital footprint, questioning fake security claims, and being more careful online.
 
-The rest of this report follows the Design Thinking structure. Section 2 explains our Methodology across the Empathy, Define, Ideation, and Prototyping phases, including our survey data, SCAMPER analysis, system architecture, installation guide, page-by-page features, and full technical writeups of every CTF challenge. Section 3 concludes the report with our personal learnings, future server-hosting plans, and open-source inspirations, followed by our reference list.
+The rest of this report follows the Design Thinking format required for our course. Section 2 covers our Methodology across the Empathy, Define, Ideation, and Prototyping stages, including our 130-student survey data, Aditi Sharma's persona and empathy map, SCAMPER analysis, system architecture, local setup steps, page-by-page features, and full writeups for all four CTF arenas. Section 3 wraps up the report with what our team learned, what we plan to improve next, and the open-source tools that inspired us, followed by our references.
 
 \clearpage
 
@@ -224,12 +218,12 @@ The rest of this report follows the Design Thinking structure. Section 2 explain
 % ==========================================
 \section{Methodology (Design Thinking Framework)}
 
-To make sure we built something that actually helps beginners instead of just making another confusing hacker test, our team followed the five-stage \textbf{Design Thinking framework}: Empathy, Define, Ideation, Prototyping, and Testing.
+To make sure we built something that genuinely helps beginners instead of just making another confusing hacker test, our team followed the five stages of \textbf{Design Thinking}: Empathy, Define, Ideation, Prototyping, and Testing.
 
 \subsection{Empathy Phase}
 
 \subsubsection{Secondary Research (Market Survey)}
-Before writing any code, we analyzed the four most popular platforms currently used to teach cybersecurity: \textbf{TryHackMe}, \textbf{HackTheBox}, \textbf{OverTheWire}, and \textbf{picoCTF}. We tested each platform from the perspective of a complete beginner who does not have Linux installed and has never used a terminal. Table~\ref{tab:market_survey} summarizes our secondary research findings.
+Before writing any code, we tried out the four most popular websites people recommend for learning cybersecurity: \textbf{TryHackMe}, \textbf{HackTheBox}, \textbf{OverTheWire}, and \textbf{picoCTF}. We went through each one pretending we were a complete beginner with no Linux installation and zero terminal experience. Table~\ref{tab:market_survey} shows what we found.
 
 \begin{table}[!htbp]
 \centering
@@ -247,7 +241,7 @@ OverTheWire & CS students learning Linux & Free, lightweight, great for learning
 \hline
 picoCTF & High school \& college students & Free, fun puzzles across crypto, stego, and web. & Many challenges still require local Python scripts or Linux binary tools. \\
 \hline
-\textbf{Cyber Awareness Academy (Ours)} & \textbf{Complete beginners \& everyday users} & \textbf{100\% in-browser, zero local installs, built-in plain-English textbook, 2+5 linked story chain.} & Currently runs offline locally (cloud hosting planned for next phase). \\
+\textbf{Cyber Awareness Academy (Ours)} & \textbf{Complete beginners \& everyday users} & \textbf{100\% in-browser, zero local installs, built-in plain-English textbook, 2+5 linked story chain.} & Currently runs offline locally (server hosting planned next). \\
 \hline
 \end{tabular}
 \caption{Market comparison of existing cybersecurity learning platforms.}
@@ -255,91 +249,115 @@ picoCTF & High school \& college students & Free, fun puzzles across crypto, ste
 \end{table}
 
 \subsubsection{Primary Research (Survey Form and Interviews)}
-To back up our secondary research with real numbers, we circulated a Google Forms survey among \textbf{48 college students} (spanning first-year engineering students and non-CS peers) and conducted 8 one-on-one interviews. The key results from our survey were eye-opening:
+To back up our market check with real numbers from people around us, we ran a Cybersecurity Awareness Survey that gathered \textbf{130 responses ($n = 130$)}, mostly from college students aged 19 to 22 who are curious about tech but come from non-technical or beginner backgrounds. Going through the survey charts and written responses gave us a really clear picture of why people hold back from learning digital privacy:
+
 \begin{itemize}
-    \item \textbf{79.2\% (38 out of 48)} admitted they never read app permissions or Terms of Service and assumed big companies keep their uploaded photos and passwords safe by default.
-    \item \textbf{83.3\% (40 out of 48)} said they wanted to learn how hacking and digital privacy work, but felt that cybersecurity was ``too complicated and technical'' to start on their own.
-    \item \textbf{70.8\% (34 out of 48)} had never heard of EXIF metadata in photos or the difference between encoding (Base64) and real encryption.
-    \item Among the 14 respondents who had tried a CTF before, \textbf{11 (78.5\%)} said they quit early because they did not want to install virtual machines or got stuck on flag formatting and terminal commands.
+    \item \textbf{Biggest Hurdle to Maintaining Personal Digital Privacy (129 responses):} When we asked people what single thing stops them the most from keeping their digital privacy safe, the number one answer was \textit{``I do not know where to find reliable resources''} at \textbf{29.5\% (38 out of 130)}. Second was \textit{``Convenience over security''} at \textbf{16.3\%}. Tied right behind that at \textbf{14.7\%} each were \textit{``The terminology is too technical and confusing''} and \textit{``Too many accounts to manage.''} Another \textbf{11.6\%} picked \textit{``I do not believe I am a target so it feels unnecessary''} (often thinking their personal data is not that special), and \textbf{9.3\%} said \textit{``It requires too much time to learn.''}
+    \item \textbf{Trade-Off Between Security and Convenience (127 responses):} When we asked how they feel about the daily balance between security and convenience, \textbf{37\%} felt the current balance is fair, and \textbf{34.6\%} said they are willing to accept serious inconvenience if it actually guarantees security. At the same time, \textbf{22.8\% (29 out of 130)} admitted that security measures feel annoying even though they put up with them, while the remaining \textbf{$\sim$5.6\%} saw security steps as an unnecessary roadblock.
+    \item \textbf{How Beginners Think and Feel About Cybersecurity:} Most respondents (\textbf{87 out of 130}) said they believe cybersecurity \textit{``requires basic technical literacy, but is manageable''} in principle, and \textbf{71 out of 130} said their most honest reaction to the subject is simple \textbf{curiosity}. However, \textbf{86 out of 130 (around 64\%)} assumed that existing cybersecurity tools and tutorials are built for people who already have an IT or programming background. Because of that, roughly \textbf{one-third ($\sim$1/3)} reported feeling overwhelmed, anxious, confused, or bored whenever they try to read about it.
+    \item \textbf{What Beginners Actually Do Online:} While \textbf{107 out of 130} could rightly spot \texttt{HTTPS} as the secure web protocol, \textbf{75 out of 130} admitted they rarely or never check their own digital footprint. Many students also told us they avoid asking beginner questions on tech forums because they are scared of being judged or made to feel ``stupid.''
 \end{itemize}
 
-During our interviews, one student told us something that stuck with our team: \textit{``Whenever I try to watch a cybersecurity tutorial, they immediately open a black Linux screen and start typing twenty commands a second. I feel dumb within five minutes and just close the video.''} Another classmate mentioned that even when they solved a puzzle once, the site rejected their answer because they did not know how the flag brackets worked.
+In the open text responses, people kept asking for the same thing: drop the heavy acronyms. Multiple students told us \textit{``Simplifying jargon is definitely a start,''} and one response summed up the whole problem in one line: \textit{``Explain it to me like I'm 5 years old.''}
 
 \subsubsection{Stakeholder Canvas}
-Based on our research, we mapped out the key stakeholders connected to our project:
+From our survey findings, we mapped out the three groups of stakeholders involved in our project:
 \begin{itemize}
-    \item \textbf{Primary Stakeholders (Direct Users):} Non-technical internet users, first-year college students, and curious beginners who want to learn how to protect their digital footprint without learning complex programming first.
-    \item \textbf{Secondary Stakeholders (Educators \& Mentors):} College professors, cybersecurity club leads, and workshop organizers who need an easy, zero-setup platform to run classroom demonstrations without spending two hours fixing student laptops.
-    \item \textbf{External Stakeholders:} Open-source tool creators (like GCHQ CyberChef and Photopea), digital privacy advocates, and everyday consumers affected by corporate data collection.
+    \item \textbf{Primary Stakeholders (Direct Users):} Everyday internet users, college students aged 19 to 22, and curious beginners (represented by our persona Aditi Sharma) who want to understand digital privacy without needing an IT degree first.
+    \item \textbf{Secondary Stakeholders (Educators \& Mentors):} College faculty, student club leads, and workshop hosts who need a zero-setup browser platform to teach cybersecurity concepts in class without spending hours fixing virtual machines on student laptops.
+    \item \textbf{External Stakeholders:} Creators of free browser utilities (such as GCHQ CyberChef and Photopea), privacy educators, and regular consumers whose data is collected by tech platforms.
 \end{itemize}
 
 \subsubsection{Empathy Map and User Persona}
-We combined the quotes and behaviors from our interviews into a structured Empathy Map, shown in Fig.~\ref{fig:empathy_map}, and created a primary User Persona to guide our design decisions.
+We combined the data and quotes from our 130-respondent survey into a six-section Empathy Map (\textit{Says, Thinks, Feels, Does, Pains,} and \textit{Gains}), shown in Fig.~\ref{fig:empathy_map}, and created our main User Persona, \textbf{Aditi Sharma}.
 
 \begin{figure}[!htbp]
 \centering
 \resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[
-    box/.style={rectangle, rounded corners=3pt, draw=black!80, thick, minimum width=6.4cm, minimum height=2.7cm, align=left, font=\footnotesize, inner sep=7pt},
-    centerbox/.style={ellipse, draw=black!90, fill=pipeorange, thick, minimum width=3.1cm, minimum height=1.4cm, align=center, font=\footnotesize\bfseries}
+    header/.style={rectangle, rounded corners=3pt, draw=black!80, fill=pipegray!70, thick, minimum width=14.6cm, minimum height=0.95cm, align=center, font=\footnotesize},
+    box/.style={rectangle, rounded corners=3pt, draw=black!80, thick, text width=4.4cm, minimum height=3.1cm, align=left, font=\scriptsize, inner sep=6pt}
 ]
-    \node[box, fill=pipeblue] (says) at (-3.7, 1.8) {
-        \textbf{SAYS:}\\
-        $\bullet$ ``I have nothing to hide online anyway.''\\
-        $\bullet$ ``Hacking requires Linux and coding.''\\
-        $\bullet$ ``Why did it reject my answer? I found it!''\\
-        $\bullet$ ``I don't want to download sketchy tools.''
+    \node[header] (hdr) at (0, 2.35) {
+        \textbf{EMPATHY MAP : Cybersecurity Awareness Survey ($n = 130$)}\\[0.15em]
+        \textbf{Aditi Sharma} (19--22 $\cdot$ College student $\cdot$ curious, non-technical beginner)
     };
-    \node[box, fill=pipegreen] (thinks) at (3.7, 1.8) {
-        \textbf{THINKS:}\\
-        $\bullet$ Cybersecurity is only for hardcore coders.\\
-        $\bullet$ Big companies encrypt all my data safely.\\
-        $\bullet$ Removing a location tag hides where I was.\\
-        $\bullet$ If I get stuck, there is nobody to explain it.
+
+    % Top Row: SAYS, THINKS, FEELS
+    \node[box, fill=pipeblue] (says) at (-5.0, 0.15) {
+        \textbf{\footnotesize SAYS}\\[0.3em]
+        $\bullet$ ``I don't know where to find reliable resources'' \textbf{(38/130)}\\
+        $\bullet$ ``It requires basic technical literacy, but is manageable'' \textbf{(87/130)}\\
+        $\bullet$ ``Simplifying jargon is definitely a start''\\
+        $\bullet$ ``Explain it to me like I'm 5 years old''
     };
-    \node[box, fill=pipepurple] (does) at (-3.7, -1.8) {
-        \textbf{DOES:}\\
-        $\bullet$ Clicks ``Agree'' on Terms of Service blindly.\\
-        $\bullet$ Reuses simple passwords (\texttt{name123}).\\
-        $\bullet$ Quits tutorials when VM/VPN setup appears.\\
-        $\bullet$ Uses the same handle on every social app.
+
+    \node[box, fill=pipepurple] (thinks) at (0, 0.15) {
+        \textbf{\footnotesize THINKS}\\[0.3em]
+        $\bullet$ Cybersecurity feels learnable in principle\\
+        $\bullet$ Assumes tools/tutorials are built for people who already know IT \textbf{(64\%)}\\
+        $\bullet$ ``My data isn't that special'' (low priority to protect)\\
+        $\bullet$ Wonders if media portrayals of hacking are realistic
     };
-    \node[box, fill=pipepink] (feels) at (3.7, -1.8) {
-        \textbf{FEELS:}\\
-        $\bullet$ Intimidated by terminal command lines.\\
-        $\bullet$ Frustrated by unexplained technical jargon.\\
-        $\bullet$ Excited and proud when a clue finally clicks.\\
-        $\bullet$ Shocked when seeing how easily data leaks.
+
+    \node[box, fill=pipeorange] (feels) at (5.0, 0.15) {
+        \textbf{\footnotesize FEELS}\\[0.3em]
+        $\bullet$ Curiosity is the most common honest reaction \textbf{(71/130)}\\
+        $\bullet$ Overwhelmed, anxious, confused, or bored \textbf{($\sim$1/3)}\\
+        $\bullet$ Frustrated when jargon blocks understanding\\
+        $\bullet$ Ambivalent toward online tech communities
     };
-    \node[centerbox] (user) at (0,0) {Target Learner\\(Aarav, 19)};
-    
-    \draw[-{Stealth[length=2mm]}, thick] (user) -- (says);
-    \draw[-{Stealth[length=2mm]}, thick] (user) -- (thinks);
-    \draw[-{Stealth[length=2mm]}, thick] (user) -- (does);
-    \draw[-{Stealth[length=2mm]}, thick] (user) -- (feels);
+
+    % Bottom Row: DOES, PAINS, GAINS
+    \node[box, fill=pipegreen] (does) at (-5.0, -3.25) {
+        \textbf{\footnotesize DOES}\\[0.3em]
+        $\bullet$ Rarely or never checks own digital footprint \textbf{(75/130)}\\
+        $\bullet$ Correctly identifies HTTPS as the secure protocol \textbf{(107/130)}\\
+        $\bullet$ Tolerates security measures as ``annoying'' \textbf{(29/130)}\\
+        $\bullet$ Avoids asking questions in tech forums
+    };
+
+    \node[box, fill=pipepink] (pains) at (0, -3.25) {
+        \textbf{\footnotesize PAINS}\\[0.3em]
+        $\bullet$ Jargon \& acronyms: DNS, AES, phishing, metadata\\
+        $\bullet$ Tools assume prior IT/programming background \textbf{(86/130)}\\
+        $\bullet$ No clear sense of trustworthy resources \textbf{(\#1 hurdle)}\\
+        $\bullet$ Fear of feeling judged or ``stupid''
+    };
+
+    \node[box, fill=pipegreen!75] (gains) at (5.0, -3.25) {
+        \textbf{\footnotesize GAINS}\\[0.3em]
+        $\bullet$ Plain-language, step-by-step explanations\\
+        $\bullet$ A fair balance between security and convenience\\
+        $\bullet$ Visual, interactive, gradual-difficulty learning\\
+        $\bullet$ Confidence that cybersecurity is manageable, not elite
+    };
 \end{tikzpicture}%
 }
-\caption{Empathy map synthesizing primary interview and survey findings from 48 students.}
+\caption{Empathy map for Aditi Sharma based on the Cybersecurity Awareness Survey ($n = 130$).}
 \label{fig:empathy_map}
 \end{figure}
 
 \noindent
-\textbf{User Persona --- Aarav Mehta (Age 19, Undergraduate Student):}
-Aarav uses Instagram, YouTube, and UPI daily on his Windows laptop and Android phone. He is curious about how hackers track people and how encryption works, but he has never used Linux. His main frustrations are platforms that ask him to install heavy software, tutorials that use unexplained acronyms like \texttt{EXIF} or \texttt{XOR}, and dry textbooks that bore him to sleep. He needs a platform that works straight in Chrome, teaches him the rules step by step, and connects every puzzle to real life.
+\textbf{User Persona: Aditi Sharma}
+\begin{itemize}
+    \item \textbf{The Curious Beginner:} Aditi is a 19-year-old college student who represents the non-technical beginner dealing with everyday digital privacy decisions. Aditi genuinely wants to learn how security works, and she knows basic things like checking for \texttt{HTTPS}, but she gets immediately intimidated by heavy technical jargon like \texttt{DNS}, \texttt{AES}, metadata, or phishing whenever she opens a normal tutorial.
+    \item \textbf{The Say-Do Gap:} Aditi claims curiosity (like 71 out of 130 students in our survey) and says security matters, but she rarely checks her own digital footprint in practice (75 out of 130). The main barrier is that she does not know where to find reliable resources (29.5\%). On top of that, she fears feeling judged in online tech communities, so she avoids asking questions and stays exposed to corporate data mining.
+\end{itemize}
 
 \subsection{Define Phase}
-During the Define phase, our team sat down to look at all the problems we found in the Empathy stage. Initially, our rough problem paragraph was simply: \textit{``People do not know cybersecurity because it is hard, so we want to make an easy CTF website with four topics.''}
+In the Define phase, our team sat together and looked at what the survey and Aditi's persona were actually telling us. At the start of the semester, our rough idea was just: \textit{``People do not know cybersecurity because it is hard, so let's make an easy CTF website.''}
 
-After reviewing our survey numbers and interview quotes, we realized that ``making an easy CTF'' was too vague. The real issue was the combination of corporate black-box deception, setup friction, and isolated puzzles that fail to build momentum. We refined our findings into the following focused \textbf{Problem Statement}:
+Once we saw the ``Say-Do Gap'' in our 130 survey responses, we realized that just making puzzles easier was not enough. People are already curious, but they stop because they do not know where to find trustworthy beginner resources, they hate unexplained jargon, and they do not want to install complicated IT tools. We narrowed this down into our final \textbf{Problem Statement}:
 
 \begin{quote}
-\textit{``Everyday internet users and non-technical students skip learning basic digital safety because traditional cybersecurity platforms require virtual machines, local command-line tools, and prior technical background. This knowledge gap allows corporations to exploit consumer privacy through deceptive black-box interfaces and weak security defaults, while leaving users vulnerable to real-world hackers. How might we design a zero-installation, 100\% in-browser CTF platform that combines plain-English textbooks with linked, story-driven investigation chains to turn complete beginners into curious, self-reliant digital investigators?''}
+\textit{``Curious, non-technical beginners like Aditi want to understand digital privacy, yet more than half never check their own digital footprint because they lack a single trustworthy beginner resource, feel locked out by unexplained jargon like DNS or AES, and assume security tools require an IT background. This gap lets corporations quietly mine consumer data and leaves everyday users vulnerable to attacks. How might we build a friendly, zero-installation, 100\% in-browser CTF platform that pairs plain-English step-by-step explanations with visual, gradual-difficulty puzzles so beginners can build real confidence without feeling judged?''}
 \end{quote}
 
 \subsection{Ideation Phase}
 
 \subsubsection{Brainstorming and Mind Mapping}
-Once our problem statement was locked in, the four of us brainstormed how to make the platform genuinely fun and educational. We drew a central Mind Map (shown in Fig.~\ref{fig:mind_map}) branching into four core pillars: Story \& Theme, Pedagogical Flow, Zero-Download Tooling, and UI/UX Design.
+Once we had a clear problem statement, the four of us brainstormed how to build a platform that directly solves Aditi's pains and delivers her gains. We sketched out a Mind Map (shown in Fig.~\ref{fig:mind_map}) split into four main parts: Anti-Corpo Story, 2+5 Gradual Flow, Zero-Install Learning, and Terminal UI.
 
 \begin{figure}[!htbp]
 \centering
@@ -381,38 +399,38 @@ Once our problem statement was locked in, the four of us brainstormed how to mak
     \draw (b4) -- (l4a); \draw (b4) -- (l4b);
 \end{tikzpicture}%
 }
-\caption{Ideation mind map organizing the core pillars of Cyber Awareness Academy.}
+\caption{Ideation mind map organizing the four main parts of Cyber Awareness Academy.}
 \label{fig:mind_map}
 \end{figure}
 
 \subsubsection{Application of the SCAMPER Method}
-To push our ideas further and make sure we were not just copying existing websites, we applied the \textbf{SCAMPER} ideation technique to traditional CTF platforms:
+We also used the \textbf{SCAMPER} method to rethink how a normal CTF works and make it fit a beginner like Aditi:
 \begin{itemize}
-    \item \textbf{Substitute:} We substituted local command-line tools (like Linux \texttt{steghide}, \texttt{xxd}, and \texttt{john}) with free, instant browser-based web utilities (CyberChef, Photopea, HexEd.it, CrackStation, and Academo).
-    \item \textbf{Combine:} We combined the live CTF challenge arena with an interactive slide-out textbook drawer (\texttt{TextbookPanel.js}) on the exact same screen, so students can read the theory and solve the puzzle side by side.
-    \item \textbf{Adapt:} We adapted real-world corporate surveillance scandals and historical breaches (like the 2012 LinkedIn unsalted hash leak and the Strava military heatmap leak) into beginner-friendly stories about infiltrating \textit{EvilCorp}.
-    \item \textbf{Modify:} We modified the standard flat list of questions into our \textbf{2+5 structure} (two easy warm-ups, a dotted line divider, and five chained questions where each answer feeds into the next). We also modified the UI from a generic rounded website into a sharp Gruvbox Dark terminal theme with cute ASCII cats.
-    \item \textbf{Put to another use:} We put everyday social media platforms (Instagram search, YouTube community posts, Google Maps library timings, and Google Lens) to use as live forensic investigation tools in our OSINT arena.
-    \item \textbf{Eliminate:} We completely eliminated virtual machines, OpenVPN setup files, user login walls, and complex database server configurations by using an auto-seeding embedded SQLite file (\texttt{ctf.db}) and a forgiving flag normalizer.
-    \item \textbf{Reverse:} Instead of making the user defend a fictional company like most corporate training courses do, we reversed the perspective: the player acts as a rebel investigator exposing how \textit{EvilCorp} tricks consumers.
+    \item \textbf{Substitute:} We replaced local Linux command-line tools (like \texttt{steghide}, \texttt{xxd}, and \texttt{john}) with free, browser-based tools (CyberChef, Photopea, HexEd.it, CrackStation, and Academo) so nobody has to install anything.
+    \item \textbf{Combine:} We combined the CTF challenge cards with a slide-out textbook panel (\texttt{TextbookPanel.js}) on the exact same page, including a ``Jargon Buster'' box that explains terms like DNS, AES, EXIF, and SQL in plain words.
+    \item \textbf{Adapt:} We adapted real-world privacy leaks (like the 2012 LinkedIn unsalted hash breach and the Strava fitness heatmap leak) into our story about exposing \textit{EvilCorp}.
+    \item \textbf{Modify:} We changed the usual flat list of puzzles into our \textbf{2+5 format} (two easy warm-ups, a dotted line divider, and five connected questions that get slightly trickier step by step). We also modified the design into a clean Gruvbox Dark terminal look with friendly ASCII cats.
+    \item \textbf{Put to another use:} We used everyday websites that students already know (Instagram search, YouTube community posts, Google Maps library timings, and Google Lens) as investigation tools in our OSINT arena.
+    \item \textbf{Eliminate:} We got rid of virtual machines, OpenVPN files, sign-up forms, and complicated database setup by using a self-seeding SQLite file (\texttt{ctf.db}) and a forgiving answer checker.
+    \item \textbf{Reverse:} Instead of asking the student to defend a company like boring corporate training videos do, we flipped the role: the player investigates how \textit{EvilCorp} abuses user trust.
 \end{itemize}
 
 \clearpage
 \subsection{Prototyping Phase}
 
 \subsubsection{Low-Fidelity Prototype and UI Evolution}
-When we built our first low-fidelity prototype and initial React wireframe, we made a mistake that many student projects make. Our first version had overly rounded boxes around every single label, bright neon borders, and three little dots in the top corner of the window that made it look like a fake macOS screen. Honestly, when we looked at it together, we realized it looked too artificial and cluttered. Furthermore, we initially only had live questions for one domain while leaving the others as static wireframes.
+When we made our first prototype in React, we fell into a trap that a lot of student web projects fall into. Our early version had big rounded borders around every tiny piece of text, glowing neon outlines, and three fake macOS window dots in the corner of every box. When we looked at it honestly, it looked artificial and messy. Also, in our earliest build, we only had one domain working while the others were just placeholder cards.
 
-We went back to the drawing board and redesigned the interface:
+We decided to clean up the whole design and build out all four domains properly:
 \begin{enumerate}
-    \item We stripped away the fake macOS window dots and reduced the excessive boxing so that cards are only used for actual questions and mission dossiers that matter.
-    \item We flattened the border radiuses to crisp, rectangular terminal edges using the \textbf{Gruvbox Dark} color palette (\texttt{index.css} and \texttt{App.css}) with \texttt{Fira Code} monospace fonts.
-    \item We added custom monospace ASCII art companions (\texttt{ascii.js}) across the pages to make the terminal feel cute and welcoming rather than cold.
-    \item We retained our structured 7-question wireframe model in \texttt{WireframeChallenges.js} to demonstrate how new curriculum modules (such as Web Security) are prototyped before connecting live downloadable assets.
+    \item We removed the fake macOS window dots and extra wrapper boxes so that borders are only used for actual question cards and briefings.
+    \item We switched to sharp rectangular terminal corners using the \textbf{Gruvbox Dark} color scheme (\texttt{index.css} and \texttt{App.css}) and \texttt{Fira Code} monospace text.
+    \item We added cute ASCII cat companions (\texttt{ascii.js}) so the dark screen still feels welcoming and fun for someone who is nervous about tech.
+    \item We built all four domains into complete 7-question arenas (\texttt{Challenges.js}, \texttt{StegChallenges.js}, \texttt{CryptoChallenges.js}, and \texttt{WebSecChallenges.js}), including downloadable evidence files in \texttt{/public/steg/} and seven live EvilCorp webpages in \texttt{/public/websec/}.
 \end{enumerate}
 
 \subsubsection{Final Prototype Architecture and Tech Stack}
-The final prototype is a full-stack web application split between a \textbf{React 19} single-page frontend (running on port \texttt{3000}) and a \textbf{Node.js HTTP REST API} backend (\texttt{server.js} running on port \texttt{3001}) connected to an embedded \textbf{SQLite3} database (\texttt{ctf.db}). Fig.~\ref{fig:system_pipeline} illustrates the complete validation and state synchronization pipeline across the application.
+Our final application uses a \textbf{React 19} frontend (running on port \texttt{3000}) talking to a \textbf{Node.js HTTP REST API} backend (\texttt{server.js} on port \texttt{3001}) backed by an embedded \textbf{SQLite3} database (\texttt{ctf.db}). Fig.~\ref{fig:system_pipeline} shows how user answers flow through the system and update the interface.
 
 \begin{figure}[!htbp]
 \centering
@@ -445,30 +463,30 @@ The final prototype is a full-stack web application split between a \textbf{Reac
     \draw[arrow] (state) -- (end);
 \end{tikzpicture}%
 }
-\caption{Cyber Awareness Academy full-stack validation and state synchronization pipeline.}
+\caption{Cyber Awareness Academy full-stack answer checking and score update flow.}
 \label{fig:system_pipeline}
 \end{figure}
 
-When a user types an answer and hits \texttt{Enter} or clicks \texttt{[Submit]}, the frontend normalizer strips outer spaces, converts characters to lowercase, and checks both \texttt{CAT\{...\}} and \texttt{CTF\{...\}} wrappers alongside beginner-friendly raw answers. It simultaneously sends a \texttt{POST} request to \texttt{/api/validate-single} on port \texttt{3001}, where \texttt{server.js} queries the \texttt{ctf\_answers} table in \texttt{ctf.db}. As soon as a flag is marked correct, \texttt{App.js} updates the domain's solved count in real time so that the progress bar on the main dashboard reflects the new percentage immediately.
+When a player types an answer and hits \texttt{Enter} or clicks \texttt{[Submit]}, our input checker trims extra spaces, ignores capital letters, and accepts both \texttt{CAT\{...\}} and raw answers so beginners never fail just because of a bracket typo. At the same time, it sends a \texttt{POST} request to \texttt{/api/validate-single} on port \texttt{3001}, where \texttt{server.js} checks the \texttt{ctf\_answers} table in \texttt{ctf.db}. Once a question is marked solved, \texttt{App.js} immediately updates that domain's score so the progress bar on the main dashboard stays accurate.
 
 \subsubsection{Offline Installation and Quickstart Guide (From GitHub README)}
-Right now, the project is built as an offline-capable local implementation so that anyone can run it on their laptop without needing internet hosting or cloud database credentials. Later on, we plan to deploy this exact codebase onto our own Linux server. As documented in our GitHub repository's \texttt{README.md}, getting the platform running locally takes four simple steps:
+Right now, our project runs as an offline-capable local setup so anyone can clone it and test it on their own machine without needing cloud keys or internet hosting. Later, we plan to put it on our own Linux server. As written in our GitHub \texttt{README.md}, running the app locally takes four quick steps:
 
 \begin{enumerate}
     \item \textbf{Prerequisites:} Install Node.js (v16 or newer) from \url{https://nodejs.org}.
-    \item \textbf{Clone and Install:} Clone the repo and install the required npm packages:
+    \item \textbf{Clone and Install:} Clone the repository and install the npm packages:
     \codebox{PowerShell / Terminal :: Step 1 \& 2}{
     \$ git clone https://github.com/Aweek07/CTF\_PROJECT.git\\
     \$ cd CTF\_PROJECT\\
     \$ npm install
     }
-    \item \textbf{Start the SQLite Backend Server (Terminal 1):} Run \texttt{node server.js}. It boots on port \texttt{3001} and automatically creates and seeds \texttt{ctf.db} with all 28 domain flags:
+    \item \textbf{Start the SQLite Backend Server (Terminal 1):} Run \texttt{node server.js}. It starts on port \texttt{3001} and automatically creates and seeds \texttt{ctf.db} with all 28 domain flags:
     \codebox{Terminal 1 :: Backend API \& SQLite Seeding}{
     \$ node server.js\\
     SQLite database initialized with Anti-Corpo CAT\{...\} challenges.\\
     Backend server running on http://localhost:3001
     }
-    \item \textbf{Launch the React Frontend (Terminal 2):} Open a second terminal and run \texttt{npm start} to open the application at \texttt{http://localhost:3000}:
+    \item \textbf{Launch the React Frontend (Terminal 2):} Open a second terminal and run \texttt{npm start} to open the app in your browser at \texttt{http://localhost:3000}:
     \codebox{Terminal 2 :: React Gruvbox Terminal UI}{
     \$ npm start\\
     Compiled successfully! Local: http://localhost:3000
@@ -476,27 +494,27 @@ Right now, the project is built as an offline-capable local implementation so th
 \end{enumerate}
 
 \subsubsection{Page-by-Page Walkthrough and Platform Features}
-Every page in the application was built with a specific purpose to guide a newcomer from zero knowledge to solving chained challenges:
+We designed every screen in the app to make sure a beginner like Aditi feels guided from the moment she opens the site:
 
 \begin{enumerate}
-    \item \textbf{Terminal Navigation Bar (\texttt{NavBar.js}):} A sticky top bar that shows a live Unix shell path matching the user's current screen (for example, \texttt{guest@cyber-academy:\allowbreak\textasciitilde/dashboard/\allowbreak stego/arena\$}). During active challenges, it displays a live \texttt{[SOLVED: X/7]} counter and a running mission stopwatch. We also wired \texttt{App.js} into the browser's native history API (\texttt{window.history.pushState}) so the browser Back and Forward buttons work naturally across every page.
-    \item \textbf{The Anti-Corpo Manifesto (\texttt{HomePage.js}):} The landing page greets the player with an ASCII art banner and a waving cat mascot. It explains three things in plain language: \textit{01. The Illusion of Digital Safety} (how tech companies profit from user naivety), \textit{02. What is a Capture The Flag (CTF)?}, and \textit{03. Our Aim: Cyber Awareness for Everyone}.
-    \item \textbf{Guided Flag Calibration Tutorial (\texttt{Onboarding.js}):} Before letting a beginner into the real arenas where they might get confused by syntax, this 3-question sandbox trains them on how flags work:
+    \item \textbf{Terminal Navigation Bar (\texttt{NavBar.js}):} A top bar that shows a live terminal path matching whichever page the player is on (such as \texttt{guest@cyber-academy:\allowbreak\textasciitilde/dashboard/\allowbreak websec/arena\$}). Inside an arena, it shows a live \texttt{[SOLVED: X/7]} counter and a timer. We also connected \texttt{App.js} to \texttt{window.history.pushState} so the normal browser Back and Forward buttons work smoothly between pages.
+    \item \textbf{The Anti-Corpo Manifesto (\texttt{HomePage.js}):} The home screen welcomes the user with an ASCII banner and a waving cat mascot. It explains our mission in three short blocks: \textit{01. The Illusion of Digital Safety} (how big companies take advantage of regular users), \textit{02. What is a Capture The Flag (CTF)?}, and \textit{03. Our Aim: Cyber Awareness for Everyone}.
+    \item \textbf{Guided Flag Calibration Tutorial (\texttt{Onboarding.js}):} Before sending a new user into the main challenges, this 3-step practice page lets them test how flags work:
     \begin{itemize}[noitemsep]
-        \item \textit{Drill 1:} Submitting \texttt{CAT\{welcome\_to\_cybersec\}} to learn the bracket format.
-        \item \textit{Drill 2:} Submitting \texttt{CAT\{look\_beneath\_the\_surface\}} to practice underscores and exact letter casing.
-        \item \textit{Drill 3:} Submitting \texttt{CAT\{ready\_to\_hack\}} to unlock the main dashboard.
+        \item \textit{Drill 1:} Entering \texttt{CAT\{welcome\_to\_cybersec\}} to see how the \texttt{CAT\{...\}} brackets work.
+        \item \textit{Drill 2:} Entering \texttt{CAT\{look\_beneath\_the\_surface\}} to practice underscores.
+        \item \textit{Drill 3:} Entering \texttt{CAT\{ready\_to\_hack\}} to unlock the main dashboard.
     \end{itemize}
-    It includes an \texttt{[Auto-fill]} button and instant feedback so nobody gets left behind.
-    \item \textbf{Cybersecurity Domains Dashboard (\texttt{MainPage.js}):} Displays the four main discipline cards (\textbf{OSINT}, \textbf{Steganography}, \textbf{Cryptography}, and \textbf{Web Security}). Each card shows custom ASCII art, required browser tools, covered topics, and a live progress bar (\texttt{Solved: X/7}) that updates the instant a question is solved inside any arena.
-    \item \textbf{Discipline Mission Dossiers (\texttt{DomainPage.js}):} Clicking a domain opens its briefing dossier before the questions start. It breaks down what the field is, how professionals use it in the real world, a red \texttt{[!] Threat Profile} warning explaining how consumers get hurt by this vector, and the recommended toolkit.
-    \item \textbf{The Slide-Out Field Manual (\texttt{TextbookPanel.js} \& \texttt{textbookData.js}):} Every challenge card has a purple \texttt{[Theory]} button. Clicking it slides out a detailed chapter from the left side of the screen. We wrote 28 chapters in \texttt{textbookData.js} specifically so they read like an interesting guide rather than a dull textbook. Each chapter includes a plain-English explanation, a simple analogy for non-tech people, a famous real-world case study, a step-by-step solving guide, a jargon buster dictionary, and direct links to open the required online tool.
-    \item \textbf{Mission Accomplished Debrief (\texttt{EndPage.js}):} When a player finishes an arena, this screen celebrates with an ASCII trophy cat, displays their total time taken and final score out of 7, summarizes the security takeaway, and credits the team.
+    It even has an \texttt{[Auto-fill]} button so nobody gets stuck on the tutorial.
+    \item \textbf{Cybersecurity Domains Dashboard (\texttt{MainPage.js}):} Shows the four main arena cards (\textbf{OSINT}, \textbf{Steganography}, \textbf{Cryptography}, and \textbf{Web Security}). Each card displays custom ASCII art, the free browser tools used inside, the topics covered, and a live progress bar (\texttt{Solved: X/7}).
+    \item \textbf{Discipline Mission Dossiers (\texttt{DomainPage.js}):} Clicking any domain card opens a short mission briefing before the questions begin. It explains what the topic means in simple terms, how professionals use it, a red \texttt{[!] Threat Profile} box showing how regular people get affected by it, and the tools needed.
+    \item \textbf{The Slide-Out Field Manual (\texttt{TextbookPanel.js} \& \texttt{textbookData.js}):} Because our survey showed that 29.5\% of beginners do not know where to find reliable resources and hate heavy jargon, every single question card has a purple \texttt{[Theory]} button. Clicking it slides open a chapter written specifically for that question (28 chapters in total). Each chapter explains the concept in plain language, gives a simple everyday analogy, shares a real-world story, lists step-by-step instructions, and includes a Jargon Buster dictionary.
+    \item \textbf{Mission Accomplished Debrief (\texttt{EndPage.js}):} Once a user finishes an arena, this page rewards them with an ASCII trophy cat, shows their final time and score out of 7, recaps what they learned, and lists our team credits.
 \end{enumerate}
 
 \clearpage
 \subsubsection{Comprehensive CTF Writeups and Learning Breakdown}
-Across all of our CTF domains, we used a strict \textbf{2+5 question layout} (shown in Fig.~\ref{fig:chain_flow}). Questions 1 and 2 are simple, standalone warm-ups so the player gets two quick wins right away. After a dotted line divider, Questions 3 to 7 form a connected 5-stage chain where each answer gives you the clue, password, or shift key needed to solve the next question.
+Every arena in our project follows the same \textbf{2+5 layout} (shown in Fig.~\ref{fig:chain_flow}). Questions 1 and 2 are easy, unrelated warm-ups so a beginner can get two quick wins and understand the flow. Below a dotted divider line, Questions 3 to 7 are all connected in a 5-stage story chain where solving one question gives you the clue, password, or ID needed for the next one.
 
 \begin{figure}[!htbp]
 \centering
@@ -517,62 +535,62 @@ Across all of our CTF domains, we used a strict \textbf{2+5 question layout} (sh
     \draw[arrow] (s3) -- (rh);
 \end{tikzpicture}%
 }
-\caption{The 2+5 challenge progression from warm-up drills to connected investigation stages.}
+\caption{The 2+5 challenge flow from warm-up drills to connected investigation stages.}
 \label{fig:chain_flow}
 \end{figure}
 
-Below is the complete writeup of how to solve every single challenge across our arenas and how each one teaches a lasting lesson.
+Below is the step-by-step writeup for all four arenas and how each puzzle helps a beginner learn.
 
 \paragraph{A. Open Source Intelligence (OSINT) Arena (\texttt{Challenges.js})}
-The OSINT arena shows players how tiny public clues scattered across maps, network registries, Instagram, and YouTube can be connected to uncover a person's identity and daily routine.
+The OSINT arena shows players how public details left on maps, network records, Instagram, and YouTube can be pieced together to track a real person's routine.
 \begin{itemize}
-    \item \textbf{Q1: Coordinates (Warm-Up 1):} The prompt gives the coordinates \texttt{48.8584, 2.2945} and asks for the landmark. Pasting those numbers into Google Maps drops a pin directly on the Eiffel Tower in Paris, giving the flag \textbf{\texttt{CAT\{eiffeltower\}}}. \textit{How it teaches:} It takes ten seconds to solve, demystifies GPS numbers, and makes players realize that camera EXIF data stores these exact coordinates on their own phone photos.
-    \item \textbf{Q2: Who Owns This IP? (Warm-Up 2):} The prompt asks which company operates the IP address \texttt{8.8.8.8}. Looking up \texttt{8.8.8.8} on \texttt{ipinfo.io} or any WHOIS database shows it belongs to Google's public DNS (\texttt{AS15169}), yielding \textbf{\texttt{CAT\{google\}}}. \textit{How it teaches:} It shows that IP addresses are publicly registered to real organizations and sparks curiosity about how DNS resolvers see every website you visit.
-    \item \textit{--- Dotted Line Divider (Start of 5-Stage Linked Investigation) ---}
-    \item \textbf{Q3: The Target Profile (Chain Stage 1):} Players are asked to find ``a guy who hates to click photos'' on Instagram and identify what sport he watches. Searching that phrase on Instagram surfaces the target account, where his posts and story highlights clearly show football matches, giving \textbf{\texttt{CAT\{football\}}}. \textit{How it teaches:} Even an account that avoids posting selfies still leaks personal interests that social engineers use to build rapport.
-    \item \textbf{Q4: Pattern of Life (Chain Stage 2):} Looking across the location tags on the same Instagram account, players notice one Mumbai neighborhood appears repeatedly: Churchgate (\textbf{\texttt{CAT\{church\_gate\}}}). \textit{How it teaches:} A single geotag shows where you stood once, but repeated geotags map out your daily habits and hangout spots, just like the famous Strava military base heatmap leak discussed in our textbook panel.
-    \item \textbf{Q5: The Start (Chain Stage 3):} The prompt asks for the location of the very first photo he ever posted. Scrolling to the bottom of his feed reveals a photo with no obvious location tag. Taking a screenshot and dropping it into \textbf{Google Lens} matches the stone domes and murals to the Beatles Ashram (Chaurasi Kutia) in Rishikesh, yielding \textbf{\texttt{CAT\{beatlesashram\}}}. \textit{How it teaches:} Stripping a location tag does not hide where a photo was taken if distinctive buildings or landmarks are visible in the background.
-    \item \textbf{Q6: The Connection (Chain Stage 4):} Players must find the account owner's real first name. By taking his Instagram handle and searching it on Google and YouTube, players find a YouTube community post linked to the same username that mentions his real first name, Abhyudaya (\textbf{\texttt{CAT\{abhyudaya\}}}). \textit{How it teaches:} This shows how easily accounts can be linked across different websites. Almost everyone reuses the same gamer tag or handle across apps, meaning one post with your real name on one site unmasks your anonymous accounts everywhere else.
-    \item \textbf{Q7: The Final Clue (Chain Stage 5):} Players inspect the latest photo posted on the account, identify the neighborhood, find the public library in that area on Google Maps, and check its regular Monday opening and closing hours in 24-hour format to get \textbf{\texttt{CAT\{9:30-19:00\}}}. \textit{How it teaches:} It shows how open-source investigators combine social media photos with public municipal records to verify real-world physical schedules.
+    \item \textbf{Q1: Coordinates (Warm-Up 1):} The question gives the coordinates \texttt{48.8584, 2.2945} and asks what famous landmark is there. Pasting those numbers into Google Maps drops a pin right on the Eiffel Tower in Paris, giving the flag \textbf{\texttt{CAT\{eiffeltower\}}}. \textit{How it helps beginners:} It takes ten seconds to solve and makes players realize that phone cameras save these exact GPS numbers inside photo files.
+    \item \textbf{Q2: Who Owns This IP? (Warm-Up 2):} Players are asked which company runs the IP address \texttt{8.8.8.8}. Searching \texttt{8.8.8.8} on \texttt{ipinfo.io} shows it belongs to Google (\texttt{AS15169}), giving \textbf{\texttt{CAT\{google\}}}. \textit{How it helps beginners:} It shows that IP addresses are registered to real companies and explains what a DNS server actually does when you type a website name.
+    \item \textit{Dotted Line Divider (Start of 5-Stage Connected OSINT Investigation)}
+    \item \textbf{Q3: The Target Profile (Chain Stage 1):} Players search Instagram for ``a guy who hates to click photos'' and check what sport he follows. Finding the account and looking at his posts and highlights shows football matches, giving \textbf{\texttt{CAT\{football\}}}. \textit{How it helps beginners:} Even someone who never posts their own face still reveals personal interests that scammers use to start fake conversations.
+    \item \textbf{Q4: Pattern of Life (Chain Stage 2):} Checking the location tags across his Instagram posts shows one Mumbai area popping up again and again: Churchgate (\textbf{\texttt{CAT\{church\_gate\}}}). \textit{How it helps beginners:} Tagging a place once shows where you visited, but tagging places every week maps out your daily routine, just like the Strava army base heatmap leak we explain in the theory tab.
+    \item \textbf{Q5: The Start (Chain Stage 3):} The question asks for the location of his very first Instagram post, which has no location tag. Taking a screenshot of the photo and searching it with \textbf{Google Lens} matches the painted domes to the Beatles Ashram in Rishikesh, giving \textbf{\texttt{CAT\{beatlesashram\}}}. \textit{How it helps beginners:} It proves that deleting a location tag does not hide where you are if landmarks are visible behind you.
+    \item \textbf{Q6: The Connection (Chain Stage 4):} Players need to find the target's real first name. Searching his Instagram username across Google and YouTube turns up a YouTube community post tied to the same handle that mentions his first name, Abhyudaya (\textbf{\texttt{CAT\{abhyudaya\}}}). \textit{How it helps beginners:} Almost everyone reuses the same username across apps, so mentioning your real name on one site connects back to all your other accounts.
+    \item \textbf{Q7: The Final Clue (Chain Stage 5):} Players check the newest photo on the account, figure out the neighborhood, find the public library in that area on Google Maps, and look up its Monday timings in 24-hour format to get \textbf{\texttt{CAT\{9:30-19:00\}}}. \textit{How it helps beginners:} It shows how investigators combine social media posts with public map listings to confirm real-world timings.
 \end{itemize}
 
 \paragraph{B. Steganography Arena (\texttt{StegChallenges.js})}
-The Steganography arena follows an insider whistleblower leaking files out of \textit{EvilCorp}. Every question has a downloadable evidence file hosted in \texttt{/public/steg/}.
+The Steganography arena follows an insider sneaking secret files out of \textit{EvilCorp}. Every question has a downloadable file in \texttt{/public/steg/}.
 \begin{itemize}
-    \item \textbf{Q1: Evil Terms of Service (Warm-Up 1):} Players download \texttt{Evil\_Terms\_\allowbreak Of\_Service.docx}, which says you give up all rights by scrolling to the bottom. Selecting the whole page (\texttt{Ctrl+A}) and changing the font color to a dark shade reveals hidden white-on-white text at the end: \textbf{\texttt{CAT\{but\_i\_refuse\}}}. \textit{How it teaches:} It shows how files can hide invisible text streams, which connects directly to how people hide invisible prompts inside PDFs and webpages today.
-    \item \textbf{Q2: Evil Mug (Warm-Up 2):} Players download \texttt{evil\_mug.jpg}, a harmless-looking photo of a company mug. Checking the file's EXIF metadata (via Windows \texttt{Properties -> Details} or online at \texttt{exif.tools}) reveals a note in the \texttt{Comments} field: \textbf{\texttt{CAT\{detailed\_\allowbreak search\}}}. \textit{How it teaches:} It proves that image files carry invisible text headers alongside the visible picture.
-    \item \textit{--- Dotted Line Divider (Start of 5-Stage Whistleblower Chain) ---}
-    \item \textbf{Q3: BLACKBOOK (Chain Stage 1):} The file \texttt{blackbook.png} looks like a completely blank black rectangle. Opening it in \textbf{Photopea} (\texttt{photopea.com}) and dragging the Brightness/Levels slider all the way up illuminates dark text (\texttt{RGB(4,4,4)} on \texttt{RGB(0,0,0)}) that reads \textbf{\texttt{CAT\{l1ghtw0rks\}}}. \textit{How it teaches:} What looks pitch black to human eyes still holds different pixel numbers in computer memory, which is why poorly redacted screenshots often leak secrets when brightened.
-    \item \textbf{Q4: Gimmick Boss (Chain Stage 2):} In \texttt{gimmick\_boss.jpg}, checking the EXIF comment first gives the clue \texttt{password:lifeisajoke}. Uploading the photo to an online \textbf{Steghide} extractor with the password \texttt{lifeisajoke} pulls out a hidden text file ending with a line of 8-bit binary. Converting that binary to ASCII gives \textbf{\texttt{CAT\{whysoserious\}}}. \textit{How it teaches:} Players learn how Steghide hides encrypted files inside the Least Significant Bits (LSB) of an image and how binary bytes map to letters.
-    \item \textbf{Q5: EvilChair (Chain Stage 3):} The photo \texttt{evilchair.jpg} shows an office chair, but opening the file in the online hex editor \textbf{HexEd.it} (or running \texttt{strings}) and scrolling to the very bottom shows extra text pasted right after the JPEG End-Of-Image bytes (\texttt{FF D9}): \textbf{\texttt{CAT\{saveaseat\}}}. \textit{How it teaches:} Normal photo viewers stop reading a file the instant they hit the \texttt{FF D9} closing bytes, meaning whole messages or zip files can be piggybacked onto the tail end of an image.
-    \item \textbf{Q6: EvilCorp Memory Wipe (Chain Stage 4):} Players download the audio broadcast \texttt{memory\_wipe.wav}. The prompt warns them not to listen to it, but to \textit{look} at it. Uploading the audio to an online \textbf{Spectrogram Viewer} (like Academo) displays the sound frequencies between 5 kHz and 15 kHz, where the sound waves visually spell out \textbf{\texttt{cat\{waverunner\}}}. \textit{How it teaches:} Seeing words drawn inside sound waves is an unforgettable moment that introduces students to audio forensics and Fast Fourier Transforms (FFT).
-    \item \textbf{Q7: tryfindme (Chain Stage 5):} The final image, \texttt{tryfindme.jpg}, has a metadata note saying the password is hidden inside the picture itself. Brightening the image in Photopea reveals a faint \texttt{0004} below the silhouettes. Using \texttt{0004} as the Steghide password extracts a hidden file containing \texttt{Q0FUe3lvdWZvdW5kbWUhfQ==}, which decodes from Base64 into \textbf{\texttt{CAT\{youfoundme!\}}}. \textit{How it teaches:} It ties together metadata inspection, brightness shifting, Steghide extraction, and Base64 decoding into one smooth workflow.
+    \item \textbf{Q1: Evil Terms of Service (Warm-Up 1):} Players download \texttt{Evil\_Terms\_\allowbreak Of\_Service.docx}, which claims you sign away your rights by scrolling to the bottom. Pressing \texttt{Ctrl+A} to highlight all text and changing the font color reveals white text hidden on the white page: \textbf{\texttt{CAT\{but\_i\_refuse\}}}. \textit{How it helps beginners:} It shows how documents can hide invisible text right in front of you.
+    \item \textbf{Q2: Evil Mug (Warm-Up 2):} Players download \texttt{evil\_mug.jpg}, a normal picture of a coffee mug. Checking the file's EXIF details (using Windows \texttt{Properties -> Details} or \texttt{exif.tools}) shows a hidden note in the \texttt{Comments} tag: \textbf{\texttt{CAT\{detailed\_\allowbreak search\}}}. \textit{How it helps beginners:} It shows that photos carry hidden text tags like camera model, date, and comments along with the picture.
+    \item \textit{Dotted Line Divider (Start of 5-Stage Whistleblower Chain)}
+    \item \textbf{Q3: BLACKBOOK (Chain Stage 1):} The file \texttt{blackbook.png} looks like a plain black square. Opening it in \textbf{Photopea} (\texttt{photopea.com}) and dragging the Brightness/Levels slider up lights up dark grey letters (\texttt{RGB(4,4,4)} on \texttt{RGB(0,0,0)}) spelling \textbf{\texttt{CAT\{l1ghtw0rks\}}}. \textit{How it helps beginners:} It teaches why blacking out sensitive info in a screenshot with a semi-transparent brush is dangerous because anyone can brighten the image to read what was underneath.
+    \item \textbf{Q4: Gimmick Boss (Chain Stage 2):} In \texttt{gimmick\_boss.jpg}, checking the EXIF comment first gives \texttt{password:lifeisajoke}. Entering \texttt{lifeisajoke} into an online \textbf{Steghide} extractor pulls out a hidden text file ending with 8-bit binary numbers. Converting that binary to text gives \textbf{\texttt{CAT\{whysoserious\}}}. \textit{How it helps beginners:} Players see how password-protected files can be tucked inside image pixels and how binary numbers turn into letters.
+    \item \textbf{Q5: EvilChair (Chain Stage 3):} The photo \texttt{evilchair.jpg} shows an office chair, but opening it in the browser hex editor \textbf{HexEd.it} and scrolling to the bottom shows plain text written right after the JPEG end marker (\texttt{FF D9}): \textbf{\texttt{CAT\{saveaseat\}}}. \textit{How it helps beginners:} Photo apps stop reading a JPEG once they hit \texttt{FF D9}, so extra data pasted at the very end stays invisible in normal gallery apps.
+    \item \textbf{Q6: EvilCorp Memory Wipe (Chain Stage 4):} Players download the audio file \texttt{memory\_wipe.wav}. Following the hint to \textit{look} at the sound instead of just listening, uploading it to an online \textbf{Spectrogram Viewer} (Academo) shows the flag drawn inside the sound waves between 5 kHz and 15 kHz: \textbf{\texttt{cat\{waverunner\}}}. \textit{How it helps beginners:} Seeing words drawn inside sound frequencies is a really cool moment that gets beginners interested in audio forensics.
+    \item \textbf{Q7: tryfindme (Chain Stage 5):} The last file, \texttt{tryfindme.jpg}, has a metadata note saying the password is in the photo itself. Brightening the photo in Photopea reveals the number \texttt{0004}. Using \texttt{0004} as the Steghide password extracts a text file containing \texttt{Q0FUe3lvdWZvdW5kbWUhfQ==}, which decodes from Base64 into \textbf{\texttt{CAT\{youfoundme!\}}}. \textit{How it helps beginners:} It brings together metadata checking, brightness adjustment, Steghide extraction, and Base64 decoding in one final puzzle.
 \end{itemize}
 
 \paragraph{C. Cryptography Arena (\texttt{CryptoChallenges.js})}
-The Cryptography arena (\textit{Operation Blackbox}) targets how corporations misuse ``encryption'' as a marketing buzzword while relying on weak keys and unsalted hashes behind the scenes.
+The Cryptography arena (\textit{Operation Blackbox}) shows how companies throw around the word ``encrypted'' while using weak encoding and unsalted password hashes.
 \begin{itemize}
-    \item \textbf{Q1: The Leaked Executive Memo (Warm-Up 1):} EvilCorp directors rotated a memo by 13 letters: \texttt{PNG\{rivypbec\_cevinpl\_vf\_n\_zlgu\}}. Running \textbf{ROT13} in CyberChef shifts each letter by 13 places to reveal \textbf{\texttt{CAT\{evilcorp\_privacy\_is\_a\_myth\}}}. \textit{How it teaches:} Introduces alphabet rotation and shows why simple substitution offers zero real security.
-    \item \textbf{Q2: The Fake Telemetry ``Encryption'' (Warm-Up 2):} EvilCorp claims their app telemetry is encrypted, but the string ends with \texttt{==}: \texttt{Q0FUe3RlbGVtZXRyeV9\allowbreak pc19ub3RfZW5jcnlwdGVkfQ==}. Decoding it with \textbf{From Base64} in CyberChef reveals \textbf{\texttt{CAT\{telemetry\_\allowbreak is\_not\_encrypted\}}}. \textit{How it teaches:} Clears up the huge confusion between encoding (which anyone can reverse with no key) and true encryption. After solving this, students start recognizing Base64 strings ending in \texttt{=} inside real web URLs and cookies.
-    \item \textit{--- Dotted Line Divider (Start of 5-Stage Cryptographic Chain) ---}
-    \item \textbf{Q3: The Whistleblower's Hex Packet (Chain Stage 1):} Players decode a raw hexadecimal dump (\texttt{43 41 54 7b ...}) using CyberChef's \textbf{From Hex} tool to get \textbf{\texttt{CAT\{whistleblower\_\allowbreak key\_is\_SHADOWCORP\}}}. This gives them the secret passphrase \texttt{SHADOWCORP}.
-    \item \textbf{Q4: The Encrypted Boardroom Dispatch (Chain Stage 2):} Players take the key \texttt{SHADOWCORP} from Q3 and use it in CyberChef's \textbf{Vigen\`ere Decode} tool on the ciphertext \texttt{UHA\{klsgor\_ewbrh\_gg\_ggnso\}} to unlock \textbf{\texttt{CAT\{caesar\_shift\_is\_seven\}}}. This reveals the shift number \texttt{7} for the next stage.
-    \item \textbf{Q5: Unlocking the Shadow Vault (Chain Stage 3):} Using the shift of \texttt{7} from Q4, players shift \texttt{JHA\{ahynoa\_chbsa\_jlyilybz\}} backward by 7 positions to reveal \textbf{\texttt{CAT\{target\_vault\_cerberus\}}}, uncovering the vault codename \texttt{cerberus}.
-    \item \textbf{Q6: Cracking the CISO's Password Hash (Chain Stage 4):} The vault is locked by an unsalted MD5 hash: \texttt{f6be3f2408481885304a362deafa168a}. Pasting this hash into \textbf{CrackStation} (\texttt{crackstation.net}) searches a massive precomputed rainbow table and cracks the password in less than a second: \texttt{cerberus123} (\textbf{\texttt{CAT\{cerberus123\}}}). \textit{How it teaches:} Watching a 32-character cryptographic hash break instantly because the executive added \texttt{123} to a word without a cryptographic salt permanently changes how students choose their own passwords.
-    \item \textbf{Q7: Neutralizing the Surveillance Master Payload (Chain Stage 5):} The final payload is encrypted with repeating-key XOR using the password from Q6 (\texttt{cerberus123}) and wrapped in Base64. Building a 2-step recipe in CyberChef (\texttt{From Base64} followed by \texttt{XOR} with key \texttt{cerberus123}) unlocks the master flag: \textbf{\texttt{CAT\{evilcorp\_\allowbreak surveillance\_\allowbreak neutralized\_2026\}}}.
+    \item \textbf{Q1: The Leaked Executive Memo (Warm-Up 1):} EvilCorp shifted a memo by 13 letters: \texttt{PNG\{rivypbec\_cevinpl\_vf\_n\_zlgu\}}. Using \textbf{ROT13} in CyberChef shifts every letter back 13 spots to get \textbf{\texttt{CAT\{evilcorp\_privacy\_is\_a\_myth\}}}. \textit{How it helps beginners:} Shows how letter-shifting ciphers work and why they are easy to reverse.
+    \item \textbf{Q2: The Fake Telemetry ``Encryption'' (Warm-Up 2):} EvilCorp claims user tracking data is encrypted, but the string ends with \texttt{==}: \texttt{Q0FUe3RlbGVtZXRyeV9\allowbreak pc19ub3RfZW5jcnlwdGVkfQ==}. Running \textbf{From Base64} in CyberChef immediately turns it back into \textbf{\texttt{CAT\{telemetry\_\allowbreak is\_not\_encrypted\}}}. \textit{How it helps beginners:} Explains the difference between encoding (which needs no key to reverse) and real encryption.
+    \item \textit{Dotted Line Divider (Start of 5-Stage Cryptographic Chain)}
+    \item \textbf{Q3: The Whistleblower's Hex Packet (Chain Stage 1):} Players convert a hexadecimal dump (\texttt{43 41 54 7b ...}) using CyberChef's \textbf{From Hex} block to get \textbf{\texttt{CAT\{whistleblower\_\allowbreak key\_is\_SHADOWCORP\}}}. This gives them the keyword \texttt{SHADOWCORP} for Q4.
+    \item \textbf{Q4: The Encrypted Boardroom Dispatch (Chain Stage 2):} Players enter the key \texttt{SHADOWCORP} from Q3 into CyberChef's \textbf{Vigen\`ere Decode} tool on \texttt{UHA\{klsgor\_ewbrh\_gg\_ggnso\}} to get \textbf{\texttt{CAT\{caesar\_shift\_is\_seven\}}}. This gives the shift number \texttt{7} for Q5.
+    \item \textbf{Q5: Unlocking the Shadow Vault (Chain Stage 3):} Using the shift of \texttt{7} from Q4, players shift \texttt{JHA\{ahynoa\_chbsa\_jlyilybz\}} back by 7 letters to get \textbf{\texttt{CAT\{target\_vault\_cerberus\}}}, revealing the vault name \texttt{cerberus}.
+    \item \textbf{Q6: Cracking the CISO's Password Hash (Chain Stage 4):} The vault uses an unsalted MD5 hash: \texttt{f6be3f2408481885304a362deafa168a}. Pasting this hash into \textbf{CrackStation} (\texttt{crackstation.net}) looks it up in a huge rainbow table and cracks the password in under a second: \texttt{cerberus123} (\textbf{\texttt{CAT\{cerberus123\}}}). \textit{How it helps beginners:} Seeing a 32-character hash break instantly because someone just typed \texttt{123} at the end of a word makes students rethink their own passwords right away.
+    \item \textbf{Q7: Neutralizing the Surveillance Master Payload (Chain Stage 5):} The final payload is locked with repeating-key XOR using the password from Q6 (\texttt{cerberus123}) and encoded in Base64. Stacking \texttt{From Base64} and \texttt{XOR} (with key \texttt{cerberus123}) in CyberChef reveals \textbf{\texttt{CAT\{evilcorp\_\allowbreak surveillance\_\allowbreak neutralized\_2026\}}}.
 \end{itemize}
 
 \paragraph{D. Web Security Arena (\texttt{WebSecChallenges.js} \& \texttt{/public/websec/})}
-Because teaching web security without real webpages feels unnatural, we built 7 standalone EvilCorp target webpages hosted inside \texttt{/public/websec/} that open directly in the player's browser.
+Because learning web security without real webpages feels weird, we built 7 interactive EvilCorp target webpages in \texttt{/public/websec/} that open right in a new browser tab.
 \begin{itemize}
-    \item \textbf{Q1: The Forgotten Developer Note (Warm-Up 1):} Players open \texttt{/websec/\allowbreak q1\_login.html}, right-click the page, and select \textbf{View Page Source} (\texttt{Ctrl+U}). At the bottom of the raw HTML code is a developer comment containing \textbf{\texttt{CAT\{always\_view\_the\_source\}}}. \textit{How it teaches:} Shows beginners that anything sent in HTML source code is visible to the public even if it is hidden on screen.
-    \item \textbf{Q2: Where Search Spiders Fear to Tread (Warm-Up 2):} Players open \texttt{/websec/\allowbreak q2\_robots.txt} to see which folders EvilCorp told Google not to index, revealing \textbf{\texttt{CAT\{robots\_reveal\_secrets\}}}. \textit{How it teaches:} Demonstrates that \texttt{robots.txt} is a public roadmap, not a security lock.
-    \item \textit{--- Dotted Line Divider (Start of 5-Stage Web Infiltration Chain) ---}
-    \item \textbf{Q3: The Greyed-Out Export Button (Chain Stage 1):} On \texttt{/websec/\allowbreak q3\_helpdesk.html}, the export button is locked with the HTML \texttt{disabled} attribute. Players right-click the button, open \textbf{Inspect Element} (\texttt{F12}), delete the word \texttt{disabled}, and click the button to get \textbf{\texttt{CAT\{never\_trust\_the\_client\}}} and the required cookie role \texttt{admin} for Q4.
-    \item \textbf{Q4: The VIP Cookie Jar (Chain Stage 2):} On \texttt{/websec/\allowbreak q4\_dashboard.html}, players elevate their session cookie \texttt{evilcorp\_role} from \texttt{guest} to \texttt{admin} (using either the on-page Cookie Inspector or DevTools Storage) to unlock \textbf{\texttt{CAT\{cookies\_are\_not\_secure\}}} and learn the CEO's Employee ID (\texttt{1042}) for Q5.
-    \item \textbf{Q5: Stepping Into the CEO's Shoes --- IDOR (Chain Stage 3):} Players open \texttt{/websec/\allowbreak q5\_profile.html?id=1001} and change the URL parameter from \texttt{1001} to \texttt{1042} to access the CEO's private dossier, yielding \textbf{\texttt{CAT\{idor\_exposes\_everyone\}}} and the server backup path \texttt{../../etc/\allowbreak evilcorp\_shadow.conf} for Q6.
-    \item \textbf{Q6: Climbing Out of the Web Folder --- Path Traversal (Chain Stage 4):} On \texttt{/websec/\allowbreak q6\_files.html?\allowbreak file=welcome.txt}, players enter \texttt{../../etc/\allowbreak evilcorp\_shadow.conf} to climb out of the public folder, capturing \textbf{\texttt{CAT\{dot\_dot\_slash\_escape\}}} and uncovering the database admin username \texttt{director\_vance} for Q7.
-    \item \textbf{Q7: Breaking the Master Vault with One Quote --- SQL Injection (Chain Stage 5):} On \texttt{/websec/q7\_vault.html}, players enter username \texttt{director\_vance} and inject \texttt{' OR 1=1 --} into the password box while watching the live SQL query monitor evaluate to \texttt{TRUE}, unlocking the master flag \textbf{\texttt{CAT\{sqli\_shatters\_evilcorp\}}}.
+    \item \textbf{Q1: The Forgotten Developer Note (Warm-Up 1):} Players open \texttt{/websec/\allowbreak q1\_login.html}, right-click the page, and click \textbf{View Page Source} (\texttt{Ctrl+U}). At the bottom of the HTML code is a developer comment holding \textbf{\texttt{CAT\{always\_view\_the\_source\}}}. \textit{How it helps beginners:} Shows that anything left inside HTML comments is sent to every visitor's browser.
+    \item \textbf{Q2: Where Search Spiders Fear to Tread (Warm-Up 2):} Players open \texttt{/websec/\allowbreak q2\_robots.txt} to read the file where EvilCorp told search engines which secret folders not to list, finding \textbf{\texttt{CAT\{robots\_reveal\_secrets\}}}. \textit{How it helps beginners:} Shows that \texttt{robots.txt} is a public text file anyone can read, not a security wall.
+    \item \textit{Dotted Line Divider (Start of 5-Stage Web Infiltration Chain)}
+    \item \textbf{Q3: The Greyed-Out Export Button (Chain Stage 1):} On \texttt{/websec/\allowbreak q3\_helpdesk.html}, the export button is locked on screen with the HTML \texttt{disabled} attribute. Players right-click the button, open \textbf{Inspect Element} (\texttt{F12}), delete the word \texttt{disabled}, and click the button to get \textbf{\texttt{CAT\{never\_trust\_the\_client\}}} along with the cookie role \texttt{admin} needed for Q4.
+    \item \textbf{Q4: The VIP Cookie Jar (Chain Stage 2):} On \texttt{/websec/\allowbreak q4\_dashboard.html}, the page checks a plain browser cookie named \texttt{evilcorp\_role}. Players change its value from \texttt{guest} to \texttt{admin} to unlock the executive panel, getting \textbf{\texttt{CAT\{cookies\_are\_not\_secure\}}} and finding the CEO's Employee ID (\texttt{1042}) for Q5.
+    \item \textbf{Q5: Stepping Into the CEO's Shoes (IDOR, Chain Stage 3):} Players open \texttt{/websec/\allowbreak q5\_profile.html?id=1001} and change the number in the address bar from \texttt{1001} to \texttt{1042} (from Q4) to view the CEO's private profile, getting \textbf{\texttt{CAT\{idor\_exposes\_everyone\}}} and the server file path \texttt{../../etc/\allowbreak evilcorp\_shadow.conf} for Q6.
+    \item \textbf{Q6: Climbing Out of the Web Folder (Path Traversal, Chain Stage 4):} On \texttt{/websec/\allowbreak q6\_files.html?\allowbreak file=welcome.txt}, players enter \texttt{../../etc/\allowbreak evilcorp\_shadow.conf} (from Q5) to step out of the public folder and read the server's config file, getting \textbf{\texttt{CAT\{dot\_\allowbreak dot\_\allowbreak slash\_\allowbreak escape\}}} and the database admin username \texttt{director\_vance} for Q7.
+    \item \textbf{Q7: Breaking the Master Vault with One Quote (SQL Injection, Chain Stage 5):} On \texttt{/websec/q7\_vault.html}, players enter \texttt{director\_vance} (from Q6) and type \texttt{' OR 1=1 --} into the password box while watching the live SQL query preview turn green, unlocking the final flag \textbf{\texttt{CAT\{sqli\_shatters\_evilcorp\}}}.
 \end{itemize}
 
 \clearpage
@@ -582,22 +600,22 @@ Because teaching web security without real webpages feels unnatural, we built 7 
 % ==========================================
 \section{Conclusion}
 
-Building \textbf{Cyber Awareness Academy} was a massive learning curve for our entire team, both in terms of software engineering and understanding how regular people think about technology. What started as a simple college project idea turned into a full platform that genuinely changes how newcomers look at their digital privacy.
+Working on \textbf{Cyber Awareness Academy} taught our team a lot, not just about building a full-stack web app, but also about how regular people outside our branch look at technology. What started as a simple college project turned into a full platform that helps beginners get past their fear of cybersecurity.
 
 \subsection{Key Learnings}
-On the technical side, we learned how to wire a full-stack React 19 application to a Node.js REST backend and manage an embedded SQLite3 database (\texttt{ctf.db}) so that it seeds itself automatically without manual setup. We also learned a lot about state management when we had to fix real-time score synchronization so that solving a question inside an arena immediately updates the progress bar on the main dashboard cards. On the design side, stripping away our early rounded boxes and fake macOS window dots in favor of a clean Gruvbox Dark terminal theme taught us that simple, intentional design always beats flashy clutter. Most importantly, watching non-technical friends test our 2+5 chains proved our core idea: when you remove the annoying setup barriers and give people a good story with a clear textbook right next to the puzzle, anyone can learn cybersecurity.
+On the coding side, we learned how to connect a React 19 frontend to a Node.js API server and set up an embedded SQLite3 database (\texttt{ctf.db}) so that it creates and fills its own tables automatically whenever someone runs \texttt{node server.js}. We also learned how to keep React state in sync across pages so that solving a flag inside an arena updates the progress bar on the main dashboard right away. On the design side, getting rid of our early rounded boxes and fake macOS window dots in favor of a clean Gruvbox Dark terminal style showed us that keeping the screen simple makes it much easier for users to focus. Most of all, seeing our survey results from 130 students and watching beginners like our persona Aditi try out our 2+5 chains proved our main point: when you remove setup headaches and put a clear, plain-English guide right next to the puzzle, anyone can learn how to protect their digital privacy.
 
 \subsection{Future Scope and Improvements}
-While the current version works great as an offline local implementation, there are several things we plan to improve next:
+While our current offline setup works smoothly on a local laptop, there are a few upgrades we want to build next:
 \begin{enumerate}
-    \item \textbf{Hosting on Our Own Server:} Right now, the user runs \texttt{node server.js} and \texttt{npm start} locally. Our immediate next step is to package the app in Docker and host it on our personal Linux server behind Nginx so anyone can play through a public web link.
-    \item \textbf{Live Sandboxed Web Security Targets:} We want to upgrade the 7 Web Security challenges from interactive concept cards into live, isolated backend routes (such as a real sandboxed SQLite login box for SQL injection and a live cookie-tampering endpoint).
-    \item \textbf{Built-In Browser Decoders:} Adding a small built-in Base64/Hex/ROT13 converter and EXIF viewer directly inside our React UI would save players from even having to open a second browser tab.
-    \item \textbf{Dynamic Per-User Flags:} Generating unique flags for each student session will allow professors to use the platform for graded college lab exams without worrying about students copying flags from each other.
+    \item \textbf{Hosting on Our Own Server:} Right now, you run \texttt{node server.js} and \texttt{npm start} locally. Our next step is to put the app inside a Docker container and host it on our own Linux server with Nginx so anyone can play through a normal web link.
+    \item \textbf{Sandboxed Backend Containers for Web Security:} Our 7 EvilCorp webpages in \texttt{/public/websec/} currently simulate server behavior safely in the browser so beginners cannot break their own laptops. Next, we want to run isolated Docker backend containers so players can test real server-side SQLite queries and network headers.
+    \item \textbf{Built-In Mini Decoders:} Adding a small Base64/Hex/ROT13 decoder and metadata viewer right inside our React page would let beginners test quick clues without even switching browser tabs.
+    \item \textbf{Unique Flags Per Student:} Generating slightly different flags for each user session will let college professors use our platform for lab quizzes without students copying flags from each other.
 \end{enumerate}
 
 \subsection{Open-Source Sources and Inspirations}
-Our project was heavily inspired by open-source tools and communities that make security knowledge free for everyone. We drew direct inspiration from \textbf{GCHQ's CyberChef} for our browser-based decoding pipelines, \textbf{Carnegie Mellon's picoCTF} and \textbf{OverTheWire} for our progressive puzzle chains, and \textbf{Pavel Pertsev's Gruvbox} color palette for our terminal aesthetic. We also rely on free web utilities including Photopea, HexEd.it, CrackStation, Exif.tools, and the Academo Spectrum Analyzer, alongside the open-source React and SQLite ecosystems.
+Our project was inspired by several open-source projects and free tools that make learning security possible for everyone. We took inspiration from \textbf{GCHQ's CyberChef} for our browser decoding steps, \textbf{Carnegie Mellon's picoCTF} and \textbf{OverTheWire} for our connected puzzle chains, and \textbf{Pavel Pertsev's Gruvbox} color theme for our terminal look. We also rely on free browser tools like Photopea, HexEd.it, CrackStation, Exif.tools, and the Academo Spectrum Analyzer, along with React and SQLite.
 
 \clearpage
 
